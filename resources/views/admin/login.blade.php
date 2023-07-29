@@ -1,6 +1,6 @@
 
 <html>
-    <body>
+    <body dir="rtl">
         <style>
             *{
                 margin: 0px;
@@ -18,7 +18,7 @@
                 <h1 style="text-shadow: 1px 1px">تسجيل الدخول</h1>
                 <div class="mb-3">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <input type="text" class="form-control" name="email" placeholder="example@email">
+                <input type="text" class="form-control" name="email" class="form-control" placeholder="example@email">
                     </div>
                     <div class="mb-3">
                 <i class="fa fa-lock" aria-hidden="true"></i>
