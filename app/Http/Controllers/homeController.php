@@ -37,6 +37,11 @@ class homeController extends Controller
         $data = agents::all();
         return view("public.agents",['agents'=>$data]);
     }
+    function search(Request $req){
+        $name = $req->query('name');
+        $data = card::where('name','like','%'.$name.'%')->get();
+        return view('public.cards',['products'=>$data]);
+    }
     // public function removeFromWish(Request $request, $id)
     // {
     //     // Read the 'wish' cookie from the request

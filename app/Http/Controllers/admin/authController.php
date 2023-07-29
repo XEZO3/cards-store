@@ -11,6 +11,14 @@ class authController extends Controller
     function register(){
         return view("admin.register");
     }
+    function index(){
+        $data= User::where('permession','Admin')->get();
+        return view("admin.admins",['users'=>$data]);
+    }
+    public function delete(Request $req,$id){
+        User::destroy($id);
+        return back()->with('success',"تم الحذف بنجاح");
+    }
     function store(Request $request){
         // dd($request);
         $formInputs = $request->validate([
@@ -31,11 +39,19 @@ class authController extends Controller
         $data =$req->validate([
             'password'=>"required"
         ]);
+        $data['password']= bcrypt($data['password']);
         $user->update($data);
         return redirect("/admin");
     }
+    function password(Request $req){
+        return view("admin.change");
+    }
     function login(){
         return view("admin.login");
+    }
+    function logout(Request $request){
+        auth()->logout();
+        return redirect("/admin/login");
     }
     function loginPost(Request $request){
         $formInputs = $request->validate([

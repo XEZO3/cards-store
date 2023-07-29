@@ -163,9 +163,9 @@ a:hover{
                         <div class="row">{{$item['name']}}</div>
                     </div>
                     <div class="col">
-                        <button style="all: unset;cursor: pointer;">-</button><div class="border" style="width: 20px">1</div><button style="all: unset;cursor: pointer;" href="#">+</button>
+                        <button onclick="submitForm({{$item['id']}},0)"  style="all: unset;cursor: pointer;">-</button><input type="number" min="0" id="valu{{$item['id']}}" value="{{$quen[$index]}}"><button onclick="submitForm({{$item['id']}},1)" style="all: unset;cursor: pointer;"  href="#">+</button>
                     </div>
-                    <div class="col"> {{$item['price']*(100-$item['discount'])/100}} ل.س<span class="close">&#10005;</span></div>
+                    <div class="col"> {{$item['price']*(100-$item['discount'])/100}} ل.س<a href="/remove-from-cart/{{$item['id']}}"><span class="close">&#10005;</span></a></div>
                 </div>
             </div>
             @endforeach   
@@ -194,4 +194,43 @@ a:hover{
   @else
       <h1>add item to the cart</h1>
   @endif
+
+  <script>
+function submitForm(formId,state) {
+  
+  var csrfToken = "{{ csrf_token() }}";
+
+  jQuery.noConflict();
+
+  $.ajax({
+    type: "POST",
+    url: "/update-cart/"+formId+"?add="+state,
+    headers: {
+      'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
+    },
+    success: function(data) {
+      if(state==1){
+        var inputElement = document.getElementById("valu" + formId);
+        var currentValue = parseInt(inputElement.value); // Convert the value to an integer
+        var newValue = currentValue + 1;
+        inputElement.value = newValue;    
+}else{
+        var inputElement = document.getElementById("valu" + formId);
+        var currentValue = parseInt(inputElement.value); // Convert the value to an integer
+        var newValue = currentValue - 1;
+        inputElement.value = newValue; 
+
+    }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert("Error: " + errorThrown);
+    }
+  });
+
+  // Return false to prevent the default form submission
+  return false;
+}
+
+
+  </script>
 @endsection

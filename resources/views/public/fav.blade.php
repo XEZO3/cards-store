@@ -1,119 +1,198 @@
 @extends('public._layout')
 @section('content')
 
-<style>
-    .content ul{
-        list-style: none !important;
-    }
-    .content ul li{
-        margin-left: 18px;
-        margin-right: 0px;
-        margin-bottom: 40px;
-        display: inline-block;
-        padding: 4px;
-        border-radius: 4px;
-        box-shadow:0 1px 3px 0px rgb(0 0 0 / 20%), 0 2px 1px -1px rgb(0 0 0 / 12%), 0 1px 1px 0 rgb(0 0 0 / 14%);
-        }
-    .content ul li:hover{
-        box-shadow: 1px 2px 10px 0px rgba(0,0,0,0.5);
-        }</style>
-    <ul style="text-align: center;"><!--بعيدا عن انه الكود هون غبي بس حاول تخليه زي ما هو عشان الخصم والسعر الجديد الخ-->
-      @if(session('success'))
-      <div class="alert alert-success">
-          {{ session('success') }}
-      </div>
-  @endif
-   
-      @foreach ($cards as $item)
-                  
-      <li>
-        <div class="product">
-         <div id="pro_img">
-          <a ><img src="{{ asset('storage/'. $item['image']) }}" width="168px" height="168px"></a>  
-         <div id="pro_title">
-           <a >{{$item['name']}}</a> 
-         </div>
-         <br>
-         <br>
-       
-        <div id="pro_price">
-        <a href="#"><?php echo $item['price']*((100-$item['discount'])/100) ;?></a>
-        </div>
-        <div id="pro_per">
-          @if ($item['discount'] !=null) 
-        <a href="#">{{$item['discount']}}%-</a>
-        @endif
-        </div>
-        <br>
-        
-        <div id="pro_pricel">
-        <h6 id="pro_t">شامل الضريبة</h6>
-        @if ($item['discount'] !=null) 
-        <a href="#">{{$item['price']}} د.أ</a>
-        @endif
-        </div>
-        @if ($item['discount'] !=null) 
-        <div id="pro_save">
-        <a href="#"><i class="fa-solid fa-tag"></i> وفّر: {{$item['price']*$item['discount']/100}} د.أ</a>
-        </div>
-        @endif
-        <div id="buyl">
-        <div id="buyr">
-        <div id="pro_buy">
-        
-             <a href="#">
-               <i class="fa-regular fa-cart-circle-plus" style="color: #1e3250;"></i></a>
-         </div><div id="pro_buy">
-          <form action="{{ route('remove.from.wish', ['id' => $item->id]) }}" id="ajax-form" method="post">
-            @csrf
-            <a href="#" >                
-              <div id="hid">
-              <button type="submit" name="favb">
-              <i class="fa-solid fa-heart-circle-plus"></i>
-                </button>
-               </a>
-        </form>
-             
-              
-         </div></div></div></div>
-        </div>
-            </li>
-              @endforeach
-    </ul>
-    <script>
-      jQuery.noConflict();
-    
-    // Now you can use "jQuery" instead of "$" in your code
-    jQuery(document).ready(function($) {
-      // Your jQuery code here
-    
-      $('#ajax-form').submit(function(e) {
-            e.preventDefault();
-           
-            var url = $(this).attr("action");
-            let formData = new FormData(this);
-      
-            $.ajax({
-                    type:'POST',
-                    url: url,
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: (response) => {
-                        alert(response.success);
-                        location.reload();
-                    },
-                    error: function(response){
-                        $('#ajax-form').find(".print-error-msg").find("ul").html('');
-                        $('#ajax-form').find(".print-error-msg").css('display','block');
-                        $.each( response.responseJSON.errors, function( key, value ) {
-                            $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-                        });
-                    }
-               });
-              });
-          
-        });
-    </script>
+<style>.product{
+  min-height: 302px;
+      }
+  .ftco-section{
+      padding: 0px !important;
+      }</style>
+      <link rel="stylesheet" href="css/pro.css">
+     
 
-@endsection
+  <section class="ftco-section">
+        
+        <div class="container">
+          <div class="row justify-content-center">
+            @foreach ($cards as $item)
+          @if($item['discount']!=0)
+            <div class="col-md-3 col-lg-3 col-sm-3 ftco-animate fadeInUp ftco-animated">
+              <div class="product">
+                <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset('storage/'. $item['image']) }}" alt="Colorlib Template">
+                  <span class="status">{{$item['discount']}}%</span>
+                  <div class="overlay"></div>
+                </a>
+                <div class="text py-3 pb-4 px-3 text-center">
+                  <h3><a href="#">{{$item['name']}}</a></h3>
+                  <div class="d-flex">
+                    <div class="pricing">
+                      <p class="price"><span class="mr-2 price-dc">{{$item['price']}}</span><span class="price-sale"> {{ $item['price']*((100-$item['discount'])/100)}} ل.س</span></p>
+                    </div>
+                  </div>
+                  <div class="bottom-area d-flex px-3">
+                    <div class="m-auto d-flex">
+
+                      <form action="{{ route('add.to.cart', ['id' => $item->id]) }}" method="post" id="ajax-form" onsubmit="return false">
+                        @csrf
+                        <a type="submit" onclick="submitForm({{$item['id']}})"  class="buy-now d-flex justify-content-center align-items-center mx-1">
+                          <button style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span></button>
+                        </a>
+                    </form>
+
+                    <form action="{{ route('add.to.wish', ['id' => $item->id]) }}" method="post" id="ajax-add-to-cart" onsubmit="return false">
+                      @csrf
+                      <a href="#" onclick="submitFormWish({{$item['id']}})" class="heart d-flex justify-content-center align-items-center ">
+                        <button type="submit" style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-heart-circle-plus" style="color: #ffffff;"></i></span></button>
+                      </a>
+                  </form>                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @else
+            <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
+              <div class="product">
+                <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset('storage/'. $item['image']) }}" alt="Colorlib Template">
+                  <div class="overlay"></div>
+                </a>
+                <div class="text py-3 pb-4 px-3 text-center">
+                  <h3><a href="#">{{$item['name']}}</a></h3>
+                  <div class="d-flex">
+                    <div class="pricing">
+                      <p class="price"><span>{{$item['price']}} ل.س</span></p>
+                    </div>
+                  </div>
+                  <div class="bottom-area d-flex px-3">
+                    <div class="m-auto d-flex">
+                      
+                      <form action="{{ route('add.to.cart', ['id' => $item->id]) }}" method="post" id="ajax-form"  onsubmit="return false">
+                        @csrf
+                        <a type="submit" onclick="submitForm({{$item['id']}})" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                          <button  style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span></button>
+                        </a>
+                    </form>
+
+                    <form action="{{ route('add.to.wish', ['id' => $item->id]) }}" method="post" id="ajax-add-to-cart" onsubmit="return false">
+                      @csrf
+                      <a href="#" onclick="submitFormWish({{$item['id']}})" class="heart d-flex justify-content-center align-items-center ">
+                        <button type="submit" style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-heart-circle-plus" style="color: #ffffff;"></i></span></button>
+                      </a>
+                  </form>        
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endif
+            @endforeach       
+          </div>
+        </div>
+      </section>
+  <!--product end-->
+<script>
+  function submitForm(formId) {
+  
+    var csrfToken = "{{ csrf_token() }}";
+
+    jQuery.noConflict();
+
+    $.ajax({
+      type: "POST",
+      url: "/add-to-cart/"+formId,
+      headers: {
+        'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
+      },
+      success: function(data) {
+        alert(data.success);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("Error: " + errorThrown);
+      }
+    });
+
+    // Return false to prevent the default form submission
+    return false;
+  }
+
+  function submitFormWish(formId) {
+  
+  var csrfToken = "{{ csrf_token() }}";
+
+  jQuery.noConflict();
+
+  $.ajax({
+    type: "POST",
+    url: "/add-to-wish/"+formId,
+    headers: {
+      'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
+    },
+    success: function(data) {
+      alert(data.success);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert("Error: " + errorThrown);
+    }
+  });
+
+  // Return false to prevent the default form submission
+  return false;
+}
+// Now you can use "jQuery" instead of "$" in your code
+// jQuery(document).ready(function($) {
+  // Your jQuery code here
+
+  // $('#ajax-form').submit(function(e) {
+  //       e.preventDefault();
+       
+  //       var url = $(this).attr("action");
+  //       let formData = new FormData(this);
+  
+  //       $.ajax({
+  //               type:'POST',
+  //               url: url,
+  //               data: formData,
+  //               contentType: false,
+  //               processData: false,
+  //               success: (response) => {
+  //                   alert(response.success);
+  //               },
+  //               error: function(response){
+  //                   $('#ajax-form').find(".print-error-msg").find("ul").html('');
+  //                   $('#ajax-form').find(".print-error-msg").css('display','block');
+  //                   $.each( response.responseJSON.errors, function( key, value ) {
+  //                       $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+  //                   });
+  //               }
+  //          });
+  //         });
+
+  //         $('#ajax-add-to-cart').submit(function(e) {
+  //           e.preventDefault();
+           
+  //           var url = $(this).attr("action");
+  //           let formData = new FormData(this);
+      
+  //           $.ajax({
+  //                   type:'POST',
+  //                   url: url,
+  //                   data: formData,
+  //                   contentType: false,
+  //                   processData: false,
+  //                   success: (response) => {
+  //                       alert(response.success);
+  //                   },
+  //                   error: function(response){
+  //                       $('#ajax-form').find(".print-error-msg").find("ul").html('');
+  //                       $('#ajax-form').find(".print-error-msg").css('display','block');
+  //                       $.each( response.responseJSON.errors, function( key, value ) {
+  //                           $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+  //                       });
+  //                   }
+  //              });
+  //             });
+
+      
+  //   });
+</script>
+@endsection 

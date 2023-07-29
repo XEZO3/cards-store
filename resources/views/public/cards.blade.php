@@ -8,6 +8,8 @@
       padding: 0px !important;
       }</style>
       <link rel="stylesheet" href="css/pro.css">
+     
+
   <section class="ftco-section">
         
         <div class="container">
@@ -30,16 +32,16 @@
                   <div class="bottom-area d-flex px-3">
                     <div class="m-auto d-flex">
 
-                      <form action="{{ route('add.to.cart', ['id' => $item->id]) }}" method="post" id="ajax-form">
+                      <form action="{{ route('add.to.cart', ['id' => $item->id]) }}" method="post" id="ajax-form" onsubmit="return false">
                         @csrf
-                        <a type="submit" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                        <a type="submit" onclick="submitForm({{$item['id']}})"  class="buy-now d-flex justify-content-center align-items-center mx-1">
                           <button style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span></button>
                         </a>
                     </form>
 
-                    <form action="{{ route('add.to.wish', ['id' => $item->id]) }}" method="post" id="ajax-add-to-cart">
+                    <form action="{{ route('add.to.wish', ['id' => $item->id]) }}" method="post" id="ajax-add-to-cart" onsubmit="return false">
                       @csrf
-                      <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                      <a href="#" onclick="submitFormWish({{$item['id']}})" class="heart d-flex justify-content-center align-items-center ">
                         <button type="submit" style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-heart-circle-plus" style="color: #ffffff;"></i></span></button>
                       </a>
                   </form>                     
@@ -64,19 +66,19 @@
                   <div class="bottom-area d-flex px-3">
                     <div class="m-auto d-flex">
                       
-                      <form action="{{ route('add.to.cart', ['id' => $item->id]) }}" method="post" id="ajax-form">
+                      <form action="{{ route('add.to.cart', ['id' => $item->id]) }}" method="post" id="ajax-form"  onsubmit="return false">
                         @csrf
-                        <a type="submit" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                          <button style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span></button>
+                        <a type="submit" onclick="submitForm({{$item['id']}})" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                          <button  style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span></button>
                         </a>
                     </form>
 
-                    <form action="{{ route('add.to.wish', ['id' => $item->id]) }}" method="post" id="ajax-add-to-cart">
+                    <form action="{{ route('add.to.wish', ['id' => $item->id]) }}" method="post" id="ajax-add-to-cart" onsubmit="return false">
                       @csrf
-                      <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                      <a href="#" onclick="submitFormWish({{$item['id']}})" class="heart d-flex justify-content-center align-items-center ">
                         <button type="submit" style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-heart-circle-plus" style="color: #ffffff;"></i></span></button>
                       </a>
-                  </form>
+                  </form>        
                     </div>
                   </div>
                 </div>
@@ -89,63 +91,108 @@
       </section>
   <!--product end-->
 <script>
+  function submitForm(formId) {
+  
+    var csrfToken = "{{ csrf_token() }}";
+
+    jQuery.noConflict();
+
+    $.ajax({
+      type: "POST",
+      url: "/add-to-cart/"+formId,
+      headers: {
+        'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
+      },
+      success: function(data) {
+        alert(data.success);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("Error: " + errorThrown);
+      }
+    });
+
+    // Return false to prevent the default form submission
+    return false;
+  }
+
+  function submitFormWish(formId) {
+  
+  var csrfToken = "{{ csrf_token() }}";
+
   jQuery.noConflict();
 
+  $.ajax({
+    type: "POST",
+    url: "/add-to-wish/"+formId,
+    headers: {
+      'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
+    },
+    success: function(data) {
+      alert(data.success);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert("Error: " + errorThrown);
+    }
+  });
+
+  // Return false to prevent the default form submission
+  return false;
+}
 // Now you can use "jQuery" instead of "$" in your code
-jQuery(document).ready(function($) {
+// jQuery(document).ready(function($) {
   // Your jQuery code here
 
-  $('#ajax-form').submit(function(e) {
-        e.preventDefault();
+  // $('#ajax-form').submit(function(e) {
+  //       e.preventDefault();
        
-        var url = $(this).attr("action");
-        let formData = new FormData(this);
+  //       var url = $(this).attr("action");
+  //       let formData = new FormData(this);
   
-        $.ajax({
-                type:'POST',
-                url: url,
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: (response) => {
-                    alert(response.success);
-                },
-                error: function(response){
-                    $('#ajax-form').find(".print-error-msg").find("ul").html('');
-                    $('#ajax-form').find(".print-error-msg").css('display','block');
-                    $.each( response.responseJSON.errors, function( key, value ) {
-                        $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-                    });
-                }
-           });
-          });
+  //       $.ajax({
+  //               type:'POST',
+  //               url: url,
+  //               data: formData,
+  //               contentType: false,
+  //               processData: false,
+  //               success: (response) => {
+  //                   alert(response.success);
+  //               },
+  //               error: function(response){
+  //                   $('#ajax-form').find(".print-error-msg").find("ul").html('');
+  //                   $('#ajax-form').find(".print-error-msg").css('display','block');
+  //                   $.each( response.responseJSON.errors, function( key, value ) {
+  //                       $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+  //                   });
+  //               }
+  //          });
+  //         });
 
-          $('#ajax-add-to-cart').submit(function(e) {
-            e.preventDefault();
+  //         $('#ajax-add-to-cart').submit(function(e) {
+  //           e.preventDefault();
            
-            var url = $(this).attr("action");
-            let formData = new FormData(this);
+  //           var url = $(this).attr("action");
+  //           let formData = new FormData(this);
       
-            $.ajax({
-                    type:'POST',
-                    url: url,
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: (response) => {
-                        alert(response.success);
-                    },
-                    error: function(response){
-                        $('#ajax-form').find(".print-error-msg").find("ul").html('');
-                        $('#ajax-form').find(".print-error-msg").css('display','block');
-                        $.each( response.responseJSON.errors, function( key, value ) {
-                            $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-                        });
-                    }
-               });
-              });
+  //           $.ajax({
+  //                   type:'POST',
+  //                   url: url,
+  //                   data: formData,
+  //                   contentType: false,
+  //                   processData: false,
+  //                   success: (response) => {
+  //                       alert(response.success);
+  //                   },
+  //                   error: function(response){
+  //                       $('#ajax-form').find(".print-error-msg").find("ul").html('');
+  //                       $('#ajax-form').find(".print-error-msg").css('display','block');
+  //                       $.each( response.responseJSON.errors, function( key, value ) {
+  //                           $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+  //                       });
+  //                   }
+  //              });
+  //             });
 
       
-    });
+  //   });
 </script>
 @endsection 

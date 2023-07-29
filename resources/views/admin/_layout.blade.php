@@ -335,19 +335,23 @@ span::after {
           </li>
             <li class="nav-item active">
                 
-            <a class="nav-link" href="/admin/terms">تعديل سياسة الخصوصية <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/admin/terms"> السياسات <span class="sr-only">(current)</span></a>
           </li>
             <li class="nav-item active">
                 
-            <a class="nav-link" href="/admin/service">تعديل شروط الخدمة <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/admin/service">الشروط <span class="sr-only">(current)</span></a>
           </li>
             <li class="nav-item active">
                 
-            <a class="nav-link" href="/admin/register">اضافة مسؤول <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/admin/users/show">المسؤولين  <span class="sr-only">(current)</span></a>
           </li>
             <li class="nav-item active">
                 
-            <a class="nav-link" href="editpass.php">تغيير كلمة السر <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/admin/changepass">تغيير كلمة السر <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+                
+            <a class="nav-link" href="/admin/logout">تسجيل خروج<span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>

@@ -38,10 +38,13 @@ Route::post('/add-to-wish/{id}', [ wishController::class, 'addToWish'])->name('a
 Route::post('/remove-from-wish/{id}', [ wishController::class, 'removeFromWish'])->name('remove.from.wish');
 
 Route::post('/add-to-cart/{id}', [ cardController::class, 'addToCart'])->name('add.to.cart');
-//Route::post('/remove-from-wish/{id}', [ cardController::class, 'addToCart'])->name('remove.from.cart');
+Route::post('/update-cart/{id}', [ cardController::class, 'update_quen'])->name('update.cart');
+
+Route::get('/remove-from-cart/{id}', [ cardController::class, 'removeFromCart'])->name('remove.from.cart');
 Route::get('/cart', [ cartController::class, 'index']);
 
 Route::get('/favorite',[homeController::class,'fav']);
+Route::get('/search',[homeController::class,'search']);
 
 Route::get('/agents',[homeController::class,'agents']);
 
@@ -53,6 +56,14 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/register',[AdminAuthController::class,'register']);
     Route::post('/register', [AdminAuthController::class,"store"]);
+
+    Route::get("/users/show",[AdminAuthController::class,'index']);
+    Route::get("/users/delete/{id}",[AdminAuthController::class,'delete']);
+
+    Route::get('/changepass',[AdminAuthController::class,'password']);
+    Route::post('/changepass', [AdminAuthController::class,"change_password"]);
+    Route::get('/logout',[AdminAuthController::class,'logout']);
+
 
     Route::middleware(['admin'])->group(function () {
         Route::get('/',[AdminHomeController::class,'index']);

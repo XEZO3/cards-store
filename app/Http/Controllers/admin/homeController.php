@@ -21,7 +21,7 @@ class homeController extends Controller
         $data =  $req->validate([
             'name'=>'required',
             'email'=>'required|email',
-            'phone_number'=>'required|integer'
+            'phone_number'=>'required'
         ]);
         if ($req->hasFile('image')) {
             // Validate the uploaded image

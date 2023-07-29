@@ -654,8 +654,8 @@ color: #555;
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarsExample02">
-        <form class="form-inline my-2 my-md-0" style="width:100%;max-width:1000px" action="search.php?#">
-          <input class="form-control" type="text" placeholder="إبحث هنا ..." style="
+        <form class="form-inline my-2 my-md-0" style="width:100%;max-width:1000px" method="GET" action="/search">
+          <input class="form-control" type="text" name="name" placeholder="إبحث هنا ..." style="
     font-family: tahoma !important;
     color: #273444 !important;
     background-color: #eff2f7 !important;
