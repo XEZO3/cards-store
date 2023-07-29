@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\order;
 use App\Models\siteInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -10,7 +11,8 @@ use Illuminate\Support\Facades\Storage;
 class homeController extends Controller
 {
     function index(){
-        return view("");
+        $orders = order::with(['order_item.card','User'])->orderBy('id')->get();
+        return view("admin.home.orders",['orders'=>$orders]);
     }
     function site_info(){
         $data = siteInfo::first();

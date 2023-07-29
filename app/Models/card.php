@@ -20,4 +20,9 @@ class card extends Model
     {
         return $this->belongsTo(category::class);
     }
+
+    public function order_item()
+    {
+        return $this->hasMany(order_item::class);
+    }
 }
