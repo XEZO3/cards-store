@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\card;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -42,6 +44,27 @@ class wishController extends Controller
         // If the 'wish' cookie is not present or the item is not found, redirect back
         return back();
     }
+    function fav(Request $req){
+        $wishListCookie = $req->cookie('wish');
+        try{
+            $decryptedCookieValue = decrypt($wishListCookie);
+            $wishListData = json_decode($decryptedCookieValue, true);
+            }catch(DecryptException $e){
+                return view('public.fav', ['cards'=>[]]); 
+            }
+        
+            // Decrypt the cookie data and decode the JSON
+          
+                $decryptedCookieValue = decrypt($wishListCookie);
+                $wishListData = json_decode($decryptedCookieValue, true);
+                $idList = array_map('intval', array_column($wishListData, 'Id'));
+                $data = card::whereIn('id',$idList)->get();
+               
+            // Your existing code to fetch the items from the database based on wishListData
+            // ...
+            return view('public.fav', ['cards'=>$data]);     
+    }
+
     public function addToWish(Request $request, $id)
     {
         $existingCartList = $request->cookie('wish');

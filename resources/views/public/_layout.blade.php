@@ -636,8 +636,8 @@ color: #555;
             <div class="dropdown-menu" aria-labelledby="dropdown03">
               <a class="dropdown-item" href="tel:{{$info['phone_number']}}">{{$info['phone_number']}}</a>
               <a class="dropdown-item" href="mailto:{{$info['email']}}">راسلنا عبر البريد</a>
-              <a class="dropdown-item" href="prip.php">سياسة الخصوصية</a>
-              <a class="dropdown-item" href="terms.php">شروط الخدمة</a>
+              <a class="dropdown-item" href="/terms">سياسة الخصوصية</a>
+              <a class="dropdown-item" href="service">شروط الخدمة</a>
             </div>
           </li>
         </ul>
@@ -691,9 +691,9 @@ color: #555;
 <div class="container">
       <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">الرئيسية</a></li>
-          <li class="nav-item"><a href="prip.php" class="nav-link px-2 text-muted">سياسة الخصوصية</a></li>
-          <li class="nav-item"><a href="terms.php" class="nav-link px-2 text-muted">شروط الخدمة</a></li>
+          <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">الرئيسية</a></li>
+          <li class="nav-item"><a href="/terms" class="nav-link px-2 text-muted">سياسة الخصوصية</a></li>
+          <li class="nav-item"><a href="/service" class="nav-link px-2 text-muted">شروط الخدمة</a></li>
         </ul>
         <p class="text-center text-muted">    جميع الحقوق محفوظة لدى # © 2023</p><!--modify it and connect it with admin dashboard-->
       </footer>

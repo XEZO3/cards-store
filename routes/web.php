@@ -43,11 +43,12 @@ Route::post('/update-cart/{id}', [ cardController::class, 'update_quen'])->name(
 Route::get('/remove-from-cart/{id}', [ cardController::class, 'removeFromCart'])->name('remove.from.cart');
 Route::get('/cart', [ cartController::class, 'index']);
 
-Route::get('/favorite',[homeController::class,'fav']);
+Route::get('/favorite',[wishController::class,'fav']);
 Route::get('/search',[homeController::class,'search']);
 
 Route::get('/agents',[homeController::class,'agents']);
-
+Route::get('/terms',[homeController::class,'terms']);
+Route::get('/service',[homeController::class,'service']);
 
 
 Route::prefix('admin')->group(function () {
