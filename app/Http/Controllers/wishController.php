@@ -34,10 +34,10 @@ class wishController extends Controller
                 $cookie = cookie('wish', $encryptedWishListData, 30 * 24 * 60);
 
                 // Create the response with the updated cookie
-                return response()->json([
-                    'success' => 'Item removed from wish list',     
-                ], Response::HTTP_OK)->withCookie($cookie);   
-                // return back()->with('success', 'Item removed from wish list')->withCookie($cookie);
+                // return response()->json([
+                //     'success' => 'Item removed from wish list',     
+                // ], Response::HTTP_OK)->withCookie($cookie);   
+                 return back()->with('success', 'Item removed from wish list')->withCookie($cookie);
             }
         }
 

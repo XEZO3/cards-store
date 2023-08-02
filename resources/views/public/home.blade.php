@@ -37,8 +37,8 @@
 
 	<div class="row  justify-content-center">
         @foreach($banner as $item)
-	<img alt="*banner name*" class="mySlides animate-fading" src="{{ URL::asset("images/banners/" . $item['image']) }}"  style="width:100%; max-height:370px;border-radius:10px">
-    @endforeach
+		<img alt="*banner name*" class="mySlides animate-fading" src="{{ :asset("storage/" . $item['image']) }}"  style="width:100%; max-height:370px;border-radius:10px">
+		@endforeach
  
 </div>
 	</div>
