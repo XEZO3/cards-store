@@ -3,11 +3,13 @@
 
 @extends('public._layout')
 @section('content')
-
-
-<style>body{background-color: #e0e0e0}</style>
-<table class="agent">
-<tr>
+<table class="agent" style="
+    margin: 0px !important;
+    width: 100%;
+    text-align: center;
+    direction: rtl;
+">
+<tbody><tr>
     <td class="namea">الإسم</td>
     <td class="phonea">جوال</td>
     <td class="cata">الفئة</td>
@@ -28,7 +30,12 @@
         </tr>
     <tr><td><br></td></tr>
    @endforeach
-   
-</table>
+</tbody></table>
+
+
+
+
+
+
 
 @endsection

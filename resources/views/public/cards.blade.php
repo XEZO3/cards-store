@@ -6,14 +6,39 @@
       }
   .ftco-section{
       padding: 0px !important;
-      }</style>
-      <link rel="stylesheet" href="css/pro.css">
-     
-
+      }
+  .hid{
+      overflow-x: hidden;
+      }
+  </style>
+      <link rel="stylesheet" href="{{URL::asset("css/pro.css")}}">
   <section class="ftco-section">
+        <div style="
+      left: 25%;
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+  ">
         
+          <input type="text" style="
+      position: relative;
+      width: 50%;
+      border: 1px solid rgba(0,0,0,.125);
+      border-radius: 5px;
+      padding: 3px 10px;
+      margin-bottom: 30px;
+      /* left: 25%; */
+      text-align: right;
+  " require="" placeholder="ادخل رقم اللاعب"><label style="
+      direction: rtl;
+      text-align: right;
+      /* float: right; */
+      /* right: 0%; */
+      position: relative;
+      margin-left: 10px;
+  ">رقم اللاعب: </label></div>
         <div class="container">
-          <div class="row justify-content-center">
+          <div class="row">
             @foreach ($products as $item)
           @if($item['discount']!=0)
             <div class="col-md-3 col-lg-3 col-sm-3 ftco-animate fadeInUp ftco-animated">
@@ -85,114 +110,61 @@
               </div>
             </div>
             @endif
-            @endforeach       
+            @endforeach  
+            
+      
+            
           </div>
         </div>
       </section>
-  <!--product end-->
-<script>
-  function submitForm(formId) {
-  
-    var csrfToken = "{{ csrf_token() }}";
-
-    jQuery.noConflict();
-
-    $.ajax({
-      type: "POST",
-      url: "/add-to-cart/"+formId,
-      headers: {
-        'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
-      },
-      success: function(data) {
-        alert(data.success);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        alert("Error: " + errorThrown);
+      <script>
+        function submitForm(formId) {
+        
+          var csrfToken = "{{ csrf_token() }}";
+      
+          jQuery.noConflict();
+      
+          $.ajax({
+            type: "POST",
+            url: "/add-to-cart/"+formId,
+            headers: {
+              'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
+            },
+            success: function(data) {
+              alert(data.success);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              alert("Error: " + errorThrown);
+            }
+          });
+      
+          // Return false to prevent the default form submission
+          return false;
+        }
+      
+        function submitFormWish(formId) {
+        
+        var csrfToken = "{{ csrf_token() }}";
+      
+        jQuery.noConflict();
+      
+        $.ajax({
+          type: "POST",
+          url: "/add-to-wish/"+formId,
+          headers: {
+            'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
+          },
+          success: function(data) {
+            alert(data.success);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            alert("Error: " + errorThrown);
+          }
+        });
+      
+        // Return false to prevent the default form submission
+        return false;
       }
-    });
-
-    // Return false to prevent the default form submission
-    return false;
-  }
-
-  function submitFormWish(formId) {
-  
-  var csrfToken = "{{ csrf_token() }}";
-
-  jQuery.noConflict();
-
-  $.ajax({
-    type: "POST",
-    url: "/add-to-wish/"+formId,
-    headers: {
-      'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the request headers
-    },
-    success: function(data) {
-      alert(data.success);
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      alert("Error: " + errorThrown);
-    }
-  });
-
-  // Return false to prevent the default form submission
-  return false;
-}
-// Now you can use "jQuery" instead of "$" in your code
-// jQuery(document).ready(function($) {
-  // Your jQuery code here
-
-  // $('#ajax-form').submit(function(e) {
-  //       e.preventDefault();
-       
-  //       var url = $(this).attr("action");
-  //       let formData = new FormData(this);
-  
-  //       $.ajax({
-  //               type:'POST',
-  //               url: url,
-  //               data: formData,
-  //               contentType: false,
-  //               processData: false,
-  //               success: (response) => {
-  //                   alert(response.success);
-  //               },
-  //               error: function(response){
-  //                   $('#ajax-form').find(".print-error-msg").find("ul").html('');
-  //                   $('#ajax-form').find(".print-error-msg").css('display','block');
-  //                   $.each( response.responseJSON.errors, function( key, value ) {
-  //                       $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-  //                   });
-  //               }
-  //          });
-  //         });
-
-  //         $('#ajax-add-to-cart').submit(function(e) {
-  //           e.preventDefault();
-           
-  //           var url = $(this).attr("action");
-  //           let formData = new FormData(this);
       
-  //           $.ajax({
-  //                   type:'POST',
-  //                   url: url,
-  //                   data: formData,
-  //                   contentType: false,
-  //                   processData: false,
-  //                   success: (response) => {
-  //                       alert(response.success);
-  //                   },
-  //                   error: function(response){
-  //                       $('#ajax-form').find(".print-error-msg").find("ul").html('');
-  //                       $('#ajax-form').find(".print-error-msg").css('display','block');
-  //                       $.each( response.responseJSON.errors, function( key, value ) {
-  //                           $('#ajax-form').find(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-  //                       });
-  //                   }
-  //              });
-  //             });
-
-      
-  //   });
-</script>
+      </script>
 @endsection 

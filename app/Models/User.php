@@ -21,7 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'permession'
+        'permession',
+        'balance',
     ];
 
     /**
@@ -48,5 +49,9 @@ class User extends Authenticatable
     public function order()
     {
         return $this->hasMany(order::class);
+    }
+    public function balance()
+    {
+        return $this->hasMany(balance::class);
     }
 }

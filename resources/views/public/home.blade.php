@@ -37,7 +37,7 @@
 
 	<div class="row  justify-content-center">
         @foreach($banner as $item)
-		<img alt="*banner name*" class="mySlides animate-fading" src="{{ :asset("storage/" . $item['image']) }}"  style="width:100%; max-height:370px;border-radius:10px">
+		<img alt="*banner name*" class="mySlides animate-fading" src="{{ asset("storage/" . $item['image']) }}"  style="width:100%; max-height:370px;border-radius:10px">
 		@endforeach
  
 </div>
@@ -63,40 +63,7 @@
 						</div>
 					  </div>
 					</a>
-{{--                     
-                    <li class="col-auto">
-                        <a href="/cards/{{$item['id']}}" class="product_group ">
-                            <div class="name_wrp" style="background-image:url(images/striped.jpg);">
-                                <div class="icon"><img src="{{ URL::asset('images/product/'. $item['image']) }}"></div>
-                            </div>
-                            <span class="d-block mt-2 mb-2">{{$item['name']}}</span>
-                        </a>
-                    </li> --}}
-                    @endforeach
-                    {{-- <li class="col-4 pr-0 pl-0">
-                        <a href="more.php" class="product_group ">
-                            <div class="name_wrp" style="background-image:url(images/striped.jpg);">
-                                <div class="icon"><img src="{{ URL::asset('images/product/playcard.png') }}"></div>
-                            </div>
-                            <span class="d-block mt-2 mb-2">google play card</span>
-                        </a>
-                    </li>
-                    <li class="col-4 pr-0 pl-0">
-                        <a href="more.php" class="product_group ">
-                            <div class="name_wrp" style="background-image:url(images/striped.jpg);">
-                                <div class="icon"><img src="{{ URL::asset('images/product/playcard.png') }}"></div>
-                            </div>
-                            <span class="d-block mt-2 mb-2">google play card</span>
-                        </a>
-                    </li>
-                    <li class="col-4 pr-0 pl-0">
-                        <a href="more.php" class="product_group ">
-                            <div class="name_wrp" style="background-image:url(images/striped.jpg);">
-                                <div class="icon"><img src="{{ URL::asset('images/product/playcard.png') }}"></div>
-                            </div>
-                            <span class="d-block mt-2 mb-2">google play card</span>
-                        </a>
-                    </li> --}}
+					@endforeach
 				
 					</div>
 				
