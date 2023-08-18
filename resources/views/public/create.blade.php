@@ -30,17 +30,21 @@ border-top-left-radius: 0;
 border-top-right-radius: 0;
 }
 </style>
-<link rel="stylesheet" type="text/css" href="css/boosttrap.min.css">  
+<link rel="stylesheet" type="text/css" href="{{URL::asset("css/boosttrap.min.css")}}">  
 
 <main class="form-signin w-100 m-auto">
-<form action="" method="post">
+<form action="/user/register" method="post">
+  @csrf
     <div  style="direction:rtl">
     <a href="index.php">
         <img class="mb-4" src="{{ asset('storage/'. $info['logo']) }}" alt="logo" width="72" height="57" style="display: block;"></a></div><!--this is logo so modify it-->
   <h1 class="h3 mb-3 fw-normal" style="text-align:right">التسجيل</h1>
     <div class="form-floating">
-    <input type="text" class="form-control" name="username" id="floatingInput" placeholder="XXXXXXXXXX" required>
+    <input type="text" class="form-control" name="name" id="floatingInput" placeholder="XXXXXXXXXX" required>
     <label for="floatingInput">اسم المستخدم</label>
+    @error('name')
+    <small class="text-danger">{{$message}}</small>
+    @enderror
   </div>
   <div class="form-floating">
     <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com" required>
@@ -63,6 +67,7 @@ border-top-right-radius: 0;
          <small class="text-danger">{{$message}}</small>
         @enderror
   </div>
+
   <div class="nav">
 
 <label for="touchp" style="width: 100%;color: #fff;background-color: #0d6efd;border: 1px solid #0d6efd;text-align: center;cursor: pointer;padding: 0.375rem 0.75rem;border-radius: 0.375rem;">متابعة
@@ -71,7 +76,7 @@ border-top-right-radius: 0;
 
 <ul class="slide" style="padding-left:0px !important">
     <div class="form-floating" style="margin-bottom:10px">
-    <input type="number" class="form-control" id="floatingPassword" placeholder="XXXXXXXXXX" required>
+    <input type="number" name="phone_number" class="form-control" id="floatingPassword" placeholder="XXXXXXXXXX" required>
     <label for="floatingInput">رقمكم على واتساب</label>
   </div>
     <button class="btn btn-primary w-100 py-2" type="submit">التسجيل</button>

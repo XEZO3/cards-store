@@ -74,7 +74,7 @@ width: 1200px !important;
         <div class="sidebar-layout" style="background-color:#27282a;">
           <div class="sidebar-header" style="padding:0px !important;">
             <div class="pro-sidebar-logo">
-              <img src="images/logo.png" style="width:50px">
+              <img src="{{asset("storage/".$info['logo'])}}" style="width:50px">
               <h5>{{$info['name']}}</h5><!--اربطها مع الادمن-->
             </div>
             </div></div></aside></div>
@@ -88,6 +88,13 @@ width: 1200px !important;
         </ul>
         <div class="collapse navbar-collapse" id="navbarsExample03" style="direction:rtl">
         <ul class="navbar-nav mr-auto" style="margin-right:50px !important">
+          @auth
+          <li class="nav-item active">
+            <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
+          <a class="nav-link" style="float:right" href="/user/logout">تسجيل الخروج</a>
+        </li>
+
+          @else
           <li class="nav-item active">
               <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
             <a class="nav-link" style="float:right" href="/user/login">الدخول</a>
@@ -99,6 +106,7 @@ width: 1200px !important;
             <i class="fa fa-user-plus" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
             <a class="nav-link" style="float:right" href="/user/register">التسجيل</a>
           </li>
+          @endauth
         <!--
 <li class="nav-item active" style="cursor:pointer;">
             <i class="fa fa-right-from-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
@@ -128,6 +136,50 @@ width: 1200px !important;
                   </a>
                 </li>
                   <!--If *NOT* logged in show this: -->
+                  @auth
+                  <li class="menu-item">
+                    <a href="/paymenthistory">
+                      <span class="menu-icon">
+                          <i class="fa-solid fa-cart-shopping"></i>
+                        </span>
+                      <span class="menu-title">دفعاتي </span>
+                    </a>
+                  </li>
+
+
+                  <li class="menu-item">
+                    <a href="/payment">
+                      <span class="menu-icon">
+                        <i class="fa fa-building-columns" aria-hidden="true"></i>
+                      </span>
+                      <span class="menu-title">إضافة رصيد</span>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="redeem.php">
+                      <span class="menu-icon">
+                        <i class="fa-solid fa-money-bill-1"></i>
+                      </span>
+                      <span class="menu-title">شحن رصيد</span>
+                    </a>
+                  </li>
+                    <li class="menu-item">
+                    <a href="viewall.php">
+                      <span class="menu-icon">
+                          <i class="fa-solid fa-cart-shopping"></i>
+                        </span>
+                      <span class="menu-title">عرض طلبياتي</span>
+                    </a>
+                  </li>
+                    <li class="menu-item">
+                    <a href="/favorite">
+                      <span class="menu-icon">
+                          <i class="fa-solid fa-heart"></i> 
+                        </span>
+                      <span class="menu-title">المفضلة</span>
+                    </a>
+                  </li> 
+                  @else
                   <li class="menu-item">
                   <a href="/user/login">
                     <span class="menu-icon">
@@ -144,41 +196,9 @@ width: 1200px !important;
                     <span class="menu-title">التسجيل</span>
                   </a>
                 </li>
+                @endauth
                   <!---->
-                  <!--If logged in show this: -->
-                   <li class="menu-item">
-                  <a href="banks.php">
-                    <span class="menu-icon">
-                      <i class="fa fa-building-columns" aria-hidden="true"></i>
-                    </span>
-                    <span class="menu-title">إضافة رصيد</span>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="redeem.php">
-                    <span class="menu-icon">
-                      <i class="fa-solid fa-money-bill-1"></i>
-                    </span>
-                    <span class="menu-title">شحن رصيد</span>
-                  </a>
-                </li>
-                  <li class="menu-item">
-                  <a href="viewall.php">
-                    <span class="menu-icon">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                      </span>
-                    <span class="menu-title">عرض طلبياتي</span>
-                  </a>
-                </li>
-                  <li class="menu-item">
-                  <a href="/favorite">
-                    <span class="menu-icon">
-                        <i class="fa-solid fa-heart"></i> 
-                      </span>
-                    <span class="menu-title">المفضلة</span>
-                  </a>
-                </li>
-                  <!---->
+                  
                   <li class="menu-item">
                   <a href="/agents">
                     <span class="menu-icon">
@@ -206,14 +226,17 @@ width: 1200px !important;
                 </li>
                 <!---->
                 <!--If logged in show this: -->
-                  <li class="menu-item">
+                @auth
+                {{-- <li class="menu-item">
                   <a href="editprofile.php">
                     <span class="menu-icon">
                       <i class="fa-solid fa-user"></i>
                     </span>
                     <span class="menu-title">تعديل الملف الشخصي</span>
                   </a>
-                </li>
+                </li> --}}
+                @endauth
+                  
                 <!---->
               </ul>
             </nav>

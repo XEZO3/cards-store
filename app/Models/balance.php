@@ -11,11 +11,12 @@ class balance extends Model
     protected $table="balance";
     protected $fillable = [
         'user_id',
-        'payment_method_id',
-        'payment_method',
+        'payment_methods_id',
         'balance',
         'price',
-        'is_valid'
+        'state',
+        'note',
+        'name'
     ];
 
 
@@ -23,8 +24,9 @@ class balance extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function payment_method()
+    public function payment_methods()
     {
-        return $this->belongsTo(payment_method::class);
+        return $this->belongsTo(payment_methods::class);
     }
+   
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string("phone_number");
             $table->enum('permession', ['Admin', 'User']);
             $table->float("balance")->default(0);
             $table->timestamps();

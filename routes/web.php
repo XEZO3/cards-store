@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\categoryController;
 use App\Http\Controllers\admin\homeController as AdminHomeController;
 use App\Http\Controllers\admin\officeController;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\balanceController;
 use App\Http\Controllers\cardController;
 use App\Http\Controllers\cartController;
 use App\Http\Controllers\homeController;
@@ -49,8 +50,15 @@ Route::get('/search',[homeController::class,'search']);
 Route::get('/agents',[homeController::class,'agents']);
 Route::get('/terms',[homeController::class,'terms']);
 Route::get('/service',[homeController::class,'service']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/payment',[balanceController::class,'paymentMethod']);
+    Route::get('/checkout/{id}',[balanceController::class,'checkout']);
+    Route::post('/balance/checkout/{payment}',[balanceController::class,'transition']);
+    Route::get('/viewpayment/{balance}',[balanceController::class,'viewpayment']);
+    Route::get('/paymenthistory',[balanceController::class,'paymenthistory']);
 
-
+    Route::get('/orders',[balanceController::class,'paymentMethod']);
+});
 Route::prefix('admin')->group(function () {
     Route::get('/login',[AdminAuthController::class,'login']);
     Route::post('/login', [AdminAuthController::class,"loginPost"]);

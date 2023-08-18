@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'superadmin@gmail.com',
             'password'=>bcrypt("admin"),
             'permession'=>"Admin",
+            'phone_number'=>"0788"
         ]);
         \App\Models\siteInfo::create([
             'name'=>"name",

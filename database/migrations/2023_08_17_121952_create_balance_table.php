@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\payment_method;
+use App\Models\payment_methods;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('balance', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
-            $table->foreignIdFor(payment_method::class)->constrained()->onDelete('cascade');
-            $table->string("payment_method");
+            $table->foreignIdFor(payment_methods::class)->constrained()->onDelete('cascade');
+            $table->string("name");
             $table->float("balance");
+            $table->string("note");
             $table->float("price");
-            $table->boolean("is_valid");
+            $table->enum('state', ['loan', 'pending','done','rejected']);;
             $table->timestamps();
         });
     }

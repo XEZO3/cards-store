@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\siteInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class authController extends Controller
 {
     function register(){
-        return view("public.create");
+        $info = siteInfo::all()->first();
+        return view("public.create",['info'=>$info]);
     }
     function store(Request $request){
         // dd($request);
@@ -16,6 +18,7 @@ class authController extends Controller
             'name'=>'required|min:3',
             'email'=>'required|email|unique:users',
             'password'=>'required|min:3|confirmed',
+            'phone_number'=>"required"
             
         ]);
         $formInputs['password']=bcrypt($formInputs['password']);
