@@ -1,48 +1,54 @@
 @extends('public._layout')
 @section('content')
-<div class="container mt-4">
-    <!-- Order cart -->
-    <div class="card">
-      <div class="card-header">
-        الطلبات
-      </div>
-      <div class="card-body">
-        <ul class="list-group">
-          @foreach ($orders as $index=>$order)
-            <li class="list-group-item">
-              <div class="d-flex justify-content-between">
-                <span style="background-color:lightgrey;color:black" > Order #{{ $index }} - Customer: {{ $order['User']['name'] }}</span>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#orderItems{{ $order->id }}" aria-expanded="false" aria-controls="orderItems{{ $order->id }}">
-                 عرض الطلب
-                </button>
-              </div>
-              <div class="collapse" id="orderItems{{ $order->id }}">
-                <table class="table mt-3">
-                  <thead>
-                    <tr>
-                      <th> اسم المنتج</th>
-                      <th>الكمية</th>
-                      <th>سعر القطعة</th>
-                      <th>مجموع</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($order['order_item'] as $item)
-                    <tr>
-                      <td>{{ $item['card']['name'] }}</td>
-                      <td>{{ $item['quentity'] }}</td>
-                      <td>${{ $item['current_item_price']}}</td>
-                      <td>${{ $item['current_item_price']*$item['quentity']}}</td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
-            </li>
-          @endforeach
-        </ul>
-      </div>
-    </div>
-  </div>
+<div style="
+    direction: rtl;
+    float:right;
+">
+<form action="" method="">
+<label style="/* font-family: tahoma; *//* font-size: 16px; */">البحث عن طريق رقم الطلبية</label>
+<input type="number" style="
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 5px;
+    padding: 2px;
+">
+<input type="submit" style="
+    border-radius: 5px;
+    padding: 3px;
+    background-color: #007bff;
+    border: none;cursor:pointer" value="ابحث"></form></div>
+<br>
+<table class="agent" style="
+    margin: 0px !important;
+    width: 100%;
+    text-align: center;
+    direction: rtl;
+">
+<tbody><tr>
+    <td class="namea">المنتج</td>
+    <td class="phonea">رقم الطلب</td>
+    <td class="cata">اللاعب/المشترك</td>
+    <td class="regiona">السعر</td>
+    <td class="quentity">الكمية</td>
+    <td class="regiona">التاريخ</td>
+    </tr>
+    @foreach($orders as $item)
+    <tr><td><br></td></tr>
+    <tr style="
+    background: #e0e0e0;
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+    box-shadow: 0 1px 3px 0px #0000000f;
+    width: 100% !important;
+    height: 70px;
+    ">
+    <td class="allb">{{$item['name']}}</td>
+    <td class="allb">{{$item['id']}}</td><!---->
+    <td class="allb">{{$item['game_id']}}</td>
+    <td class="allb">{{$item['card']['price']}}</td>
+    <td class="allb">{{$item['quentity']}}</td>
+    <td class="allb">{{$item['created_at']}}</td>
+        </tr>
+    <tr><td><br></td></tr>
+   @endforeach
+</tbody></table>
 
   @endsection

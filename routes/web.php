@@ -12,6 +12,7 @@ use App\Http\Controllers\balanceController;
 use App\Http\Controllers\cardController;
 use App\Http\Controllers\cartController;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\orderController;
 use App\Http\Controllers\wishController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -57,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/viewpayment/{balance}',[balanceController::class,'viewpayment']);
     Route::get('/paymenthistory',[balanceController::class,'paymenthistory']);
 
-    Route::get('/orders',[balanceController::class,'paymentMethod']);
+    Route::get('/orders',[orderController::class,'index']);
 });
 Route::prefix('admin')->group(function () {
     Route::get('/login',[AdminAuthController::class,'login']);

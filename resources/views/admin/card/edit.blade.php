@@ -48,6 +48,15 @@
                 <small class="text-danger">{{$message}}</small>
             @enderror
         <br>
+        <div>
+            <h2>يتطلب رقم لاعب</h2>
+            <input type="radio" name="require_id" value="1" @if (1 === $card['require_id']) checked @endif style="display:inline">
+            <label for="">نعم</label>
+            <br>
+            <input type="radio" name="require_id" value="0" @if (0 === $card['require_id']) checked @endif style="display:inline">
+            <label for="">لا</label>
+        </div>
+        <br>
         <label> الصورة الحالية</label>
         <img style="width: 80px;height:80px"  src="{{ asset('storage/'. $card['image']) }}"/>
 

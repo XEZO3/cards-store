@@ -14,6 +14,7 @@ class card extends Model
         'price',
         'discount',
         'category_id',
+        'require_id',
         'avilability',
     ];
     public function category()

@@ -51,7 +51,9 @@
         <div class="row justify-content-center ">
                 
                     @foreach ($category as $item)
+					<div class="col-auto">
 					<a href="/cards/{{$item['id']}}" class="aa" style="color: black;" class="product_group">
+						
 					<div class="card  shadow-lg" style="width: 11.5rem;margin:20px;height:16rem">
 						<div class="back" >
 						<img  src="{{ asset('storage/'. $item['image']) }}" style="width: 55%;height:55%;margin-top:35px;  box-shadow: 5px 5px 2px;border-radius: 10px;
@@ -63,6 +65,8 @@
 						</div>
 					  </div>
 					</a>
+				</div>
+
 					@endforeach
 				
 					</div>

@@ -20,6 +20,7 @@
             <th scope="col">السعر</th>
             <th scope="col">القسم</th>
             <th scope="col">قيمة الخصم %</th>
+            <th scope="col">يتطلب رقم لاعب</th>
             <th scope="col">التواجد</th>
             <th scope="col">###</th>
           </tr>
@@ -35,6 +36,7 @@
             <td><div class="mt-4">{{$item['price']}}</div></td>
             <td><div class="mt-4">{{$item['category']['name']}}</div></td>
             <td><div class="mt-4">{{$item['discount']}}</div></td>
+            <td><div class="mt-4">{{$item['require_id']==1?"نعم":"لا"}}</div></td>
             <td><div class="mt-4">{{$item['avilability']==1?"متواجد":"غير متواجد"}}</div></td>
             <td>
                 <div class="d-flex flex-row mt-4">

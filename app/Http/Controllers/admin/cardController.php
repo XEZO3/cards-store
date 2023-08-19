@@ -34,6 +34,7 @@ class cardController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Adjust the validation rules as needed
             'price'=>'required|numeric',
             'category_id'=>'required|integer',
+            'require_id'=>"required",
             'discount'=>'required|numeric',
             'avilability'=>'required|boolean'
             
@@ -41,6 +42,7 @@ class cardController extends Controller
         $path = $req->file('image')->store('images/product', 'public');
         card::create([
             'name'=>$data['name'],
+            'require_id'=>$data['require_id'],
             'image'=>$path,
             'price'=>$data['price'],
             'category_id'=>$data['category_id'],
@@ -57,6 +59,7 @@ class cardController extends Controller
             'price'=>'required|numeric',
             'category_id'=>'required|integer',
             'discount'=>'required|numeric',
+            'require_id'=>"required",
             'avilability'=>'required|boolean'
         ]);
 
@@ -80,6 +83,7 @@ class cardController extends Controller
             'price'=>$data['price'],
             'discount'=>$data['discount'],
             'category_id'=>$data['category_id'],
+            'require_id'=>$data['require_id'],
             "avilability"=>$data['avilability']
         ]);
         return redirect("/admin/cards");

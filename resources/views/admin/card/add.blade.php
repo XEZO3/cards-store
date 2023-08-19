@@ -48,6 +48,15 @@
                 <small class="text-danger">{{$message}}</small>
             @enderror
         <br>
+        <div>
+            <h2>يتطلب رقم لاعب</h2>
+            <input type="radio" name="require_id" value="1" style="display:inline">
+            <label for="">نعم</label>
+            <br>
+            <input type="radio" name="require_id" value="0" style="display:inline">
+            <label for="">لا</label>
+        </div>
+        <br>
         <input type="file" name="image">
         <br>
         @error('image')

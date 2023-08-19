@@ -10,6 +10,9 @@ class order extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
+        'card_id',
+        'quentity',
+        'game_id',
         'total', 
     ];
 

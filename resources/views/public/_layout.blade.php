@@ -3,6 +3,7 @@
 <head>
     <title>{{$info['name']}}</title>
     <link rel="stylesheet" type="text/css" href="https://azouaoui-med.github.io/pro-sidebar-template/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <style>
@@ -63,7 +64,8 @@ width: 1200px !important;
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body style="overflow-x: hidden;">
-    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="background-color:#27282a !important;height: 100px;width: 100%;/* position: absolute; *//* z-index:10; */">   
        
     <div class="layout has-sidebar" style="height: 100%;">
@@ -78,13 +80,14 @@ width: 1200px !important;
               <h5>{{$info['name']}}</h5><!--اربطها مع الادمن-->
             </div>
             </div></div></aside></div>
+            @auth
        <ul style="margin-right:50px !important;margin-bottom: 0px;">
           <li>
                <div style="color: rgb(21, 87, 36);border: 1px solid #c3e6cb;background-color: #d4edda;min-width:130px;max-height: 38px;height: 100%;border-radius: 4px;text-align: right;padding-right: 10px !important;padding: 3px;">
-                <strong>&lrm;$0.00</strong>
+                <strong>&lrm;${{auth()->user()->balance}}</strong>
                </div>
           </li>
-         
+         @endauth
         </ul>
         <div class="collapse navbar-collapse" id="navbarsExample03" style="direction:rtl">
         <ul class="navbar-nav mr-auto" style="margin-right:50px !important">
@@ -164,7 +167,7 @@ width: 1200px !important;
                     </a>
                   </li>
                     <li class="menu-item">
-                    <a href="viewall.php">
+                    <a href="/orders">
                       <span class="menu-icon">
                           <i class="fa-solid fa-cart-shopping"></i>
                         </span>
