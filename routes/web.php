@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/paymenthistory',[balanceController::class,'paymenthistory']);
 
     Route::get('/orders',[orderController::class,'index']);
+    Route::post('/order/purchasing/{card}',[orderController::class,'purchasing']);
+
 });
 Route::prefix('admin')->group(function () {
     Route::get('/login',[AdminAuthController::class,'login']);

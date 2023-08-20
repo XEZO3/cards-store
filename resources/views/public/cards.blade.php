@@ -23,7 +23,7 @@
           <div class="row justify-content-center">
             @foreach ($products as $item)
           @if($item['discount']!=0)
-            <div class="col-md-3 col-lg-3 col-sm-3 ftco-animate fadeInUp ftco-animated">
+            <div class="col-md-6 col-lg-4 col-sm-5  ftco-animate fadeInUp ftco-animated">
               <div class="product">
                 <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset('storage/'. $item['image']) }}" alt="image">
                   <span class="status">{{$item['discount']}}%</span>
@@ -67,7 +67,7 @@
 
 
             @else
-            <div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
+            <div class="col-md-6 col-lg-4 col-sm-5 ftco-animate fadeInUp ftco-animated">
               <div class="product">
                 <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset('storage/'. $item['image']) }}" alt="Colorlib Template">
                   <div class="overlay"></div>
@@ -109,6 +109,8 @@
                   <div class="modal-body">
                     @auth
                     <div class="container">
+                      <form action="/order/purchasing/{{$item['id']}}" method="POST">
+                        @csrf
                       @if($item['require_id']==true)
                       <div class="row">
                         <label >ID اللاعب</label>
@@ -117,9 +119,9 @@
                       @endif
                       <div class="row justify-content-center">
                         <label style="text-align: center" for="">الكمية</label>
-                        <div class="col-1"><button class="btn btn-danger" onclick="change({{$item['id']}},0)">-</button></div>
-                        <div class="col-3" style="margin-right: -20px"><input type="number" id="valu{{$item['id']}}" min="1" value="1" name="quentity" class="form-control"></div>
-                        <div class="col-1"><button class="btn btn-primary " onclick="change({{$item['id']}},1)">+</button></div>
+                        <div class="col-1"><button class="btn btn-danger"  type="button"onclick="change({{$item['id']}},0,{{$item['price']}})">-</button></div>
+                        <div class="col-3" style="margin-right: -20px"><input type="number"  id="valu{{$item['id']}}" min="1" value="1" name="quentity" class="form-control"></div>
+                        <div class="col-1"><button class="btn btn-primary " type="button" onclick="change({{$item['id']}},1,{{$item['price']}})">+</button></div>
                       </div>
                       <br>
                       <div class="row justify-content-center">
@@ -136,10 +138,11 @@
                   
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
                    @auth
-                   <button type="button" class="btn btn-primary">Save changes</button>
+                   <button type="submit" class="btn btn-primary">ِشراء</button>
                    @endauth 
+                  </form>
                   </div>
                 </div>
               </div>
@@ -153,7 +156,7 @@
         </div>
       </section>
       <script>
-        function change(formId,state){
+        function change(formId,state,price){
           var inputElement = document.getElementById("valu" + formId);
           var currentValue = parseInt(inputElement.value);
           var spanprice =  document.getElementById("price" + formId)
@@ -166,8 +169,12 @@
            
              newValue = currentValue -1;
           }
+          if(newValue<=0){
+            inputElement.value = 1
+          }else{
           inputElement.value = newValue;
-          spanprice.textContent  =  newValue*spanValue
+          }
+          spanprice.textContent  =  newValue*price
         }
        
        function submitFormWish(formId) {

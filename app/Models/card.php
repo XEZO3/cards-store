@@ -22,8 +22,13 @@ class card extends Model
         return $this->belongsTo(category::class);
     }
 
-    public function order_item()
+    public function order()
     {
-        return $this->hasMany(order_item::class);
+        return $this->hasMany(order::class);
+    }
+
+    public function card_keys()
+    {
+        return $this->hasMany(card_keys::class);
     }
 }
