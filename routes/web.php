@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\bannerControl;
 use App\Http\Controllers\admin\cardController as AdminCardController;
 use App\Http\Controllers\admin\categoryController;
 use App\Http\Controllers\admin\homeController as AdminHomeController;
+use App\Http\Controllers\admin\keyController;
 use App\Http\Controllers\admin\officeController;
 use App\Http\Controllers\admin\paymentController;
 use App\Http\Controllers\admin\zipCodeController;
@@ -85,6 +86,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/logout',[AdminAuthController::class,'logout']);
         
         Route::get('/',[AdminHomeController::class,'index']);
+
         Route::get('/info',[AdminHomeController::class,'site_info']);
         Route::post('/info/update/{id}',[AdminHomeController::class,'site_info_update']);
 
@@ -155,6 +157,16 @@ Route::prefix('admin')->group(function () {
                     Route::post('/edit/{payment}',[paymentController::class,'update']);
                     Route::get('/add',[paymentController::class,'add']);
                     Route::post('/add',[paymentController::class,'store']);
+                });
+                Route::prefix('keys')->group(function () {
+                    Route::get('/',[keyController::class,'index']);
+                    Route::get('/delete/{id}',[keyController::class,'delete']);
+                    // Route::get('/edit/{payment}',[paymentController::class,'edit']);
+                    // Route::post('/edit/{payment}',[paymentController::class,'update']);
+                    //Route::get('/add',[keyController::class,'add']);
+                    Route::post('/create',[keyController::class,'store']);
+                    Route::get('/addkeytouser/{order}',[keyController::class,'addKeyToUser']);
+
                 });
                 
 

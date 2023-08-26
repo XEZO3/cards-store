@@ -1,6 +1,6 @@
 @extends('admin._layout')
 @section('content')
-<div class="container">
+<div class="container" style="max-height: 800px;overflow-y:scroll">
     <div class="row">
         <div class="col">
             @if(session('success'))
@@ -53,6 +53,7 @@
         </tbody>
       </table>
       <a href="/admin/cards/add" class="btn btn-primary" style="color: white"> اضافة المزيد</a>
+      <a href="/admin/keys/" class="btn btn-warning" style="color: white"> اضافة اكواد بطاقات</a>
 </div>
 
 

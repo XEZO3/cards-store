@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class homeController extends Controller
 {
     function index(){
-       // $orders = order::with(['order_item.card','User'])->orderBy('id')->get();
-       $orders = [];
+       $orders = order::with(['User','card'])->orderBy('id')->get();
         return view("admin.home.orders",['orders'=>$orders]);
     }
     function site_info(){
