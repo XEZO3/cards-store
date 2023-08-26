@@ -69,15 +69,15 @@ Route::prefix('admin')->group(function () {
     Route::get('/register',[AdminAuthController::class,'register']);
     Route::post('/register', [AdminAuthController::class,"store"]);
 
-    Route::get("/users/show",[AdminAuthController::class,'index']);
-    Route::get("/users/delete/{id}",[AdminAuthController::class,'delete']);
-
-    Route::get('/changepass',[AdminAuthController::class,'password']);
-    Route::post('/changepass', [AdminAuthController::class,"change_password"]);
-    Route::get('/logout',[AdminAuthController::class,'logout']);
-
 
     Route::middleware(['admin'])->group(function () {
+        Route::get("/users/show",[AdminAuthController::class,'index']);
+        Route::get("/users/delete/{id}",[AdminAuthController::class,'delete']);
+    
+        Route::get('/changepass',[AdminAuthController::class,'password']);
+        Route::post('/changepass', [AdminAuthController::class,"change_password"]);
+        Route::get('/logout',[AdminAuthController::class,'logout']);
+        
         Route::get('/',[AdminHomeController::class,'index']);
         Route::get('/info',[AdminHomeController::class,'site_info']);
         Route::post('/info/update/{id}',[AdminHomeController::class,'site_info_update']);

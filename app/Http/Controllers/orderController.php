@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class orderController extends Controller
 {
-    public function index(){
+    public function index(Request $req){
         $orders = order::with(["card"])->where('user_id',auth()->id())->get();
         return view("public.orders",['orders'=>$orders]);
     }
@@ -45,16 +45,19 @@ class orderController extends Controller
             'game_id'=>($card['require_id']==1)?"required":""
         ]);
         $keys = card_keys::where("avilability",'1')->where("card_id",$card['id'])->take($data['quentity'])->get(); 
-       
-        if(count($keys) < $data['quentity'] &&count($keys) >0){
+        
+        if(count($keys) >= $data['quentity'] &&count($keys) >0){
+            
             $data['quentity'] == count($keys);
-            $keytext = implode('\n',$keys->pluck('key')->toArray());
-            $data['keys'] = $keytext;
+            //$keytext = implode('\n',$keys->pluck('key')->toArray());
+           $keysdata = "";
             $data['state'] = "done";
             foreach($keys as $item){
-                $item::update(['avilability'=>0]);
+                $keysdata .= "<p>".$item['key']."</p>\n";
+                $item->update(['avilability'=>0]);
+                
             }
-
+        $data['keys'] = $keysdata;
         }else if(count($keys)==0){
             $data['state'] = "pending";
         }
@@ -64,7 +67,6 @@ class orderController extends Controller
         $data['card_id'] = $card['id'];
         $data['total'] = $total;
          
-
         order::create($data);
         $user = auth()->user();
         $user->balance = $user->balance-$total;

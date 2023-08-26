@@ -32,9 +32,11 @@
             <
             <td>
                 <div class="d-flex flex-row ">
+                  @if($item['email']!="superadmin@gmail.com")
                     <div ><a href="/admin/users/delete/{{$item['id']}}" class="btn btn-danger mr-1">
                       <i class="material-icons" style="color: white">حذف</i>
                     </a></div>
+                    @endif
                   </div>
             </td>
           </tr>

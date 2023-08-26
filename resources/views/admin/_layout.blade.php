@@ -3,408 +3,242 @@
 <head>
     
     <title>control panel</title>  
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="css/.css">
-    <link rel="stylesheet" href="css/boosttrap.min.css">
-    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/8ee2d4d390.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.3.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://azouaoui-med.github.io/pro-sidebar-template/main.css">
     <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
         body{
-    direction: rtl; 
-    margin: 0px;
-} 
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    max-width: 100%;
+    direction: rtl !important;
+}
+        .layout{
+            min-height: 100px !important;
+        }
+        a{
+        text-decoration: none !important;
+        }
+.r{
+    float: right;
+}
+.l{
+    float: left;
+}
 .c{
     clear: both;
 }
 .w{
-width: 1200px;
-    margin-right: 50px;
-    margin-left: auto;
-    margin: 0px;
+width: 1200px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
 }
-.loginAll{
-    width: 600px;
-    margin: 100px auto;
-    margin-left: 340px;
-    background-color: lightcyan;
-    border: 1px solid #eee;
-    padding: 10px;
-}
+/*headertop style start*/
 
-
-input[type=file]{
-    margin: 10px;
-    padding: 7px;
-    width: 80%;
-    border: 1px solid #eee;
-    font-family: tahoma;
-    font-size: 12px;
-    color: #000;}
-input[type=submit]{
-    width: 100%;
-	padding: 8px;
-	color: #ffffff;
-	background: none #191970;
-	border: none;
-	border-radius: 6px;
-	font-size: 18px;
-	cursor: pointer;
-	margin: 12px 0;
-}
-
-.ok{
-    background: #5bcf71;
-    padding: 15px 10px;
-    text-align: center;
-    font-family: tahoma;
-    color: #fff;
-    font-size: 14px;
-    border: 1px solid #2da845
-}
-.all{
-    max-width: 800px;
-    width: 100%;
-    margin: 50px auto;
-    text-align: right
-}
-.admin-menu ul{
-    list-style: none;
-}
-
-.adminbody{
-    background: #fff;
-    padding: 10px;
-    font-family: tahoma;
-    font-size: 13px;
-    color: #555;
-    border: 1px solid #eee;
-}
-label{
-    text-align: right;
-    font-family: tahoma;
-    color: #555;
-    font-size: 13px;
-    font-weight: bold;
-}
-select{
-    margin: 10px;
-}
-textarea{
-    margin: 10px;
-    margin-right: 80px;
-}
-.kw{
-    overflow-y: hidden;
-    overflow-x: hidden;
-    border: 1px solid #000;
-    direction: ltr;
-}
-.kw p{
-    font-family: tahoma;
-    font-size: 14px;
-    font-style: normal;
-    text-align: left;
-    margin-left: 10px;
-}
-.prod ul{
-    list-style: none;
-    color: aqua;
-    padding: 0px;
-    margin: 0px;
-    margin: 0px;
-}
-
-
-.search{
-    background: #f9fafc;
-    padding: 0px;
-    display: flex;
-  flex-direction: row-reverse;
-    list-style: none;    
-}
-.searchform input[type=text]{
-    padding: 6px;
-    font-family: tahoma;
-    color: #273444;
-    background-color: #eff2f7;
-    width: 80%;
-    border: 1px solid #e0e6ed;
-    border-radius: 50px;
-    margin-right: 10px;
-    margin-top: 20px;
-    margin-bottom: auto;
-    position: relative; 
-}
-.searchform button[type=submit]{
-    position: relative;
-    background-color: transparent;
-    border: 0px transparent solid;
-    margin-top: auto;
-    margin-right: -40px;
-    padding: 10px 0px;
-    cursor: pointer;
-}
-.searchform button i{
-    -webkit-transform: scaleX(-1);
-  transform: scaleX(1);
-    font-size: 16px;
-}
-.sf button i{
-    -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-    font-size: 16px;
-}
-/* ***************** */
-
-
-span {
-  padding: 13px 1px;
-    background: url(../images/menubar.png);
-    background-repeat: round;
-    background-size: cover;
-    color: white;
-    font-size: 1.2em;
-    font-variant: small-caps;
-    cursor: pointer;
-    display: block;
-    width: 100%;
-}
-
-span::after {
-  float: right;
-  right: 10%;
-  content: "+";
-}
-
-.slide {
-  clear:both;
-  width:100%;
-  height:0px;
-  overflow:auto;
-  text-align: right;
-  transition: height .4s ease;
-}
-
-.slide li {padding : 10px;}
-
-#touchp {position: absolute; opacity: 0; height: 0px;}    
-
-#touchp:checked + .slide {height: 450px;} 
-
-#touch {position: absolute; opacity: 0; height: 0px;}    
-
-#touch:checked + .slide {height: 450px;} 
-
-        .search{
-    background: #f9fafc;
-    padding: 0px;
-    display: flex;
-  flex-direction: row-reverse;
-    list-style: none;    
-}
-.searchform input[type=text]{
-    padding: 6px;
-    font-family: tahoma;
-    color: #273444;
-    background-color: #eff2f7;
-    width: 80%;
-    border: 1px solid #e0e6ed;
-    border-radius: 50px;
-    margin-right: 10px;
-    margin-top: 20px;
-    margin-bottom: auto;
-    position: relative; 
-}
-.searchform button[type=submit]{
-    position: relative;
-    background-color: transparent;
-    border: 0px transparent solid;
-    margin-top: auto;
-    margin-right: -40px;
-    padding: 10px 0px;
-    cursor: pointer;
-}
-.searchform button i{
-    -webkit-transform: scaleX(-1);
-  transform: scaleX(1);
-    font-size: 16px;
-}
-.sf button i{
-    -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-    font-size: 16px;
-}
-        .nav-link{
-            color: #000 !important;
+.animate-fading{animation:fading 5s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+        
+        .mySlides{
+            max-width: 1200px;
         }
-        @media (min-width: 1900px){
-	.admin-menu {
-		width: 100%;
-	}
+        .sidebar .sidebar-layout::-webkit-scrollbar{
+        background-color: #27282a;
+        }
+    .sidebar .sidebar-layout:hover::-webkit-scrollbar-thumb {
+    background-color: #27282a;
 }
-@media (min-width: 1367px){
-	.admin-menu {
-		width:  100%;
-	}
-}
-@media (max-width: 991px) {
-	.admin-menu{
-		width:  100%;
-	}
-}
-@media (max-width: 600px) {
-	.admin-menu{
-		width:  100%;
-	}
-}
-        .navbar {
-  background-color: #333;
-}
-.navbar a {
-  font-size: 16px;
-  text-align: center;
-  padding: 9px 16px;
-  text-decoration: none;
-}
-    .list-hor{
-    float: right;
-    list-style-type: none;
-  margin: 0;
-  padding: 0px 0px !important;
-  overflow: hidden;
-  background-color: ;
-    
-}
-.list-hor li {
-  float: right;
-    margin-left: 19px !important;
-}
-.list-hor li a {
-  display: block;
-  color: #ff7f27;
-  text-align: center;
-  padding: 1px 10px !important;
-  text-decoration: none;
- 
-}
-    span::after {
-    float: right;
-    right: 10%;
-    content: "" !important;
-}</style>
+.navbar-expand-sm .navbar-collapse {
+            flex-basis: 100% !important;
+        }
+</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/8ee2d4d390.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.3.0/css/all.css">
     <script src="inc/ckeditor5-build-classic/ckeditor.js"></script>
 </head>
 <body style="overflow-x:hidden;width:100%">
-    <div class="admin-menu">
-    <div class="menubar">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="direction:rtl;background-color:wheat !important;"">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation"style="
-    color: rgba(255,255,255,.5)!important;
-    background-color: transparent !important;
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="background-color:#27282a !important;height: 100px;width: 100%;/* position: absolute; *//* z-index:10; */">   
+        <div class="layout has-sidebar" style="height: 100%;">
+        <aside id="" class="sidebar break-point-lg" style="z-index: 11;">
+        <a id="btn-collapse"></a>
+        <div class="sidebar-layout" style="background-color:#27282a;overflow-y: hidden;">
+          <div class="sidebar-header">
+            <div class="pro-sidebar-logo">
+              <h5>اسم المستخدم</h5>
+            </div>
+            </div>
+          </div></aside></div>
+        <div class="collapse navbar-collapse" id="navbarsExample03" style="direction:rtl">
+        <ul class="navbar-nav mr-auto" style="margin-right:50px !important">
+          <li class="nav-item active">
+              <i class="fa fa-house" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
+            <a class="nav-link" style="float:right" href="/">عرض الصفحة الرئيسية</a>
+          </li>
+            
+            
+        </ul>
+      </div>
+     <div class="collapse navbar-collapse" id="navbarsExample03" style="direction: ltr;">
+        <ul class="navbar-nav mr-auto" style="margin-right:50px !important">
+          <li class="nav-item active" style="
+    cursor: pointer;
 ">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" " id="navbarsExample03">
-        <ul class="navbar-nav mr-auto"  style="margin-right:0px !important">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.php">الرئيسية <span class="sr-only">(current)</span></a>
+              <i class="fa fa-right-from-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
+            <a class="nav-link" href="/admin/logout" style="float:right">تسجيل الخروج</a>
           </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link " href="/admin/category" >التصنيفات</a>
             
-          </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link " href="/admin/cards" >المنتجات</a>
-           
-          </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link"  href="/admin/info">اعدادات الموقع</a>
-           
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="/admin/agents">الوكلاء</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="/admin/office">المكاتب</a>
-          </li>
-            <li class="nav-item active">
             
-            <a class="nav-link" href="/admin/banners"> غلاف <span class="sr-only">(current)</span></a>
-          </li>
-            <li class="nav-item active">
-                
-            <a class="nav-link" href="/admin/terms"> السياسات <span class="sr-only">(current)</span></a>
-          </li>
-            <li class="nav-item active">
-                
-            <a class="nav-link" href="/admin/service">الشروط <span class="sr-only">(current)</span></a>
-          </li>
-            <li class="nav-item active">
-                
-            <a class="nav-link" href="/admin/users/show">المسؤولين  <span class="sr-only">(current)</span></a>
-          </li>
-            <li class="nav-item active">
-                
-            <a class="nav-link" href="/admin/changepass">تغيير كلمة السر <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-                
-            <a class="nav-link" href="/admin/logout">تسجيل خروج<span class="sr-only">(current)</span></a>
-          </li>
         </ul>
       </div>
     </nav>
+    <div class="layout has-sidebar" style="height:100%">
+      <aside id="sidebar" class="sidebar break-point-lg">
+        <a id="btn-collapse"></a>
+        <div class="sidebar-layout" style="background-color:#27282a">
+          
+          <div class="sidebar-content" style="
+    /* margin-top: 80px; */
+">
+            <nav class="menu open-current-submenu">
+              <ul style="text-align:right;">
+                <li class="menu-item">
+                  <a href="/admin">
+                    <span class="menu-icon">
+                      <i class="fa fa-house" aria-hidden="true"></i>
+                    </span>
+                    <span class="menu-title">طلبات البطاقات</span>
+                  </a>
+                </li>
+                  
+                <li class="menu-item">
+                  <a href="/admin/category">
+                    <span class="menu-icon">
+                      <i class="fa fa-layer-group" aria-hidden="true"></i>
+                    </span>
+                    <span class="menu-title">التصنيفات</span>
+                  </a>
+                </li>
+                  <li class="menu-item">
+                  <a href="/admin/cards">
+                    <span class="menu-icon">
+                      <i class="fa fa-boxes-stacked" aria-hidden="true"></i>
+                    </span>
+                    <span class="menu-title">المنتجات</span>
+                  </a>
+                </li>
+                  
+                  
+                  
+                   <li class="menu-item">
+                  <a href="/admin/info">
+                    <span class="menu-icon">
+                      <i class="fa fa-gear" aria-hidden="true"></i>
+                    </span>
+                    <span class="menu-title">اعدادات الموقع</span>
+                  </a>
+                </li>
+
+                <li class="menu-item">
+                  <a href="/admin/info">
+                    <span class="menu-icon">
+                      <i class="fa fa-gear" aria-hidden="true"></i>
+                    </span>
+                    <span class="menu-title">طلبات الشحن</span>
+                  </a>
+                </li>
+
+                <li class="menu-item">
+                  <a href="/admin/agents">
+                    <span class="menu-icon">
+                      <i class="fa-solid fa-user-tie"></i>
+                    </span>
+                    <span class="menu-title">الوكلاء</span>
+                  </a>
+                </li>
+                  <li class="menu-item">
+                  <a href="/admin/office">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                      </span>
+                    <span class="menu-title">مكاتب التحويل</span>
+                  </a>
+                </li>
+                  
+                  <li class="menu-item">
+                  <a href="/admin/banners">
+                    <span class="menu-icon">
+                      <i class="fa fa-scroll" aria-hidden="true"></i>
+                    </span>
+                    <span class="menu-title">الغلاف</span>
+                  </a>
+                </li>
+                  
+                  <li class="menu-item">
+                  <a href="/admin/terms">
+                    <span class="menu-icon">
+                      <i class="fa-solid fa-address-card"></i>
+                    </span>
+                    <span class="menu-title">سياسة الخصوصية</span>
+                  </a>
+                </li>
+                  <li class="menu-item">
+                  <a href="/admin/service">
+                    <span class="menu-icon">
+                      <i class="fa-solid fa-handshake"></i>
+                    </span>
+                    <span class="menu-title">اتفاقية الاستخدام</span>
+                  </a>
+                </li>
+                
+                
+                  <li class="menu-item">
+                  <a href="/admin/users/show">
+                    <span class="menu-icon">
+                      <i class="fa-solid fa-user-plus"></i>
+                    </span>
+                    <span class="menu-title">المسؤولين</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/admin/changepass">
+                    <span class="menu-icon">
+                      <i class="fa-solid fa-user-pen"></i>
+                    </span>
+                    <span class="menu-title">تغيير كلمة السر</span>
+                  </a>
+                </li><!---->
+              </ul>
+            </nav>
+          </div>
+          
+        </div>
+      </aside>
+      <div id="overlay" class="overlay"></div>
+      <div class="layout" style="overflow-y:auto;overflow-x:hidden">
+        <main class="content">
+          <div>
+            <a id="btn-toggle" style="color:white;margin-top:17px;" href="#" class="sidebar-toggler break-point-lg">
+              <i class="ri-menu-line ri-xl"></i>
+              </a>
+              <br>
     <div class="c"></div>
- </div>
- </div>
-    <div class="all">  
+
+    <div class="all" style="direction:rtl;text-align:right;">
 @yield('content')
 
+</div></main></div></div> 
 </div>
-<script>
-  var myIndex = 0;
-  carousel();
-  
-  function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";  
-    }
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}    
-    x[myIndex-1].style.display = "block";  
-    setTimeout(carousel, 4500);    
-  }
-  
-  function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000*200);
-      expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
-  }
-  
-  function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-  }
-  
-  
-  </script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-  <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
-  <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+</script>
+<script src="https://azouaoui-med.github.io/pro-sidebar-template/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+<script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

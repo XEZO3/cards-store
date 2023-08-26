@@ -1,6 +1,16 @@
 @extends('public._layout')
 @section('content')
-<div style="
+<style>
+    .modal-backdrop {
+ 
+  
+ z-index: -1;
+}
+.paragraph-content {
+  white-space: pre-wrap;
+}
+</style>
+{{-- <div style="
     direction: rtl;
     float:right;
 ">
@@ -15,7 +25,9 @@
     border-radius: 5px;
     padding: 3px;
     background-color: #007bff;
-    border: none;cursor:pointer" value="ابحث"></form></div>
+    border: none;cursor:pointer;
+    color:white
+    " value="ابحث"></form></div> --}}
 <br>
 <table class="agent" style="
     margin: 0px !important;
@@ -24,12 +36,15 @@
     direction: rtl;
 ">
 <tbody><tr>
-    <td class="namea">المنتج</td>
-    <td class="phonea">رقم الطلب</td>
+    <td class="namea">رقم الطلب</td>
+    <td class="phonea">المنتج</td>
     <td class="cata">اللاعب/المشترك</td>
     <td class="regiona">السعر</td>
     <td class="quentity">الكمية</td>
     <td class="regiona">التاريخ</td>
+    <td class="regiona">الحالة</td>
+    <td class="regiona">##</td>
+
     </tr>
     @foreach($orders as $item)
     <tr><td><br></td></tr>
@@ -40,12 +55,44 @@
     width: 100% !important;
     height: 70px;
     ">
-    <td class="allb">{{$item['name']}}</td>
     <td class="allb">{{$item['id']}}</td><!---->
+    <td class="allb">{{$item['card']['name']}}</td>
     <td class="allb">{{$item['game_id']}}</td>
     <td class="allb">{{$item['card']['price']}}</td>
     <td class="allb">{{$item['quentity']}}</td>
     <td class="allb">{{$item['created_at']}}</td>
+    <td class="allb">{{$item['state']=="pending" ? "قيد الانتظار" : ($item['state']=="done" ? "تمت العملية" : "تم الالغاء")}}</td>
+    <td class="allb">
+        @if($item['state']!="pending" && $item['state']!="rejected")
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#so{{$item['id']}}s">
+            eye
+          </button>
+        @else
+         
+        @endif
+    </td>
+    @if($item['state']!="pending" && $item['state']!="rejected")
+        <div class="modal fade" id="so{{$item['id']}}s" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">البطاقات</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container" style="overflow-y: scroll">
+                        <p class="paragraph-content" style="text-align: center">
+                            {{strip_tags(nl2br($item['keys']))}}
+                         </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endif
         </tr>
     <tr><td><br></td></tr>
    @endforeach
