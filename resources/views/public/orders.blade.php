@@ -65,7 +65,7 @@
     <td class="allb">
         @if($item['state']!="pending" && $item['state']!="rejected")
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#so{{$item['id']}}s">
-            eye
+          <i class="fa-solid fa-eye"></i>
           </button>
         @else
          
@@ -81,9 +81,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container" style="overflow-y: scroll">
-                        <p class="paragraph-content" style="text-align: center">
-                            {{strip_tags(nl2br($item['keys']))}}
-                         </p>
+                        <p class="paragraph-content" style="text-align: center">{{strip_tags(nl2br($item['keys']))}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">

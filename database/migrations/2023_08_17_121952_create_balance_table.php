@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(payment_methods::class)->constrained()->onDelete('cascade');
             $table->string("name");
-            $table->float("balance");
+            $table->decimal('balance', 10, 2);
             $table->string("note");
             $table->float("price");
             $table->enum('state', ['loan', 'pending','done','rejected']);;

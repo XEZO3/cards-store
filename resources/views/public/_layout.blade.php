@@ -159,7 +159,7 @@ width: 1200px !important;
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a href="redeem.php">
+                    <a href="/payment/recharge">
                       <span class="menu-icon">
                         <i class="fa-solid fa-money-bill-1"></i>
                       </span>

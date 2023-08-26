@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\balance;
 use App\Models\payment_methods;
+use App\Models\zip_codes;
 use Illuminate\Http\Request;
 
 class balanceController extends Controller
@@ -36,6 +37,26 @@ class balanceController extends Controller
         $data = balance::with("payment_methods")->find($balance['id']);
         return view("public.payment.viewpayment",['balance'=>$data]);
     }
+    public function recharge_the_balance(Request $req){
+        $code = $req->validate([
+            "code"=>"required"
+        ]);
+        $result =zip_codes::where("code",$code)->where("validity",1)->first();
+        if($result!=null){
+            $result->update(['validity'=>0]);
+            $user = auth()->user();
+            $user->balance = $user->balance+$result['amount'];
+            $user->save();
+            return redirect()->back()->with('message', 'success');
+
+        }
+        return redirect()->back()->with('error', 'failed');
+    }
+    public function recharge(){
+        return view("public.payment.recharge");
+
+    }
+
     public function paymenthistory(){
     $balance = balance::with("payment_methods")->where("user_id",auth()->id())->get();
     return view("public.payment.paymenthistory",['balance'=>$balance]);

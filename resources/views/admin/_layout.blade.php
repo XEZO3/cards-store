@@ -63,6 +63,7 @@ width: 1200px !important;
     <script src="inc/ckeditor5-build-classic/ckeditor.js"></script>
 </head>
 <body style="overflow-x:hidden;width:100%">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="background-color:#27282a !important;height: 100px;width: 100%;/* position: absolute; *//* z-index:10; */">   
         <div class="layout has-sidebar" style="height: 100%;">
         <aside id="" class="sidebar break-point-lg" style="z-index: 11;">
@@ -110,8 +111,7 @@ width: 1200px !important;
                 <li class="menu-item">
                   <a href="/admin">
                     <span class="menu-icon">
-                      <i class="fa fa-house" aria-hidden="true"></i>
-                    </span>
+                      <i class="fa-solid fa-receipt"></i>                    </span>
                     <span class="menu-title">طلبات البطاقات</span>
                   </a>
                 </li>
@@ -145,11 +145,20 @@ width: 1200px !important;
                 </li>
 
                 <li class="menu-item">
-                  <a href="/admin/info">
+                  <a href="/admin/balance">
                     <span class="menu-icon">
-                      <i class="fa fa-gear" aria-hidden="true"></i>
+                      <i class="fa-solid fa-money-check-dollar"></i>
                     </span>
                     <span class="menu-title">طلبات الشحن</span>
+                  </a>
+                </li>
+
+                <li class="menu-item">
+                  <a href="/admin/zipcode">
+                    <span class="menu-icon">
+                      <i class="fa-solid fa-money-check-dollar"></i>
+                    </span>
+                    <span class="menu-title">انشاء كود شحن</span>
                   </a>
                 </li>
 

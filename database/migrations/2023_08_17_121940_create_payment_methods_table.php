@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("image");
             $table->string("wallet");
-            $table->float("ex_price");
+            $table->decimal('ex_price', 10, 2);
             $table->timestamps();
         });
     }

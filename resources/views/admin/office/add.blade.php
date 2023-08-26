@@ -19,12 +19,12 @@
                 <small class="text-danger">{{$message}}</small>
             @enderror
         <br>
-        <input type="file" name="image">
+        <input type="file" class="form-control" name="image">
         <br>
         @error('image')
                 <small class="text-danger">{{$message}}</small>
             @enderror
-        <input type="submit" name="form-control">
+        <input type="submit" class="btn btn-primary" name="form-control">
         </form><br><br>
     </div>
 </div>

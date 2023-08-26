@@ -30,8 +30,7 @@
     <td class="allb">{{$item['created_at']}}</td>
     <td class="allb">{{$item['payment_methods']['name']}}</td>
     <td class="allb">{{$item['note']}}</td>
-    <td class="allb">{{$item['state']=="pending" ? "قيد الانتظار" : ($item['state']=="done" ? "تمت العملية" : ($item['state']=="rejected" ? "تم الالغاء" : "دين"))}}
-    </td>
+    <td class="allb">{{$item['state']=="pending" ? "قيد الانتظار" : ($item['state']=="done" ? "تمت العملية" : ($item['state']=="rejected" ? "تم الالغاء" : "دين"))}}</td>
 
         </tr>
     <tr><td><br></td></tr>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(card::class)->constrained()->onDelete('cascade');
             $table->integer("quentity");
             $table->string("game_id")->nullable(true);
-            $table->float("total");
+            $table->decimal('total', 10, 2);
             $table->enum('state',['pending','done','rejected']);
             $table->text("keys")->nullable();
             $table->timestamps();

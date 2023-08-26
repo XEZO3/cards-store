@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\admin\agentController;
 use App\Http\Controllers\admin\authController as AdminAuthController;
+use App\Http\Controllers\admin\balanceController as AdminBalanceController;
 use App\Http\Controllers\admin\bannerControl;
 use App\Http\Controllers\admin\cardController as AdminCardController;
 use App\Http\Controllers\admin\categoryController;
 use App\Http\Controllers\admin\homeController as AdminHomeController;
 use App\Http\Controllers\admin\officeController;
+use App\Http\Controllers\admin\paymentController;
+use App\Http\Controllers\admin\zipCodeController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\balanceController;
 use App\Http\Controllers\cardController;
@@ -31,19 +34,18 @@ Route::get('/user/register', [authController::class,"register"]);
 Route::post('/user/register', [authController::class,"store"]);
 Route::post('/user/login', [authController::class,"loginPost"]);
 Route::get('/user/login', [authController::class,"login"])->name('login');
-Route::get('/user/logout', [authController::class,"logout"])->middleware('auth');
 
-Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('payment-verify');
+// Route::get('/payments/verify/{payment?}',[FrontController::class,'payment_verify'])->name('payment-verify');
 Route::get('/',[homeController::class,'index']);
 Route::get('/cards/{category}',[cardController::class,'index']);
 Route::post('/add-to-wish/{id}', [ wishController::class, 'addToWish'])->name('add.to.wish');
 Route::post('/remove-from-wish/{id}', [ wishController::class, 'removeFromWish'])->name('remove.from.wish');
 
-Route::post('/add-to-cart/{id}', [ cardController::class, 'addToCart'])->name('add.to.cart');
-Route::post('/update-cart/{id}', [ cardController::class, 'update_quen'])->name('update.cart');
+// Route::post('/add-to-cart/{id}', [ cardController::class, 'addToCart'])->name('add.to.cart');
+// Route::post('/update-cart/{id}', [ cardController::class, 'update_quen'])->name('update.cart');
 
-Route::get('/remove-from-cart/{id}', [ cardController::class, 'removeFromCart'])->name('remove.from.cart');
-Route::get('/cart', [ cartController::class, 'index']);
+// Route::get('/remove-from-cart/{id}', [ cardController::class, 'removeFromCart'])->name('remove.from.cart');
+// Route::get('/cart', [ cartController::class, 'index']);
 
 Route::get('/favorite',[wishController::class,'fav']);
 Route::get('/search',[homeController::class,'search']);
@@ -52,6 +54,10 @@ Route::get('/agents',[homeController::class,'agents']);
 Route::get('/terms',[homeController::class,'terms']);
 Route::get('/service',[homeController::class,'service']);
 Route::middleware(['auth'])->group(function () {
+    Route::get('/user/logout', [authController::class,"logout"]);
+    Route::post('/payment/recharge',[balanceController::class,'recharge_the_balance']);
+    Route::get('/payment/recharge',[balanceController::class,'recharge']);
+
     Route::get('/payment',[balanceController::class,'paymentMethod']);
     Route::get('/checkout/{id}',[balanceController::class,'checkout']);
     Route::post('/balance/checkout/{payment}',[balanceController::class,'transition']);
@@ -128,6 +134,29 @@ Route::prefix('admin')->group(function () {
                     Route::get('/add',[AdminCardController::class,'add']);
                     Route::post('/add',[AdminCardController::class,'store']);
                 });
+
+                Route::prefix('zipcode')->group(function () {
+                    Route::get('/',[zipCodeController::class,'index']);
+                    Route::get('/delete/{id}',[zipCodeController::class,'delete']);
+                    // Route::get('/edit/{card}',[zipCodeController::class,'edit']);
+                    // Route::post('/edit/{card}',[zipCodeController::class,'update']);
+                    // Route::get('/c',[zipCodeController::class,'store']);
+                    Route::post('/create',[zipCodeController::class,'store']);
+                });
+                Route::prefix('balance')->group(function () {
+                    Route::get('/',[AdminBalanceController::class,'index']);
+                    Route::get('/delete/{id}',[AdminBalanceController::class,'delete']);
+                    Route::get('/update/{id}/{state}',[AdminBalanceController::class,'update']);
+                });
+                Route::prefix('payment')->group(function () {
+                    Route::get('/',[paymentController::class,'index']);
+                    Route::get('/delete/{id}',[paymentController::class,'delete']);
+                    Route::get('/edit/{card}',[paymentController::class,'edit']);
+                    Route::post('/edit/{card}',[paymentController::class,'update']);
+                    Route::get('/add',[paymentController::class,'add']);
+                    Route::post('/add',[paymentController::class,'store']);
+                });
+                
 
 
     });
