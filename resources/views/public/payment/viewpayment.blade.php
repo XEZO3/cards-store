@@ -69,7 +69,7 @@
                     <th style="font-weight:normal">{{$balance['payment_methods']['name']}}</th>
                 </tr>
                 <tr>
-                    <th><strong>عنوان المحفظة<button title="هذا اسم الشخص الذي يجب تحويل المال الى حسابه" style="background-color: transparent;border: none;color: #007bff;cursor:pointer;"><i class="fa-solid fa-circle-info"></i></button></strong></th>
+                    <th><strong>اسم المستلم\\عنوان المحفظة<button title="هذا اسم الشخص الذي يجب تحويل المال الى حسابه" style="background-color: transparent;border: none;color: #007bff;cursor:pointer;"><i class="fa-solid fa-circle-info"></i></button></strong></th>
                     <th style="font-weight:normal">{{$balance['payment_methods']['wallet']}}</th>
                 </tr>
                 <tr>

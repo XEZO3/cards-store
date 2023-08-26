@@ -178,6 +178,15 @@ width: 1200px !important;
                     <span class="menu-title">مكاتب التحويل</span>
                   </a>
                 </li>
+
+                <li class="menu-item">
+                  <a href="/admin/payment">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                      </span>
+                    <span class="menu-title">طرق الدفع</span>
+                  </a>
+                </li>
                   
                   <li class="menu-item">
                   <a href="/admin/banners">
@@ -239,6 +248,16 @@ width: 1200px !important;
     <div class="c"></div>
 
     <div class="all" style="direction:rtl;text-align:right;">
+      @if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+@if(session('error'))
+    <div class="alert alert-success">
+        {{ session('error') }}
+    </div>
+@endif
 @yield('content')
 
 </div></main></div></div> 

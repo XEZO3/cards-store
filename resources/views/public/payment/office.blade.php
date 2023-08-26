@@ -31,39 +31,7 @@
     padding: 0px 15px;
 ">اختر طريقة الدفع</div>
 <ul style="text-align: center;list-style: none;">
-    {{-- <li style="
-    display: inline-block;
-    margin-top: 18px;
-    list-style-type: none;
-    max-width: 40%;
-    width: 100%;
-">
-    <a href="/offices" style="
-    text-decoration: none !important;
-    display: block;
-    overflow: hidden;
-    position: relative;
-    margin: 0.5em;
-    box-shadow: rgba(0,0,0,.25) 0 0 1em;
-    border-radius: 0.5em;
-    background: #fff;
-    color: inherit;
-">
-        <div style="
-    background-position: center;
-    background-color: #aaa;
-    display: flex;
-    align-items: center;
-"><img src="" style="width: 100%;height:120px;">
-</div>
-        <span style="
-    margin-bottom: 0.5rem !important;
-    margin-top: 0.5rem;
-    display: block;
-">مكاتب التحويل</span>
-        </a>
-    </li> --}}
-    @foreach ($methods as $item)
+    @foreach ($office as $item)
     <li style="
     display: inline-block;
     margin-top: 18px;

@@ -151,8 +151,8 @@ Route::prefix('admin')->group(function () {
                 Route::prefix('payment')->group(function () {
                     Route::get('/',[paymentController::class,'index']);
                     Route::get('/delete/{id}',[paymentController::class,'delete']);
-                    Route::get('/edit/{card}',[paymentController::class,'edit']);
-                    Route::post('/edit/{card}',[paymentController::class,'update']);
+                    Route::get('/edit/{payment}',[paymentController::class,'edit']);
+                    Route::post('/edit/{payment}',[paymentController::class,'update']);
                     Route::get('/add',[paymentController::class,'add']);
                     Route::post('/add',[paymentController::class,'store']);
                 });
