@@ -66,12 +66,12 @@
                   <div class="bottom-area d-flex px-3">
                     <div class="m-auto d-flex">
                       
-                      <form action="{{ route('add.to.cart', ['id' => $item->id]) }}" method="post" id="ajax-form"  onsubmit="return false">
+                      {{-- <form action="{{ route('add.to.cart', ['id' => $item->id]) }}" method="post" id="ajax-form"  onsubmit="return false">
                         @csrf
                         <a type="submit" onclick="submitForm({{$item['id']}})" class="buy-now d-flex justify-content-center align-items-center mx-1">
                           <button  style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span></button>
                         </a>
-                    </form>
+                    </form> --}}
 
                     <form action="{{ route('remove.from.wish', ['id' => $item->id]) }}" method="post" id="ajax-add-to-cart" >                      @csrf
                       <a href="#" class="heart d-flex justify-content-center align-items-center ">

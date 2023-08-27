@@ -25,7 +25,7 @@ class balanceController extends Controller
     public function transition(Request $req,payment_methods $payment){
         
         $data = $req->validate([
-            'balance'=>"required|Integer|gt:25",
+            'balance'=>"required|Integer|gt:25|lte:1000",
             'name'=>"required",
             'note'=>"required"
         ]);

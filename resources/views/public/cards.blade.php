@@ -119,7 +119,7 @@
                       @endif
                       <div class="row justify-content-center">
                         <label style="text-align: center" for="">الكمية</label>
-                        <div class="col-1"><button class="btn btn-danger"  type="button"onclick="change({{$item['id']}},0,{{$item['price']}})">-</button></div>
+                        <div class="col-1"><button class="btn btn-danger"  type="button" onclick="change({{$item['id']}},0,{{$item['price']*((100-$item['discount'])/100)}})">-</button></div>
                         <div class="col-3" style="margin-right: -20px"><input type="number"  id="valu{{$item['id']}}" min="1" value="1" name="quentity" class="form-control"></div>
                         <div class="col-1"><button class="btn btn-primary " type="button" onclick="change({{$item['id']}},1,{{$item['price']*((100-$item['discount'])/100)}})">+</button></div>
                       </div>
