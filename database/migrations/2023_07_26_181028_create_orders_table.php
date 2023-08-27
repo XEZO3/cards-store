@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(card::class)->constrained()->onDelete('cascade');
+            $table->integer("order_id");
             $table->integer("quentity");
             $table->string("game_id")->nullable(true);
             $table->decimal('total', 10, 2);
@@ -25,12 +26,13 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+
         Schema::dropIfExists('orders');
     }
 };

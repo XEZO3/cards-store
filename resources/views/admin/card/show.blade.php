@@ -40,10 +40,13 @@
             <td><div class="mt-4">{{$item['avilability']==1?"متواجد":"غير متواجد"}}</div></td>
             <td>
                 <div class="d-flex flex-row mt-4">
-                    <div ><a href="/admin/cards/edit/{{$item['id']}}"  class="btn btn-primary">
+                    <div >
+                      <a href="/admin/cards/edit/{{$item['id']}}"  class="btn btn-primary">
                       <i style="color: white" class="material-icons ">تعديل</i>
-                    </a></div>
-                    <div ><a href="/admin/cards/delete/{{$item['id']}}" class="btn btn-danger mr-1">
+                    </a>
+                  </div>
+                    <div >
+                      <a href="/admin/cards/delete/{{$item['id']}}" class="btn btn-danger mr-1">
                       <i class="material-icons" style="color: white">حذف</i>
                     </a></div>
                   </div>

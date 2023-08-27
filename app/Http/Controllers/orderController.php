@@ -66,9 +66,12 @@ class orderController extends Controller
         $data['user_id'] =auth()->id() ;
         $data['card_id'] = $card['id'];
         $data['total'] = $total;
-         
-        order::create($data);
         $user = auth()->user();
+        if($user->balance<$total){
+            return redirect()->back()->with('error', 'رصيدك لا يكفي');
+        }
+        order::create($data);
+      
         $user->balance = $user->balance-$total;
         $user->save();
         return redirect("/orders");

@@ -267,7 +267,24 @@ width: 1200px !important;
               <i class="ri-menu-line ri-xl" style="
 "></i>
             </a>
-              <!--content*********************--><br>
+
+
+            
+              <!--content*********************-->
+              <br>
+          <div dir="ltr">
+            @if(session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+          </div> 
+             
 @yield('content')
 </div>
 </main>

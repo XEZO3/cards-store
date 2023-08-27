@@ -11,6 +11,7 @@ class order extends Model
     protected $fillable = [
         'user_id',
         'card_id',
+        'order_id',
         'quentity',
         'game_id',
         'keys',
@@ -18,6 +19,17 @@ class order extends Model
         'total', 
     ];
 
+    protected static function booted()
+    {
+        static::creating(function ($order) {
+            $uniqueOrderId = null;
+            do {
+                $uniqueOrderId = rand(); 
+            } while (static::where('order_id', $uniqueOrderId)->exists()); 
+
+            $order->order_id = $uniqueOrderId;
+        });
+    }
     public function card()
     {
         return $this->belongsTo(card::class);

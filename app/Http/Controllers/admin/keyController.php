@@ -43,6 +43,7 @@ class keyController extends Controller
         $data = $req->validate([
             'keys'=>"required"
         ]);
+        $data['state'] = "done";
         $order->update($data);
         return redirect()->back()->with('message', 'تمت العملية بنجاح');
 

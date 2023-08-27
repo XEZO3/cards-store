@@ -55,7 +55,7 @@
     width: 100% !important;
     height: 70px;
     ">
-    <td class="allb">{{$item['id']}}</td><!---->
+    <td class="allb">{{$item['order_id']}}</td><!---->
     <td class="allb">{{$item['card']['name']}}</td>
     <td class="allb">{{$item['game_id']}}</td>
     <td class="allb">{{$item['card']['price']}}</td>

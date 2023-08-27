@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\categoryController;
 use App\Http\Controllers\admin\homeController as AdminHomeController;
 use App\Http\Controllers\admin\keyController;
 use App\Http\Controllers\admin\officeController;
+use App\Http\Controllers\admin\orderController as AdminOrderController;
 use App\Http\Controllers\admin\paymentController;
 use App\Http\Controllers\admin\zipCodeController;
 use App\Http\Controllers\authController;
@@ -83,9 +84,7 @@ Route::prefix('admin')->group(function () {
     
         Route::get('/changepass',[AdminAuthController::class,'password']);
         Route::post('/changepass', [AdminAuthController::class,"change_password"]);
-        Route::get('/logout',[AdminAuthController::class,'logout']);
-        
-        Route::get('/',[AdminHomeController::class,'index']);
+        Route::get('/logout',[AdminAuthController::class,'logout']);       
 
         Route::get('/info',[AdminHomeController::class,'site_info']);
         Route::post('/info/update/{id}',[AdminHomeController::class,'site_info_update']);
@@ -165,7 +164,17 @@ Route::prefix('admin')->group(function () {
                     // Route::post('/edit/{payment}',[paymentController::class,'update']);
                     //Route::get('/add',[keyController::class,'add']);
                     Route::post('/create',[keyController::class,'store']);
-                    Route::get('/addkeytouser/{order}',[keyController::class,'addKeyToUser']);
+                    Route::post('/addkeytouser/{order}',[keyController::class,'addKeyToUser']);
+
+                });
+                Route::prefix('order')->group(function () {
+                    Route::get('/',[AdminOrderController::class,'index']);
+                    Route::get('/delete/{id}',[AdminOrderController::class,'delete']);
+                    // Route::get('/edit/{payment}',[paymentController::class,'edit']);
+                    // Route::post('/edit/{payment}',[paymentController::class,'update']);
+                    //Route::get('/add',[keyController::class,'add']);
+                    Route::post('/create',[AdminOrderController::class,'store']);
+                    Route::get('/setstate/{order}/{state}',[AdminOrderController::class,'setstate']);
 
                 });
                 
