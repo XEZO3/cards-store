@@ -32,6 +32,7 @@ class cardController extends Controller
         $data = $req->validate([
             'name'=>'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Adjust the validation rules as needed
+            'description'=>'required|string',
             'price'=>'required|numeric',
             'category_id'=>'required|integer',
             'require_id'=>"required",
@@ -43,6 +44,7 @@ class cardController extends Controller
         card::create([
             'name'=>$data['name'],
             'require_id'=>$data['require_id'],
+            'description'=>$data['description'],
             'image'=>$path,
             'price'=>$data['price'],
             'category_id'=>$data['category_id'],
@@ -56,6 +58,7 @@ class cardController extends Controller
         $card = card::findOrFail($card['id']);
         $data= $req->validate([
             'name'=>'required|string',
+            'description'=>'required|string',
             'price'=>'required|numeric',
             'category_id'=>'required|integer',
             'discount'=>'required|numeric',
@@ -81,6 +84,7 @@ class cardController extends Controller
         $card->update([
             'name'=>$data['name'],
             'price'=>$data['price'],
+            'description'=>$data['description'],
             'discount'=>$data['discount'],
             'category_id'=>$data['category_id'],
             'require_id'=>$data['require_id'],

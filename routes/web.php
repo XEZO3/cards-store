@@ -68,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/orders',[orderController::class,'index']);
     Route::post('/order/purchasing/{card}',[orderController::class,'purchasing']);
+    Route::get('/orders/cancel/{order}',[orderController::class,'cancelOrder']);
 
 });
 Route::prefix('admin')->group(function () {
@@ -81,7 +82,8 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get("/users/show",[AdminAuthController::class,'index']);
         Route::get("/users/delete/{id}",[AdminAuthController::class,'delete']);
-    
+        Route::get('/',[AdminOrderController::class,'index']);
+
         Route::get('/changepass',[AdminAuthController::class,'password']);
         Route::post('/changepass', [AdminAuthController::class,"change_password"]);
         Route::get('/logout',[AdminAuthController::class,'logout']);       
@@ -170,9 +172,6 @@ Route::prefix('admin')->group(function () {
                 Route::prefix('order')->group(function () {
                     Route::get('/',[AdminOrderController::class,'index']);
                     Route::get('/delete/{id}',[AdminOrderController::class,'delete']);
-                    // Route::get('/edit/{payment}',[paymentController::class,'edit']);
-                    // Route::post('/edit/{payment}',[paymentController::class,'update']);
-                    //Route::get('/add',[keyController::class,'add']);
                     Route::post('/create',[AdminOrderController::class,'store']);
                     Route::get('/setstate/{order}/{state}',[AdminOrderController::class,'setstate']);
 

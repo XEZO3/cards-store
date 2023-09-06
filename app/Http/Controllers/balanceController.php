@@ -15,7 +15,7 @@ class balanceController extends Controller
         return view("public.payment.payment",['methods'=>$methods]);
     }
     public function checkout($id){
-        $methods = payment_methods::find($id);
+        $methods = payment_methods::findOrFail($id);
         return view("public.payment.checkout",['method'=>$methods]);
     }
     public function office(){
@@ -29,17 +29,22 @@ class balanceController extends Controller
             'name'=>"required",
             'note'=>"required"
         ]);
-        
-        $data['user_id']=auth()->user()->id;
-        $data['price']=$data['balance']+$payment['ex_price'];
-        $data['payment_methods_id'] =$payment['id'];
-        $data['state'] ="pending";
-        $balance = balance::create($data);
-        return redirect("/viewpayment/".$balance['id']); 
+        try{
+            $data['user_id']=auth()->user()->id;
+            $data['price']=$data['balance']+$payment['ex_price'];
+            $data['payment_methods_id'] =$payment['id'];
+            $data['state'] ="pending";
+            $balance = balance::create($data);
+            return redirect("/viewpayment/".$balance['id']); 
+
+        }catch(\Exception $e){
+            return back()->with('error', 'حدث خطا الرجاء المحاولة مرة اخرى');
+
+        }
         
     }
     public function viewpayment(balance $balance){
-        $data = balance::with("payment_methods")->find($balance['id']);
+        $data = balance::with("payment_methods")->findOrFail($balance) ??null;
         return view("public.payment.viewpayment",['balance'=>$data]);
     }
     public function recharge_the_balance(Request $req){

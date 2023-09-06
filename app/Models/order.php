@@ -15,6 +15,7 @@ class order extends Model
         'quentity',
         'game_id',
         'keys',
+        'rejecte_cause',
         'state',
         'total', 
     ];

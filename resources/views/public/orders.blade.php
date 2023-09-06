@@ -43,6 +43,7 @@
     <td class="quentity">الكمية</td>
     <td class="regiona">التاريخ</td>
     <td class="regiona">الحالة</td>
+    <td class="regiona">سبب الرفض|ان وجد</td>
     <td class="regiona">##</td>
 
     </tr>
@@ -62,16 +63,19 @@
     <td class="allb">{{$item['quentity']}}</td>
     <td class="allb">{{$item['created_at']}}</td>
     <td class="allb">{{$item['state']=="pending" ? "قيد الانتظار" : ($item['state']=="done" ? "تمت العملية" : "تم الالغاء")}}</td>
+    <td class="allb">{{$item['rejecte_cause']}}</td>
     <td class="allb">
-        @if($item['state']!="pending" && $item['state']!="rejected")
+        @if($item['state']=="done")
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#so{{$item['id']}}s">
           <i class="fa-solid fa-eye"></i>
           </button>
-        @else
-         
+        @elseif($item['state']=="pending")
+        <a onclick="check('/orders/cancel/{{$item['id']}}')" class="btn btn-danger" >
+          <i class="fa-solid fa-ban"></i>
+        </a>
         @endif
     </td>
-    @if($item['state']!="pending" && $item['state']!="rejected")
+    @if($item['state']=="done")
         <div class="modal fade" id="so{{$item['id']}}s" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -95,5 +99,11 @@
     <tr><td><br></td></tr>
    @endforeach
 </tbody></table>
-
+<script>
+  function check(direction){
+    var confirmation = confirm("هل انت متاكد من هذه العملية؟");
+    if(confirmation)
+    window.location.href = direction
+}
+</script>
   @endsection

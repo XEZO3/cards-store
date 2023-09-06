@@ -24,9 +24,9 @@ class authController extends Controller
         $formInputs = $request->validate([
             'name'=>'required|min:3',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:3|confirmed',
-            
+            'password'=>'required|min:3|confirmed',     
         ]);
+        $formInputs['phone_number'] = "1234556";
         $formInputs['password']=bcrypt($formInputs['password']);
         $formInputs['permession'] = "Admin";
         $user = User::create($formInputs);

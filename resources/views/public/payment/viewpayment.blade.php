@@ -24,6 +24,8 @@
         direction: rtl;
         padding: 1.25rem;
     ">
+    @isset($balance)
+    <!-- Your code to display balance and payment methods -->
             <table style="width:100%;max-width:100%;margin-bottom:1rem; background-color:transparent;border-collapse:collapse">
             <tbody>
                 <tr>
@@ -82,6 +84,9 @@
                 </tr>
                 </tbody>
             </table>
+            @else
+                <p>لا يوجد بيانات</p>
+            @endisset
             </div>
     </div>
 @endsection

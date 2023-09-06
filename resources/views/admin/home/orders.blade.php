@@ -53,7 +53,7 @@
                       <td>{{ $order['state'] === 'pending' ? 'قيد الانتظار' : ($order['state'] === 'rejected' ? 'تم الرفض' : ($order['state'] === 'done' ? 'تمت العملية' : 'حالة غير معروفة')) }}</td>
                       <td>
                         @if($order['card']['require_id']==true && $order['state']=="pending")
-                        <a href="/admin/order/state/{{$order['id']}}/done" style="color:white" class="btn btn-success">تمت العملية</a>
+                        <a href="/admin/order/setstate/{{$order['id']}}/done" style="color:white" class="btn btn-success">تمت العملية</a>
                         <a href="/admin/order/setstate/{{$order['id']}}/rejected" style="color:white" class="btn btn-danger">الرفض</a>
                         @elseif($order['state']=="pending") 
                           <form method="post" action="/admin/keys/addkeytouser/{{$order['id']}}">

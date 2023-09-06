@@ -11,6 +11,7 @@ class card extends Model
     protected $fillable = [
         'name',
         'image',
+        'description',
         'price',
         'discount',
         'category_id',
