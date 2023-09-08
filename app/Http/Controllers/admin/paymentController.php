@@ -19,8 +19,7 @@ class paymentController extends Controller
     }
     public function edit(Request $req,payment_methods $payment){
         if ($payment === null) {
-            // Handle the case where $payment is null
-            // For example, you can return an error view or redirect back with a message
+           
             return redirect()->back()->with('error', 'Payment method not found.');
         }
         return view('admin.payment.edit', ['payment' => $payment]);

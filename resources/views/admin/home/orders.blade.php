@@ -1,6 +1,10 @@
 @extends('admin._layout')
 @section('content')
-
+<style>
+.modal-backdrop {
+   z-index: -1;
+}
+</style>
 
 <div class="container mt-4">
     <!-- Order cart -->
@@ -34,10 +38,15 @@
                     <tr>
                       <th> اسم المنتج</th>
                       <th>الكمية</th>
+                      @if($order['card']['require_id']==true )
                       <th>رقم اللاعب</th>
+                      @endif
                       <th>مجموع</th>
                       <th>الحالة</th>
                       <th>البطاقات</th>
+                      @if($order['state']=="rejected")
+                      <th>سبب الرفض</th>
+                      @endif
                       @if($order['card']['require_id']==false && $order['state']=="pending")
                       <th>#</th>
                       @endif
@@ -48,13 +57,15 @@
                     <tr>
                       <td>{{ $order['card']['name'] }}</td>
                       <td>{{ $order['quentity'] }}</td>
+                      @if($order['card']['require_id']==true )
                       <td>{{$order['game_id']}}</td>
+                      @endif
                       <td>{{ $order['total']}}</td>
                       <td>{{ $order['state'] === 'pending' ? 'قيد الانتظار' : ($order['state'] === 'rejected' ? 'تم الرفض' : ($order['state'] === 'done' ? 'تمت العملية' : 'حالة غير معروفة')) }}</td>
                       <td>
                         @if($order['card']['require_id']==true && $order['state']=="pending")
                         <a href="/admin/order/setstate/{{$order['id']}}/done" style="color:white" class="btn btn-success">تمت العملية</a>
-                        <a href="/admin/order/setstate/{{$order['id']}}/rejected" style="color:white" class="btn btn-danger">الرفض</a>
+                        <a data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#reject{{$order['id']}}">الرفض</a>
                         @elseif($order['state']=="pending") 
                           <form method="post" action="/admin/keys/addkeytouser/{{$order['id']}}">
                             @csrf
@@ -64,10 +75,36 @@
                           </form>  
                         @endif
                       </td>
-                      @if($order['card']['require_id']==false && $order['state']=="pending")
-                      <td><a href="/admin/order/setstate/{{$order['id']}}/rejected" style="color:white" class="btn btn-danger">الرفض</a></td>
+                      @if($order['state']=="rejected")
+                      <td>{{$order['rejecte_cause']}}</td>
                       @endif
-                     
+                      @if($order['card']['require_id']==false && $order['state']=="pending")
+                      <td><a style="color:white" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#reject{{$order['id']}}">الرفض</a></td>
+                      @endif
+                      <!-- Modal -->
+                      <div class="modal fade" id="reject{{$order['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">سبب الرفض</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                            </div>
+                            <div class="modal-body">
+                              <form action="/admin/order/setstate/{{$order['id']}}/rejected" onsubmit="return check()">
+                                <textarea name="rejecte_cause" class="form-control" cols="30" rows="10" ></textarea>
+                                @error('rejecte_cause')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                              <button type="submit" class="btn btn-primary">اتمام العملية</button>
+                            </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--modal end-->                     
                     </tr>
                   </tbody>
                 </table>
@@ -97,5 +134,12 @@
     textInput.removeAttribute("disabled"); // Enable the input
 
   }
+  function check(){
+    var confirmation = confirm("هل انت متاكد من هذه العملية؟");
+    if(confirmation)
+    return true
+
+    return false
+}
 </script>
   @endsection

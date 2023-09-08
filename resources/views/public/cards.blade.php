@@ -131,7 +131,7 @@
                             @if($item['require_id']==true)
                             <div class="form-group">
                               <label for="playerNumber">رقم اللاعب</label>
-                              <input type="number" id="playerNumber" name="game_id" class="form-control" placeholder="أدخل رقم اللاعب" required>
+                              <input type="text" id="playerNumber" name="game_id" class="form-control" placeholder="أدخل رقم اللاعب" required>
                               @error('game_id')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror

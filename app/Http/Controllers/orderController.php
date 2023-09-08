@@ -36,9 +36,7 @@ class orderController extends Controller
         }else {
         $data['state'] = "pending";
         }
-        // if(count($keys)==0){
-        //     $data['state'] = "pending";
-        // }
+     
 
         $total = ($card['price']*(100-$card['discount'])/100)*$data['quentity'];
         $data['user_id'] =auth()->id() ;

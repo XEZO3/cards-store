@@ -17,6 +17,7 @@
             <th scope="col">#</th>
             <th scope="col">الصورة</th>
             <th scope="col">الاسم</th>
+            <th scope="col">الوصف</th>
             <th scope="col">السعر</th>
             <th scope="col">القسم</th>
             <th scope="col">قيمة الخصم %</th>
@@ -33,6 +34,7 @@
             <th scope="row">{{$index+1}}</th>
             <td><img style="width: 80px;height:80px"  src="{{ asset('storage/'. $item['image']) }}"/></td>
             <td ><div class="mt-4">{{$item['name']}}</div></td>
+            <td><div class="mt-4">{{$item['description']}}</div></td>
             <td><div class="mt-4">{{$item['price']}}</div></td>
             <td><div class="mt-4">{{$item['category']['name']}}</div></td>
             <td><div class="mt-4">{{$item['discount']}}</div></td>
