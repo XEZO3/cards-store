@@ -38,7 +38,7 @@
             @enderror
         <br>
         <label>قيمة الخصم (%)</label>
-        <input type="number" name="discount" class="form-control" >
+        <input type="number" value="0" name="discount" class="form-control" >
         <br>
         @error('discount')
                 <small class="text-danger">{{$message}}</small>
@@ -56,12 +56,14 @@
             @enderror
         <br>
         <div>
-            <h2>يتطلب رقم لاعب</h2>
-            <input type="radio" name="require_id" value="1" style="display:inline">
-            <label for="">نعم</label>
+            <h2>المتطلب</h2>
+            <input type="radio" name="require_type" value="1" style="display:inline">
+            <label for="">رقم اللاعب</label>
             <br>
-            <input type="radio" name="require_id" value="0" style="display:inline">
-            <label for="">لا</label>
+            <input type="radio" name="require_type" value="2" style="display:inline">
+            <label for="">حساب و كلمة مرور</label>
+            <input type="radio" name="require_type" value="0" style="display:inline">
+            <label for="">لا شيء</label>
         </div>
         <br>
         <input type="file" class="form-control" name="image">

@@ -55,8 +55,7 @@ class balanceController extends Controller
         if($result!=null){
             $result->update(['validity'=>0]);
             $user = auth()->user();
-            $user->balance = $user->balance+$result['amount'];
-            $user->save();
+            $this->updateUserBalance($user,$result['amount']);
             return redirect()->back()->with('message', 'success');
 
         }
@@ -70,6 +69,20 @@ class balanceController extends Controller
     public function paymenthistory(){
     $balance = balance::with("payment_methods")->where("user_id",auth()->id())->get();
     return view("public.payment.paymenthistory",['balance'=>$balance]);
+    }
+    public function updateUserBalance($user, $balance)
+    {
+        $user->balance += $balance;
+        $user->total_balance += $balance;
+        $totalBalance = $user->total_balance + $balance;
+        if ($totalBalance >= 100 && $totalBalance <= 500) {
+            $user->rank = 3;
+        } elseif ($totalBalance >= 500 && $totalBalance <= 1200) {
+            $user->rank = 2;
+        } elseif ($totalBalance >= 1200) {
+            $user->rank = 1;
+        }
+        $user->save();
     }
 }
  

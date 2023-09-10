@@ -23,8 +23,7 @@ class balanceController extends Controller
             case 1:
                 if($orders['state']=="pending"){
                     $user = User::find($orders['user_id']);
-                    $user->balance =  $user->balance +$orders['balance'];
-                    $user->save();
+                    $this->updateUserBalance($user,$orders['balance']);
                     $orders->update(['state'=>"done"]);
                 }else{
                     $orders->update(['state'=>"done"]);
@@ -35,29 +34,28 @@ class balanceController extends Controller
                 break;
             case 3:
                 $user = User::find($orders['user_id']);
-                $user->balance =  $user->balance +$orders['balance'];
-                $user->save();
+                $this->updateUserBalance($user,$orders['balance']);
                 $orders->update(['state'=>"loan"]);
                 break;
         }
         return redirect()->back()->with('message', 'تمت العملية');     
     }
     return redirect()->back()->with('error', 'حدث خطا');     
-
-        // if($orders !=null){
-        //     if($state ==1){
-        //         if($orders['state']=="pending"){
-        //             $user = auth()->user();
-        //             $user->balance =  $user->balance +$orders['balance'];
-        //             $user->save();
-        //             $orders->update(['state'=>"done"]);
-        //         }else if($orders['state']!="rejected"){
-        //             $orders->update(['state'=>"done"]);
-        //         }
-        //     }else if()
-        // }else{
-        //     return redirect()->back()->with('error', 'حدث خطا'); 
-        // }
         
       }
+
+    public function updateUserBalance($user, $balance)
+    {
+        $user->balance += $balance;
+        $user->total_balance += $balance;
+        $totalBalance = $user->total_balance + $balance;
+        if ($totalBalance >= 100 && $totalBalance <= 500) {
+            $user->rank = 3;
+        } elseif ($totalBalance >= 500 && $totalBalance <= 1000) {
+            $user->rank = 2;
+        } elseif ($totalBalance >= 1200) {
+            $user->rank = 1;
+        }
+        $user->save();
+    }
 }

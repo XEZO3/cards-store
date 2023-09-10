@@ -10,86 +10,104 @@ use Illuminate\Support\Facades\Storage;
 
 class cardController extends Controller
 {
-    public function index(Request $req){
+    private $validationRules = [
+        'name' => 'required|string',
+        'description' => 'required|string',
+        'price' => 'required|numeric',
+        'category_id' => 'required|integer',
+        'discount' => 'required|numeric',
+        'require_type' => 'required',
+        'avilability' => 'required|boolean',
+    ];
+
+    public function index(Request $req)
+    {
         $card = card::with(['category'])->get();
-        return view("admin.card.show",['card'=>$card]);
+        return view("admin.card.show", ['card' => $card]);
     }
-    public function delete(Request $req,$id){
+
+    public function delete(Request $req, $id)
+    {
         card::destroy($id);
-        return back()->with('success',"تم الحذف بنجاح");
-    }
-    public function edit(Request $req,card $card){
-        $category = category::all();
-        return view('admin.card.edit',['card'=>$card,'category'=>$category]);
+        return back()->with('success', "تم الحذف بنجاح");
     }
 
-    public function add(Request $req){
+    public function edit(Request $req, card $card)
+    {
         $category = category::all();
-        return view('admin.card.add',['category'=>$category]);
+        return view('admin.card.edit', ['card' => $card, 'category' => $category]);
     }
 
-    public function store(Request $req){
-        $data = $req->validate([
-            'name'=>'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Adjust the validation rules as needed
-            'description'=>'required|string',
-            'price'=>'required|numeric',
-            'category_id'=>'required|integer',
-            'require_id'=>"required",
-            'discount'=>'required|numeric',
-            'avilability'=>'required|boolean'
-            
-        ]);
-        $path = $req->file('image')->store('images/product', 'public');
+    public function add(Request $req)
+    {
+        $category = category::all();
+        return view('admin.card.add', ['category' => $category]);
+    }
+
+    public function store(Request $req)
+    {
+        $data = $req->validate(array_merge($this->validationRules, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        ]));
+
+        $path = $this->uploadImage($req, 'image', 'images/product', 'public');
+
         card::create([
-            'name'=>$data['name'],
-            'require_id'=>$data['require_id'],
-            'description'=>$data['description'],
-            'image'=>$path,
-            'price'=>$data['price'],
-            'category_id'=>$data['category_id'],
-            'discount'=>$data['discount'],
-            "avilability"=>$data['avilability']
+            'name' => $data['name'],
+            'require_type' => $data['require_type'],
+            'description' => $data['description'],
+            'image' => $path,
+            'price' => $data['price'],
+            'category_id' => $data['category_id'],
+            'discount' => $data['discount'],
+            "avilability" => $data['avilability'],
         ]);
+
         return redirect("/admin/cards");
     }
-    
-    public function update(Request $req,card $card){
-        $card = card::findOrFail($card['id']);
-        $data= $req->validate([
-            'name'=>'required|string',
-            'description'=>'required|string',
-            'price'=>'required|numeric',
-            'category_id'=>'required|integer',
-            'discount'=>'required|numeric',
-            'require_id'=>"required",
-            'avilability'=>'required|boolean'
-        ]);
+
+    public function update(Request $req, card $card)
+    {
+        $data = $req->validate($this->validationRules);
+
+        $card = $this->findCardById($card['id']);
 
         if ($req->hasFile('image')) {
-            // Validate the uploaded image
-            $req->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            ]);
-            // Delete the old image if it exists
-            if (Storage::disk('public')->exists($card['image'])) {
-                Storage::disk('public')->delete($card['image']);
-            }
-            $path = $req->file('image')->store('images/product', 'public');
-
-            // Update the 'path' in the database
+            $path = $this->uploadImage($req, 'image', 'images/product', 'public');
+            $this->deleteImage($card['image']);
             $card['image'] = $path;
-
         }
+
         $card->update([
-            'name'=>$data['name'],
-            'price'=>$data['price'],
-            'description'=>$data['description'],
-            'discount'=>$data['discount'],
-            'category_id'=>$data['category_id'],
-            'require_id'=>$data['require_id'],
-            "avilability"=>$data['avilability']
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'description' => $data['description'],
+            'discount' => $data['discount'],
+            'category_id' => $data['category_id'],
+            'require_type' => $data['require_type'],
+            "avilability" => $data['avilability'],
         ]);
+
         return redirect("/admin/cards");
+    }
+
+    // Helper method to upload an image
+    private function uploadImage(Request $request, $fieldName, $storagePath, $disk)
+    {
+        return $request->file($fieldName)->store($storagePath, $disk);
+    }
+
+    // Helper method to delete an image
+    private function deleteImage($path)
+    {
+        if (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
+    }
+
+    // Helper method to find a card by ID
+    private function findCardById($id)
+    {
+        return card::findOrFail($id);
     }
 }

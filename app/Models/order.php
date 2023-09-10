@@ -13,6 +13,8 @@ class order extends Model
         'card_id',
         'order_id',
         'quentity',
+        'username',
+        'password',
         'game_id',
         'keys',
         'rejecte_cause',

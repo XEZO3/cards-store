@@ -29,6 +29,9 @@
     color:white
     " value="ابحث"></form></div> --}}
 <br>
+@php 
+$rank = auth()->user()->rank;
+@endphp
 <table class="agent" style="
     margin: 0px !important;
     width: 100%;
@@ -59,13 +62,13 @@
     <td class="allb">{{$item['order_id']}}</td><!---->
     <td class="allb">{{$item['card']['name']}}</td>
     <td class="allb">{{$item['game_id']}}</td>
-    <td class="allb">{{$item['card']['price']}}</td>
+    <td class="allb">{{$item['card']['price']*((100-$item['discount'])/100)*(100 - ($rank == 1 ? 20 : ($rank == 2?10:($rank==3?5:0)))) / 100}}</td>
     <td class="allb">{{$item['quentity']}}</td>
     <td class="allb">{{$item['created_at']}}</td>
     <td class="allb">{{$item['state']=="pending" ? "قيد الانتظار" : ($item['state']=="done" ? "تمت العملية" : "تم الالغاء")}}</td>
     <td class="allb">{{$item['rejecte_cause']}}</td>
     <td class="allb">
-        @if($item['state']=="done")
+        @if($item['state']=="done" && $item['card']['require_type']==0)
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#so{{$item['id']}}s">
           <i class="fa-solid fa-eye"></i>
           </button>
@@ -75,7 +78,7 @@
         </a>
         @endif
     </td>
-    @if($item['state']=="done")
+    @if($item['state']=="done" && $item['card']['require_type']==0)
         <div class="modal fade" id="so{{$item['id']}}s" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">

@@ -17,8 +17,12 @@ class orderController extends Controller
     public function purchasing(Request $req,card $card){
         $data = $req->validate([
             'quentity'=>'required|Integer|gt:0',
-            'game_id'=>($card['require_id']==1)?"required":""
+            'game_id'=>($card['require_type']==1)?"required":"",
+            'username'=>($card['require_type']==2)?"required":"",
+            'password'=>($card['require_type']==2)?"required":"",
         ]);
+        $user = auth()->user();
+        if($card['require_type']==0){
         $keys = card_keys::where("avilability",'1')->where("card_id",$card['id'])->take($data['quentity'])->get(); 
         
         if(count($keys) >= $data['quentity'] &&count($keys) >0){
@@ -36,9 +40,11 @@ class orderController extends Controller
         }else {
         $data['state'] = "pending";
         }
-     
+    }else{
+        $data['state'] = "pending";
+    }
 
-        $total = ($card['price']*(100-$card['discount'])/100)*$data['quentity'];
+        $total = ($card['price'] * (100 - $card['discount']) / 100) * (100 - (auth()->user()->rank == 1 ? 20 : (auth()->user()->rank == 2?10:(auth()->user()->rank==3?5:0)))) / 100 * $data['quentity'];
         $data['user_id'] =auth()->id() ;
         $data['card_id'] = $card['id'];
         $data['total'] = $total;

@@ -20,9 +20,15 @@
   <section class="ftco-section">
         <div class="container">
           @if(count($products)>0)
-
+          @php
+            $rank = auth()->user()->rank;
+          @endphp
           <div class="row justify-content-center">
             @foreach ($products as $item)
+            @php
+        // You can also use the @php Blade directive to write PHP code
+                $price = $item['price']*((100-$item['discount'])/100)*(100 - ($rank == 1 ? 20 : ($rank == 2?10:($rank==3?5:0)))) / 100;
+            @endphp
           @if($item['discount']!=0)
             <div class="col-md-6 col-lg-4 col-sm-5  ftco-animate fadeInUp ftco-animated">
               <div class="product">
@@ -34,29 +40,14 @@
                   <h3><a href="#">{{$item['name']}}</a></h3>
                   <div class="d-flex">
                     <div class="pricing">
-                      <p class="price"><span class="mr-2 price-dc">{{$item['price']}}</span><span class="price-sale"> {{ $item['price']*((100-$item['discount'])/100)}} نقطة</span></p>
+                      <p class="price"><span class="mr-2 price-dc">{{$item['price']}}</span><span class="price-sale"> {{$price}} نقطة</span></p>
                     </div>
                   </div>
                   <div class="bottom-area d-flex px-3">
                     <div class="m-auto d-flex">
-
-                      {{-- <form action="{{ route('add.to.cart', ['id' => $item->id]) }}" method="post" id="ajax-form" onsubmit="return false">
-                        @csrf
-                        <a type="submit" onclick="submitForm({{$item['id']}})"  class="buy-now d-flex justify-content-center align-items-center mx-1">
-                          <button style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span></button>
-                        </a>
-                    </form> --}}
                     <a  class="buy-now d-flex justify-content-center align-items-center mx-1"  data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s">
                       <span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span>
-                    </a>
-                    
-                    
-                    {{-- <form action="{{ route('add.to.wish', ['id' => $item->id]) }}" method="post" id="ajax-add-to-cart" onsubmit="return false">
-                      @csrf
-                      <a href="#" onclick="submitFormWish({{$item['id']}})" class="heart d-flex justify-content-center align-items-center ">
-                        <button type="submit" style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-heart-circle-plus" style="color: #ffffff;"></i></span></button>
-                      </a>
-                  </form>                      --}}
+                    </a>        
                     </div>
                   </div>
                 </div>
@@ -77,7 +68,7 @@
                   <h3><a href="#">{{$item['name']}}</a></h3>
                   <div class="d-flex">
                     <div class="pricing">
-                      <p class="price"><span>{{$item['price']}} نقطة</span></p>
+                      <p class="price"><span>{{$price}} نقطة</span></p>
                     </div>
                   </div>
                   <div class="bottom-area d-flex px-3">
@@ -85,14 +76,7 @@
                       
                       <a  class="buy-now d-flex justify-content-center align-items-center mx-1"  data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s">
                         <span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span>
-                      </a>
-
-                    {{-- <form action="{{ route('add.to.wish', ['id' => $item->id]) }}" method="post" id="ajax-add-to-cart" onsubmit="return false">
-                      @csrf
-                      <a href="#" onclick="submitFormWish({{$item['id']}})" class="heart d-flex justify-content-center align-items-center ">
-                        <button type="submit" style="backgrount-color:none;border:0;all: unset;cursor: pointer;"><span><i class="fa-beat fa-sm fa-solid fa-heart-circle-plus" style="color: #ffffff;"></i></span></button>
-                      </a>
-                  </form>         --}}
+                      </a>                    
                     </div>
                   </div>
                 </div>
@@ -118,17 +102,17 @@
                             <div class="form-row">
                               <div class="form-group col-md-6" >
                                 <label for="quantity">الكمية</label>
-                                <input type="number" id="quentity{{$item['id']}}" name="quentity" min="1" value="1" onchange="change({{$item['id']}},{{ $item['price']*((100-$item['discount'])/100)}})" class="form-control" required>
+                                <input type="number" id="quentity{{$item['id']}}" name="quentity" min="1" value="1" onchange="change({{$item['id']}},{{$price}})" class="form-control" required>
                                 @error('quentity')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
                               </div>
                               <div class="form-group col-md-6">
                                 <label for="total">المجموع</label>
-                                <input type="text" id="total{{$item['id']}}" value="{{$item['price']}}" class="form-control" readonly>
+                                <input type="text" id="total{{$item['id']}}" value="{{$price}}" class="form-control" readonly>
                               </div>
                             </div>
-                            @if($item['require_id']==true)
+                            @if($item['require_type']==1)
                             <div class="form-group">
                               <label for="playerNumber">رقم اللاعب</label>
                               <input type="text" id="playerNumber" name="game_id" class="form-control" placeholder="أدخل رقم اللاعب" required>
@@ -136,15 +120,26 @@
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
+                            @elseif($item['require_type']==2)
+                            <label for="playerNumber">اسم المستخدم او البريد</label>
+                              <input type="text" id="playerNumber" name="username" class="form-control" placeholder="ادخل اسم المستخدم او الايميل" required>
+                              @error('username')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                                <label for="playerNumber">كلمة المرور</label>
+                              <input type="text" id="playerNumber" name="password" class="form-control" placeholder="أدخل كلمة المرور" required>
+                              @error('password')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
                             @endif
                             <div class="alert alert-success text-right">
                               <strong>{{$item['name']}}</strong>
-                              <span class="float-left" id="tot{{$item['id']}}">{{$item['price']}}</span>
+                              <span class="float-left" id="tot{{$item['id']}}">{{$price}}</span>
                               <span>× </span>
                               <span id="spn{{$item['id']}}">1</span>
                             </div>
                             <div class="alert alert-info text-right">
-                              وصف التصنيف ممكن يكون "هاذ المنتج يعمل بشكل يدوي/تلقائي او اي وصف هو بده اياه"
+                              {{$item['description']}}
                             </div>
                             
 

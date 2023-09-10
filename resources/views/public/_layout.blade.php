@@ -284,6 +284,59 @@ width: 1200px !important;
             </div>
         @endif
           </div> 
+          @if(count($news)>0)
+          <div id="news-popup" class="popup">
+          <div class="popup-content">
+              <span id="close-popup" class="close">&times;</span>
+              <h2>Latest News</h2>
+              <ul>
+                  @foreach ($news as  $index => $item)
+                      <li>                     
+                          <p>{{ $item->news }}</p>
+                      </li>
+                  @endforeach
+              </ul>
+          </div>
+      </div>
+      @endif
+      <style>
+          .popup {
+              display: block;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.7);
+              z-index: 1;
+          }
+
+          .popup-content {
+              background-color: #fff;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              padding: 20px;
+              border-radius: 5px;
+              box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+              font-size: 16px; /* Adjust the font size as needed */
+              width: 80%; /* Adjust the width as needed */
+              max-width: 600px; /* Optional: Set a maximum width */
+              height: 80%; /* Adjust the height as needed */
+              max-height: 600px; /* Optional: Set a maximum height */
+          }
+
+          .close {
+              position: absolute;
+              top: 10px;
+              right: 15px;
+              font-size: 20px;
+              font-weight: bold;
+              cursor: pointer;
+          }
+      </style>
+          
              
 @yield('content')
 </div>
@@ -305,9 +358,13 @@ width: 1200px !important;
 </div>
 <script src="https://azouaoui-med.github.io/pro-sidebar-template/main.js"></script>
 <script>
+ document.getElementById('close-popup').addEventListener('click', function() {
+        document.getElementById('news-popup').style.display = 'none';
+    });
+
+
 var myIndex = 0;
 carousel();
-
 function carousel() {
 var i;
 var x = document.getElementsByClassName("mySlides");

@@ -38,8 +38,11 @@
                     <tr>
                       <th> اسم المنتج</th>
                       <th>الكمية</th>
-                      @if($order['card']['require_id']==true )
+                      @if($order['card']['require_type']==1 )
                       <th>رقم اللاعب</th>
+                      @elseif($order['card']['require_type']==2)
+                      <th>اسم المستخدم او الايميل</th>
+                      <th>كلمة المرور</th>
                       @endif
                       <th>مجموع</th>
                       <th>الحالة</th>
@@ -47,7 +50,7 @@
                       @if($order['state']=="rejected")
                       <th>سبب الرفض</th>
                       @endif
-                      @if($order['card']['require_id']==false && $order['state']=="pending")
+                      @if($order['card']['require_type']==0 && $order['state']=="pending")
                       <th>#</th>
                       @endif
                     </tr>
@@ -57,13 +60,16 @@
                     <tr>
                       <td>{{ $order['card']['name'] }}</td>
                       <td>{{ $order['quentity'] }}</td>
-                      @if($order['card']['require_id']==true )
+                      @if($order['card']['require_type']==1 )
                       <td>{{$order['game_id']}}</td>
+                      @elseif($order['card']['require_type']==2)
+                      <td>{{$order['username']}}</td>
+                      <td>{{$order['password']}}</td>
                       @endif
                       <td>{{ $order['total']}}</td>
                       <td>{{ $order['state'] === 'pending' ? 'قيد الانتظار' : ($order['state'] === 'rejected' ? 'تم الرفض' : ($order['state'] === 'done' ? 'تمت العملية' : 'حالة غير معروفة')) }}</td>
                       <td>
-                        @if($order['card']['require_id']==true && $order['state']=="pending")
+                        @if($order['card']['require_type']!=0 && $order['state']=="pending")
                         <a href="/admin/order/setstate/{{$order['id']}}/done" style="color:white" class="btn btn-success">تمت العملية</a>
                         <a data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#reject{{$order['id']}}">الرفض</a>
                         @elseif($order['state']=="pending") 
@@ -78,7 +84,7 @@
                       @if($order['state']=="rejected")
                       <td>{{$order['rejecte_cause']}}</td>
                       @endif
-                      @if($order['card']['require_id']==false && $order['state']=="pending")
+                      @if($order['card']['require_type']==0 && $order['state']=="pending")
                       <td><a style="color:white" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#reject{{$order['id']}}">الرفض</a></td>
                       @endif
                       <!-- Modal -->

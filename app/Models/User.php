@@ -23,7 +23,10 @@ class User extends Authenticatable
         'password',
         'permession',
         'balance',
-        'phone_number'
+        'phone_number',
+        'latest_seen_news_id',
+        'total_balance',
+        'rank'
     ];
 
     /**

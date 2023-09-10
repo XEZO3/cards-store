@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->foreignIdFor(category::class)->constrained()->onDelete('cascade');;
             $table->boolean("avilability");
-            $table->boolean('require_id');
+            $table->integer('require_type');
             $table->float("discount");
             $table->timestamps();
         });

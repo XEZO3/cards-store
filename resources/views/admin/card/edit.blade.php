@@ -49,12 +49,14 @@
             @enderror
         <br>
         <div>
-            <h2>يتطلب رقم لاعب</h2>
-            <input type="radio" name="require_id" value="1" @if (1 === $card['require_id']) checked @endif style="display:inline">
-            <label for="">نعم</label>
+            <h2>المتطلب</h2>
+            <input type="radio" name="require_type" value="1" @if (0 === $card['require_type']) checked @endif style="display:inline">
+            <label for="">رقم لاعب</label>
+            <input type="radio" name="require_type" value="2" @if (1 === $card['require_type']) checked @endif style="display:inline">
+            <label for="">اسم مستخدم و كلمة مرور</label>
             <br>
-            <input type="radio" name="require_id" value="0" @if (0 === $card['require_id']) checked @endif style="display:inline">
-            <label for="">لا</label>
+            <input type="radio" name="require_type" value="0" @if (0 === $card['require_type']) checked @endif style="display:inline">
+            <label for="">لا شيء</label>
         </div>
         <br>
         <label> الصورة الحالية</label>

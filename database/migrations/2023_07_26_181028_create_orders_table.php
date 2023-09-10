@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer("order_id");
             $table->integer("quentity");
             $table->string("game_id")->nullable(true);
+            $table->string("username")->nullable(true);
+            $table->string("password")->nullable(true);
             $table->string("rejecte_cause")->nullable(true);
             $table->decimal('total', 10, 2);
             $table->enum('state',['pending','done','rejected']);
