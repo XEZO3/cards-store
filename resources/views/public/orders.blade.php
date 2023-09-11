@@ -42,7 +42,7 @@ $rank = auth()->user()->rank;
     <td class="namea">رقم الطلب</td>
     <td class="phonea">المنتج</td>
     <td class="cata">اللاعب/المشترك</td>
-    <td class="regiona">السعر</td>
+    <td class="regiona">المجموع</td>
     <td class="quentity">الكمية</td>
     <td class="regiona">التاريخ</td>
     <td class="regiona">الحالة</td>
@@ -62,7 +62,7 @@ $rank = auth()->user()->rank;
     <td class="allb">{{$item['order_id']}}</td><!---->
     <td class="allb">{{$item['card']['name']}}</td>
     <td class="allb">{{$item['game_id']}}</td>
-    <td class="allb">{{$item['card']['price']*((100-$item['discount'])/100)*(100 - ($rank == 1 ? 20 : ($rank == 2?10:($rank==3?5:0)))) / 100}}</td>
+    <td class="allb">{{$item['total']}}</td>
     <td class="allb">{{$item['quentity']}}</td>
     <td class="allb">{{$item['created_at']}}</td>
     <td class="allb">{{$item['state']=="pending" ? "قيد الانتظار" : ($item['state']=="done" ? "تمت العملية" : "تم الالغاء")}}</td>

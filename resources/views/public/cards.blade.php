@@ -53,11 +53,6 @@
                 </div>
               </div>
             </div>
-           
-            
-
-
-
             @else
             <div class="col-md-6 col-lg-4 col-sm-5 ftco-animate fadeInUp ftco-animated">
               <div class="product">
@@ -102,7 +97,7 @@
                             <div class="form-row">
                               <div class="form-group col-md-6" >
                                 <label for="quantity">الكمية</label>
-                                <input type="number" id="quentity{{$item['id']}}" name="quentity" min="1" value="1" onchange="change({{$item['id']}},{{$price}})" class="form-control" required>
+                                <input type="number" id="quentity{{$item['id']}}" name="quentity" min="1" value="1" onchange="change({{$item['id']}},{{$price}})" class="form-control" required />
                                 @error('quentity')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
@@ -132,6 +127,12 @@
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
                             @endif
+                            <div class="form-group col-md-6">
+                              <label for="discount">كود الخصم</label>
+                              <input type="text" id="discount" name="discount_code" class="form-control">
+                              <small id="discount-error" class="text-danger"></small>
+                          </div>
+                          
                             <div class="alert alert-success text-right">
                               <strong>{{$item['name']}}</strong>
                               <span class="float-left" id="tot{{$item['id']}}">{{$price}}</span>
@@ -168,21 +169,61 @@
        
       </section>
       <script>
-        function change(formId,price){
-          var quentity = document.getElementById("quentity" + formId);
-          var totalform =  document.getElementById("total" + formId);
-          var span = document.getElementById("spn" + formId);
-          var totalSpan = document.getElementById("tot" + formId);
-          if(quentity.value<1){
-          totalform.value = 1 * price
-          span.textContent = 1
-          totalSpan.textContent = 1*price
-          }else{
-            totalform.value = quentity.value * price
-          span.textContent = quentity.value
-          totalSpan.textContent = quentity.value*price
-
+    function change(formId, price) {
+    var quentity = document.getElementById("quentity" + formId);
+    var totalform = document.getElementById("total" + formId);
+    var span = document.getElementById("spn" + formId);
+    var totalSpan = document.getElementById("tot" + formId);
+    var discountCode = document.getElementById("discount").value; // Get the discount code
+    if (quentity.value < 1) {
+              var totalValue = (1 * price).toFixed(2);
+              totalform.value = parseFloat(totalValue); // Convert to a number
+              span.textContent = 1;
+              totalSpan.textContent = parseFloat(totalValue); // Convert to a number
+          } else {
+              var totalValue = (quentity.value * price).toFixed(2);
+              totalform.value = parseFloat(totalValue); // Convert to a number
+              span.textContent = quentity.value;
+              totalSpan.textContent = parseFloat(totalValue); // Convert to a number
           }
+    // Check if the discount code is not empty
+    if (discountCode.trim() !== '') {
+        // Make an AJAX request to validate the discount code
+        jQuery.noConflict();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/validate-discount", // Laravel route for discount code validation
+            data: {
+                discount_code: discountCode
+            },
+            success: function (response) {
+                if (response.valid) {
+                    // Calculate the total with the discount
+                    var totalWithDiscount = calculateTotalWithDiscount(price, quentity.value, response.discount);
+
+                    // Update the total input field with the discounted total
+                    totalform.value = parseFloat(totalWithDiscount);
+                    totalSpan.textContent = parseFloat(totalWithDiscount);
+                    $('#discount-error').text(''); // Clear any previous error message
+                } else {
+                    // If the discount code is invalid, use the regular total
+                    $('#discount-error').text('Invalid discount code.');
+                }
+            },
+            error: function () {
+                // Handle AJAX error, e.g., display an error message
+                $('#discount-error').text('Error validating discount code.');
+            }
+        });
+    }
+    
+}
+
+function calculateTotalWithDiscount(price, quantity, discount) {
+  var discountedTotal = price * quantity * (100 - discount)/100;
+  return  parseFloat(discountedTotal);
+}
           // var newValue = 0;
           // if(state ==1){
              
@@ -197,7 +238,7 @@
           // inputElement.value = newValue;
           // }
           // spanprice.textContent  =  newValue*price
-        }
+       
        
       
       

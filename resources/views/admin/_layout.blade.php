@@ -111,8 +111,25 @@ width: 1200px !important;
                 <li class="menu-item">
                   <a href="/admin">
                     <span class="menu-icon">
-                      <i class="fa-solid fa-receipt"></i>                    </span>
+                      <i class="fa-solid fa-receipt"></i>     
+                    </span>
+                    <span class="menu-title">الرئيسية</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/admin/order">
+                    <span class="menu-icon">
+                      <i class="fa-solid fa-receipt"></i>                    
+                    </span>
                     <span class="menu-title">طلبات البطاقات</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/admin/news">
+                    <span class="menu-icon">
+                      <i class="fa-solid fa-receipt"></i>                    
+                    </span>
+                    <span class="menu-title">الاخبار</span>
                   </a>
                 </li>
                   
@@ -159,6 +176,15 @@ width: 1200px !important;
                       <i class="fa-solid fa-money-check-dollar"></i>
                     </span>
                     <span class="menu-title">انشاء كود شحن</span>
+                  </a>
+                </li>
+
+                <li class="menu-item">
+                  <a href="/admin/discount">
+                    <span class="menu-icon">
+                      <i class="fa-solid fa-money-check-dollar"></i>
+                    </span>
+                    <span class="menu-title">انشاء كود خصم</span>
                   </a>
                 </li>
 

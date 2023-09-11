@@ -6,8 +6,10 @@ use App\Http\Controllers\admin\balanceController as AdminBalanceController;
 use App\Http\Controllers\admin\bannerControl;
 use App\Http\Controllers\admin\cardController as AdminCardController;
 use App\Http\Controllers\admin\categoryController;
+use App\Http\Controllers\admin\discountController;
 use App\Http\Controllers\admin\homeController as AdminHomeController;
 use App\Http\Controllers\admin\keyController;
+use App\Http\Controllers\admin\newsController;
 use App\Http\Controllers\admin\officeController;
 use App\Http\Controllers\admin\orderController as AdminOrderController;
 use App\Http\Controllers\admin\paymentController;
@@ -19,6 +21,7 @@ use App\Http\Controllers\cartController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\wishController;
+use App\Models\discounts;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -176,7 +179,19 @@ Route::prefix('admin')->group(function () {
                     Route::get('/setstate/{order}/{state}',[AdminOrderController::class,'setstate']);
 
                 });
-                
+                Route::prefix('news')->group(function () {
+                    Route::get('/',[newsController::class,'index']);
+                    Route::get('/delete/{id}',[newsController::class,'delete']);
+                    Route::get('/edit/{news}',[newsController::class,'edit']);
+                    Route::post('/edit/{news}',[newsController::class,'update']);
+                    Route::get('/add',[newsController::class,'add']);
+                    Route::post('/add',[newsController::class,'store']);
+                });
+                Route::prefix('discount')->group(function () {
+                    Route::get('/',[discountController::class,'index']);
+                    Route::get('/delete/{id}',[discountController::class,'delete']);
+                    Route::post('/create',[discountController::class,'store']);
+                });
 
 
     });
