@@ -44,7 +44,7 @@ class balanceController extends Controller
         
     }
     public function viewpayment(balance $balance){
-        $data = balance::with("payment_methods")->findOrFail($balance) ??null;
+        $data = balance::with("payment_methods")->findOrFail($balance['id']) ??null;
         return view("public.payment.viewpayment",['balance'=>$data]);
     }
     public function recharge_the_balance(Request $req){

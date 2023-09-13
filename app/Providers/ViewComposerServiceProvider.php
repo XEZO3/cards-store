@@ -25,7 +25,14 @@ class ViewComposerServiceProvider extends ServiceProvider
         view()->composer('public/_layout', function ($view) {
             $categories = category::all();
             $info = siteInfo::all()->first();
-            $news = news::where('id', '>', auth()->user()->latest_seen_news_id)->get();
+           $news = [];
+            if(auth()->check()){
+                $news = news::where('id', '>', auth()->user()->latest_seen_news_id)->get();
+                if ($news->isNotEmpty()) {
+                    $latestNewsId = $news->max('id');
+                    auth()->user()->update(['latest_seen_news_id' => $latestNewsId]);
+                }
+            }
             if($info!=null&&$categories!=null){
             $view->with('categories', $categories)->with('info',$info)->with("news",$news);
             }
@@ -33,10 +40,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             {
                 $view->with('info',$info)->with("news",$news);
             }
-            if ($news->isNotEmpty()) {
-                $latestNewsId = $news->max('id');
-                auth()->user()->update(['latest_seen_news_id' => $latestNewsId]);
-            }
+           
         });
 
         view()->composer('admin/_layout', function ($view) {

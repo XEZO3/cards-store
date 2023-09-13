@@ -91,6 +91,9 @@ Route::prefix('admin')->group(function () {
         Route::post('/changepass', [AdminAuthController::class,"change_password"]);
         Route::get('/logout',[AdminAuthController::class,'logout']);       
 
+        Route::get('/dashboard', [AdminHomeController::class,'dashboard']);
+
+
         Route::get('/info',[AdminHomeController::class,'site_info']);
         Route::post('/info/update/{id}',[AdminHomeController::class,'site_info_update']);
 

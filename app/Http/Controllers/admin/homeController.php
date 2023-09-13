@@ -3,13 +3,81 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\balance;
 use App\Models\order;
 use App\Models\siteInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class homeController extends Controller
 {
+   public function dashboard() {
+    // Get the current month and year
+    $currentMonth = date('n'); // Get the current month (1 to 12)
+    $currentYear = date('Y');
+
+    // Calculate the starting month (12 months ago) and year based on the current month
+    $startMonth = $currentMonth - 12;
+    $startYear = $currentYear;
+
+    if ($startMonth <= 0) {
+        $startMonth += 12; // Handle wrap-around for months before January
+        $startYear--; // Decrement the year when wrapping around
+    }
+
+    // Fetch data for the last 12 months, including the current month
+    $balances = balance::select(DB::raw("SUM(price) as total_charged"))
+        ->where(function ($query) use ($currentYear, $startYear, $currentMonth, $startMonth) {
+            $query->whereYear('created_at', '>=', $startYear)
+                ->orWhere(function ($query) use ($currentYear, $startYear, $currentMonth,$startMonth) {
+                    $query->whereYear('created_at', '=', $startYear)
+                        ->whereMonth('created_at', '>=', $startMonth);
+                });
+        })
+        ->whereMonth('created_at', '<=', $currentMonth)
+        ->where('state', 'done')
+        ->groupBy(DB::raw("Month(created_at)"))
+        ->pluck("total_charged");
+
+    $orderCounts = balance::select(DB::raw("COUNT(*) as total_orders"))
+        ->where(function ($query) use ($currentYear, $startYear, $currentMonth, $startMonth) {
+            $query->whereYear('created_at', '>=', $startYear)
+                ->orWhere(function ($query) use ($currentYear, $startYear, $currentMonth, $startMonth) {
+                    $query->whereYear('created_at', '=', $startYear)
+                        ->whereMonth('created_at', '>=', $startMonth);
+                });
+        })
+        ->whereMonth('created_at', '<=', $currentMonth)
+        ->groupBy(DB::raw("Month(created_at)"))
+        ->pluck("total_orders");
+
+    $months = balance::select(DB::raw("Month(created_at) as month"))
+        ->where(function ($query) use ($currentYear, $startYear, $currentMonth, $startMonth) {
+            $query->whereYear("created_at", '>=', $startYear)
+                ->orWhere(function ($query) use ($currentYear, $startYear, $currentMonth,$startMonth) {
+                    $query->whereYear('created_at', '=', $startYear)
+                        ->whereMonth('created_at', '>=', $startMonth);
+                });
+        })
+        ->whereMonth('created_at', '<=', $currentMonth)
+        ->where('state', 'done')
+        ->groupBy(DB::raw("Month(created_at)"))
+        ->pluck("month");
+    
+    $datas = array_fill(0, 12, 0); // Initialize an array for 12 months with 0 values
+    $orderCountsArray = array_fill(0, 12, 0); // Initialize an array for 12 months with 0 order counts
+    foreach ($months as $index => $month) {
+        $offset = ($currentMonth - $month + 12) % 12; // Calculate the correct index in reverse order
+        $datas[$offset] = $balances[$index];
+        $orderCountsArray[$offset] = $orderCounts[$index];
+    }
+
+    return view("admin.home.inventory_manage", ['balance' => $datas, 'orderCounts' => $orderCountsArray]);
+}
+    
+
     function site_info(){
         $data = siteInfo::first();
         return view("admin.home.siteInfo",['siteInfo'=>$data]);

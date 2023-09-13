@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\homeController;
 use App\Models\discounts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,8 @@ Route::post('/validate-discount', function (Request $request) {
     // Invalid discount code, return a JSON response with validity as false.
     return response()->json(['valid' => false]);
 });
+Route::get('/admin/get-income-data',[homeController::class,"getIncomeData"] );
+Route::get('/admin/get-order-data', [homeController::class,"getOrderData"]);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
