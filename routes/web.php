@@ -85,7 +85,7 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get("/users/show",[AdminAuthController::class,'index']);
         Route::get("/users/delete/{id}",[AdminAuthController::class,'delete']);
-        Route::get('/',[AdminOrderController::class,'index']);
+        Route::get('/',[AdminHomeController::class,'dashboard']);
 
         Route::get('/changepass',[AdminAuthController::class,'password']);
         Route::post('/changepass', [AdminAuthController::class,"change_password"]);
