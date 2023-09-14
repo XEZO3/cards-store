@@ -96,7 +96,16 @@ width: 1200px !important;
             <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
           <a class="nav-link" style="float:right" href="/user/logout">تسجيل الخروج</a>
         </li>
-
+        <li class="nav-item active">
+          @if(auth()->user()->rank==1)
+          <i class="fa-solid fa-crown" style="color: #ffd700;"></i>
+          @elseif(auth()->user()->rank==2)
+          <i class="fa-solid fa-crown" style="color: #c0c0c0;"></i>
+          @elseif(auth()->user()->rank==3)
+          <i class="fa-solid fa-crown" style="color: #cd7f32;"></i>
+          @endif
+          <a class="nav-link" style="float:right" href="/user/logout">{{auth()->user()->name}}</a>
+      </li>
           @else
           <li class="nav-item active">
               <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>

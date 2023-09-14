@@ -111,7 +111,7 @@ width: 1200px !important;
                 <li class="menu-item">
                   <a href="/admin">
                     <span class="menu-icon">
-                      <i class="fa-solid fa-receipt"></i>     
+                      <i class="fa-solid fa-house"></i>
                     </span>
                     <span class="menu-title">الرئيسية</span>
                   </a>
@@ -127,7 +127,7 @@ width: 1200px !important;
                 <li class="menu-item">
                   <a href="/admin/news">
                     <span class="menu-icon">
-                      <i class="fa-solid fa-receipt"></i>                    
+                      <i class="fa-solid fa-newspaper"></i>                    
                     </span>
                     <span class="menu-title">الاخبار</span>
                   </a>
@@ -196,14 +196,14 @@ width: 1200px !important;
                     <span class="menu-title">الوكلاء</span>
                   </a>
                 </li>
-                  <li class="menu-item">
+                  {{-- <li class="menu-item">
                   <a href="/admin/office">
                     <span class="menu-icon">
                         <i class="fa-solid fa-money-bill-transfer"></i>
                       </span>
                     <span class="menu-title">مكاتب التحويل</span>
                   </a>
-                </li>
+                </li> --}}
 
                 <li class="menu-item">
                   <a href="/admin/payment">
