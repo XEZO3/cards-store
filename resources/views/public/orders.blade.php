@@ -9,6 +9,10 @@
 .paragraph-content {
   white-space: pre-wrap;
 }
+.all{
+overflow-x: scroll;
+    display: grid;
+}
 </style>
 {{-- <div style="
     direction: rtl;
@@ -29,9 +33,6 @@
     color:white
     " value="ابحث"></form></div> --}}
 <br>
-@php 
-$rank = auth()->user()->rank;
-@endphp
 <table class="agent" style="
     margin: 0px !important;
     width: 100%;

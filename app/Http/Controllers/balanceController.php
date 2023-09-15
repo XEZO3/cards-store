@@ -74,7 +74,8 @@ class balanceController extends Controller
     {
         $user->balance += $balance;
         $user->total_balance += $balance;
-        $totalBalance = $user->total_balance + $balance;
+        $totalBalance = $user->total_balance;
+        
         if ($totalBalance >= 100 && $totalBalance <= 500) {
             $user->rank = 3;
         } elseif ($totalBalance >= 500 && $totalBalance <= 1200) {

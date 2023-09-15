@@ -104,7 +104,7 @@ width: 1200px !important;
           @elseif(auth()->user()->rank==3)
           <i class="fa-solid fa-crown" style="color: #cd7f32;"></i>
           @endif
-          <a class="nav-link" style="float:right" href="/user/logout">{{auth()->user()->name}}</a>
+          <a class="nav-link" style="float:right">{{auth()->user()->name}}</a>
       </li>
           @else
           <li class="nav-item active">
@@ -183,14 +183,7 @@ width: 1200px !important;
                       <span class="menu-title">عرض طلبياتي</span>
                     </a>
                   </li>
-                    <li class="menu-item">
-                    <a href="/favorite">
-                      <span class="menu-icon">
-                          <i class="fa-solid fa-heart"></i> 
-                        </span>
-                      <span class="menu-title">المفضلة</span>
-                    </a>
-                  </li> 
+                    
                   @else
                   <li class="menu-item">
                   <a href="/user/login">
@@ -297,8 +290,8 @@ width: 1200px !important;
           <div id="news-popup" class="popup">
           <div class="popup-content">
               <span id="close-popup" class="close">&times;</span>
-              <h2>Latest News</h2>
-              <ul>
+              <h2 style="text-align:right">اخر الاخبار</h2>
+              <ul style="text-align:right;list-style:none">
                   @foreach ($news as  $index => $item)
                       <li>                     
                           <p>{{ $item->news }}</p>

@@ -3,12 +3,15 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
-<div style="height: 400px; width: 900px; margin: auto;">
+<div class="container-fluid" style="overflow-x:scroll">
+    <div style="width: 700px; height: 300px; margin:  auto;">
     <canvas id="barChartBalanceNumber"></canvas>
 </div>
-<div style="height: 400px; width: 900px; margin: auto;">
+<div style="width: 700px; height: 300px; margin:  auto;">
     <canvas id="barChart"></canvas>
 </div>
+</div>
+
 <script>
     $(function () {
         var datas = <?php echo json_encode($balance); ?>;
