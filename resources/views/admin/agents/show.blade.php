@@ -1,6 +1,6 @@
 @extends('admin._layout')
 @section('content')
-<div class="container">
+<div class="container-fluid" style="overflow-x:scroll">
     <div class="row">
         <div class="col">
             @if(session('success'))
@@ -11,7 +11,7 @@
         </div>
     </div>
   
-    <table class="table">
+    <table class="table" style="overflow-x:scroll">
         <thead>
           <tr>
             <th scope="col">#</th>

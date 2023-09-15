@@ -13,6 +13,7 @@
         text-align: right;
         border-radius: 5px;
         font-family:tahoma;
+        overflow-x:scroll
     ">
     <div style="
         border: 1px solid rgba(0,0,0,.125);
@@ -26,7 +27,7 @@
     ">
     @isset($balance)
     <!-- Your code to display balance and payment methods -->
-            <table style="width:100%;max-width:100%;margin-bottom:1rem; background-color:transparent;border-collapse:collapse">
+            <table style="width:100%;max-width:100%;margin-bottom:1rem; background-color:transparent;border-collapse:collapse;overflow-x:scroll" >
             <tbody>
                 <tr>
                     <th><strong>رقم الدفعة: </strong></th>

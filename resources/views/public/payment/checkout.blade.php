@@ -1,9 +1,11 @@
 @extends('public._layout')
 @section('content')
-
-<div style="
-    width: 50%;
-    left: 25%;
+<style>
+   
+</style>
+<div class="testing" style="
+    width: 90%;
+   margin:auto;
     position: relative;
     height: fit-content;
     border: 1px solid rgba(0,0,0,.125);

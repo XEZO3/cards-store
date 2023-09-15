@@ -1,96 +1,249 @@
 @extends('public._layout')
 @section('content')
 
-<style>
-  .product {
-    min-height: 302px;
-  }
+<style>.product{
+  min-height: 302px;
+      }
+  .ftco-section{
+      padding: 0px !important;
+      }
+      .col-lg-3, .col-md-6{width:50% !important;padding-right:0px !important;}
+  .hid{
+      overflow-x: hidden;
+      }
+    .modal-backdrop {
+      z-index: -1;
+}
+span.price-dc{overflow-wrap: break-word;}
+  </style>
+      <link rel="stylesheet" href="{{URL::asset("css/pro.css")}}">
+  <section class="ftco-section">
+        <div class="container">
+          @if(count($products)>0)
+          @php
+          $rank = 0;
+          if(auth()->check()){
+            $rank = auth()->user()->rank;
+          }
+          @endphp
+          <div class="row justify-content-center">
+            @foreach ($products as $item)
+            @php
+        // You can also use the @php Blade directive to write PHP code
+                $price = $item['price']*((100-$item['discount'])/100)*(100 - ($rank == 1 ? 20 : ($rank == 2?10:($rank==3?5:0)))) / 100;
+            @endphp
+          @if($item['discount']!=0)
+            <div class="col-md-6 col-lg-4 col-sm-5  ftco-animate fadeInUp ftco-animated">
+              <div class="product">
+                <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset('storage/'. $item['image']) }}" alt="image">
+                  <span class="status">{{$item['discount']}}%</span>
+                  <div class="overlay"></div>
+                </a>
+                <div class="text py-3 pb-4 px-3 text-center">
+                  <h3><a href="#">{{$item['name']}}</a></h3>
+                  <div class="d-flex">
+                    <div class="pricing">
+                      <p class="price"><span class="mr-2 price-dc">{{$item['price']}}</span><span class="price-sale"> {{$price}} نقطة</span></p>
+                    </div>
+                  </div>
+                  <div class="bottom-area d-flex px-3">
+                    <div class="m-auto d-flex">
+                    <a  class="buy-now d-flex justify-content-center align-items-center mx-1"  data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s">
+                      <span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span>
+                    </a>        
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @else
+            <div class="col-md-6 col-lg-4 col-sm-5 ftco-animate fadeInUp ftco-animated">
+              <div class="product">
+                <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset('storage/'. $item['image']) }}" alt="Colorlib Template">
+                  <div class="overlay"></div>
+                </a>
+                <div class="text py-3 pb-4 px-3 text-center">
+                  <h3><a href="#">{{$item['name']}}</a></h3>
+                  <div class="d-flex">
+                    <div class="pricing">
+                      <p class="price"><span>{{$price}} نقطة</span></p>
+                    </div>
+                  </div>
+                  <div class="bottom-area d-flex px-3">
+                    <div class="m-auto d-flex">
+                      
+                      <a  class="buy-now d-flex justify-content-center align-items-center mx-1"  data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s">
+                        <span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span>
+                      </a>                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endif
+            <!-- modal start -->
+            <div class="modal fade"  id="sosab{{$item['id']}}s"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{$item['name']}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    @auth
+                        <section class="ftco-section" style="text-align: right" dir="rtl">
+                          <div class="alert alert-info text-right">
+                            ادخل الكمية المراد شراؤها
+                          </div>
+                          <form action="/order/purchasing/{{$item['id']}}" method="POST">
+                            @csrf
+                            <div class="form-row">
+                              <div class="form-group col-md-6" >
+                                <label for="quantity">الكمية</label>
+                                <input type="number" id="quentity{{$item['id']}}" name="quentity" min="1" value="1" onchange="change({{$item['id']}},{{$price}})" class="form-control" required />
+                                @error('quentity')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="total">المجموع</label>
+                                <input type="text" id="total{{$item['id']}}" value="{{$price}}" class="form-control" readonly>
+                              </div>
+                            </div>
+                            @if($item['require_type']==1)
+                            <div class="form-group">
+                              <label for="playerNumber">رقم اللاعب</label>
+                              <input type="text" id="playerNumber" name="game_id" class="form-control" placeholder="أدخل رقم اللاعب" required>
+                              @error('game_id')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            @elseif($item['require_type']==2)
+                            <label for="playerNumber">اسم المستخدم او البريد</label>
+                              <input type="text" id="playerNumber" name="username" class="form-control" placeholder="ادخل اسم المستخدم او الايميل" required>
+                              @error('username')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                                <label for="playerNumber">كلمة المرور</label>
+                              <input type="text" id="playerNumber" name="password" class="form-control" placeholder="أدخل كلمة المرور" required>
+                              @error('password')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            @endif
+                            <div class="form-group col-md-6">
+                              <label for="discount">كود الخصم</label>
+                              <input type="text" id="discount" name="discount_code" class="form-control">
+                              <small id="discount-error" class="text-danger"></small>
+                          </div>
+                          
+                            <div class="alert alert-success text-right">
+                              <strong>{{$item['name']}}</strong>
+                              <span class="float-left" id="tot{{$item['id']}}">{{$price}}</span>
+                              <span>× </span>
+                              <span id="spn{{$item['id']}}">1</span>
+                            </div>
+                            <div class="alert alert-info text-right">
+                              {{$item['description']}}
+                            </div>
+                            
 
-  .ftco-section {
-    padding: 0px !important;
-  }
+                        </section>
+                        @else
+                      <h3 style="float: right">يجب عليك تسجيل الدخول اولا</h3>
+                    @endauth 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                   @auth
+                   <button type="submit" class="btn btn-primary">ِشراء</button>
+                   @endauth 
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+ <!-- modal end -->
+            @endforeach              
+          </div>
+          @else
+            <h2 style="text-align: center">لا يتوفر منتجات لهذا القسم</h2>
+          @endif
+        </div>
+       
+      </section>
+      <script>
+    function change(formId, price) {
+    var quentity = document.getElementById("quentity" + formId);
+    var totalform = document.getElementById("total" + formId);
+    var span = document.getElementById("spn" + formId);
+    var totalSpan = document.getElementById("tot" + formId);
+    var discountCode = document.getElementById("discount").value; // Get the discount code
+    if (quentity.value < 1) {
+              var totalValue = (1 * price).toFixed(2);
+              totalform.value = parseFloat(totalValue); // Convert to a number
+              span.textContent = 1;
+              totalSpan.textContent = parseFloat(totalValue); // Convert to a number
+          } else {
+              var totalValue = (quentity.value * price).toFixed(2);
+              totalform.value = parseFloat(totalValue); // Convert to a number
+              span.textContent = quentity.value;
+              totalSpan.textContent = parseFloat(totalValue); // Convert to a number
+          }
+    // Check if the discount code is not empty
+    if (discountCode.trim() !== '') {
+        // Make an AJAX request to validate the discount code
+        jQuery.noConflict();
 
-  .col-lg-3,
-  .col-md-6 {
-    width: 100%;
-    padding-right: 0px !important;
-  }
+        $.ajax({
+            type: "POST",
+            url: "/api/validate-discount", // Laravel route for discount code validation
+            data: {
+                discount_code: discountCode
+            },
+            success: function (response) {
+                if (response.valid) {
+                    // Calculate the total with the discount
+                    var totalWithDiscount = calculateTotalWithDiscount(price, quentity.value, response.discount);
 
-  .hid {
-    overflow-x: hidden;
-  }
-
-  .modal-backdrop {
-    z-index: -1;
-  }
-
-  span.price-dc {
-    overflow-wrap: break-word;
-  }
-</style>
-
-<link rel="stylesheet" href="{{ URL::asset("css/pro.css") }}">
-<style>
-  /* Add responsive styles here */
-  @media (min-width: 576px) {
-    .col-sm-5 {
-      width: 50% !important;
+                    // Update the total input field with the discounted total
+                    totalform.value = parseFloat(totalWithDiscount);
+                    totalSpan.textContent = parseFloat(totalWithDiscount);
+                    $('#discount-error').text(''); // Clear any previous error message
+                } else {
+                    // If the discount code is invalid, use the regular total
+                    $('#discount-error').text('Invalid discount code.');
+                }
+            },
+            error: function () {
+                // Handle AJAX error, e.g., display an error message
+                $('#discount-error').text('Error validating discount code.');
+            }
+        });
     }
-  }
+    
+}
 
-  @media (min-width: 768px) {
-    .col-md-6,
-    .col-lg-4 {
-      width: 50% !important;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .col-lg-3 {
-      width: 25% !important;
-    }
-  }
-</style>
-
-<section class="ftco-section">
-  <div class="container">
-    @if(count($products)>0)
-    @php
-    $rank = 0;
-    if(auth()->check()){
-      $rank = auth()->user()->rank;
-    }
-    @endphp
-    <div class="row justify-content-center">
-      @foreach ($products as $item)
-      @php
-      $price = $item['price']*((100-$item['discount'])/100)*(100 - ($rank == 1 ? 20 : ($rank == 2 ? 10 : ($rank == 3 ? 5 : 0)))) / 100;
-      @endphp
-      @if($item['discount']!=0)
-      <div class="col-md-6 col-lg-4 col-sm-5  ftco-animate fadeInUp ftco-animated">
-        <!-- Rest of your code -->
-      </div>
-      @else
-      <div class="col-md-6 col-lg-4 col-sm-5 ftco-animate fadeInUp ftco-animated">
-        <!-- Rest of your code -->
-      </div>
-      @endif
-      <!-- modal start -->
-      <div class="modal fade" id="sosab{{$item['id']}}s" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <!-- Rest of your code -->
-      </div>
-      <!-- modal end -->
-      @endforeach
-    </div>
-    @else
-    <h2 style="text-align: center">لا يتوفر منتجات لهذا القسم</h2>
-    @endif
-  </div>
-</section>
-
-<!-- Your JavaScript code -->
-<script>
-  // Add your JavaScript code here
-</script>
-
-@endsection
+function calculateTotalWithDiscount(price, quantity, discount) {
+  var discountedTotal = price * quantity * (100 - discount)/100;
+  return  parseFloat(discountedTotal);
+}
+          // var newValue = 0;
+          // if(state ==1){
+             
+          //    newValue = currentValue + 1;
+          // }else{
+           
+          //    newValue = currentValue -1;
+          // }
+          // if(newValue<=0){
+          //   inputElement.value = 1
+          // }else{
+          // inputElement.value = newValue;
+          // }
+          // spanprice.textContent  =  newValue*price
+       
+       
+      
+      
+      </script>
+@endsection 

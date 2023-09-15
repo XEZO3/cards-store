@@ -1,6 +1,6 @@
 @extends('admin._layout')
 @section('content')
-<div class="container">
+<div class="container-fluid" style="overflow-x:scroll">
     <div class="row">
         <div class="col">
             @if(session('success'))
@@ -10,8 +10,7 @@
         @endif
         </div>
     </div>
-  
-    <table class="table">
+    <table class="table" style="overflow-x:scroll">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -29,7 +28,6 @@
             <th scope="row">{{$index+1}}</th>
             <td >{{$item['name']}}</td>
             <td>{{$item['email']}}</td>
-            <
             <td>
                 <div class="d-flex flex-row ">
                   @if($item['email']!="superadmin@gmail.com")

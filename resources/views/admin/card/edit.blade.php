@@ -12,6 +12,13 @@
                 <small class="text-danger">{{$message}}</small>
             @enderror
         <br>
+        <label>وصف البطاقة</label>
+        <input type="text" name="description" class="form-control"  value="{{$card['description']}}">
+        <br>
+        @error('description')
+                <small class="text-danger">{{$message}}</small>
+            @enderror
+        <br>
         <label>سعر البطاقة</label>
         <input type="float" name="price" class="form-control" value="{{$card['price']}}" >
         <br>

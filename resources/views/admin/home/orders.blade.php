@@ -6,12 +6,12 @@
 }
 </style>
 
-<div class="container mt-4">
+<div class="container-fluid mt-4">
     <!-- Order cart -->
-    <div class="container">
+    <div class="container-fluid">
       <div class="row justify-content-center">
-        <div class="col-5">
-          <input type="text" class="form-control" id="order_id" placeholder="رقم الطلب">
+        <div class="col-auto">
+          <input type="text" style="min-width:150px" class="form-control" id="order_id" placeholder="رقم الطلب">
         </div>
         <div class="col-auto">
           <button onclick="search()" class="btn btn-primary">بحث</button>
@@ -23,9 +23,9 @@
         الطلبات
       </div>
       <div class="card-body">
-        <ul class="list-group">
+        <ul class="list-group"  style="overflow-x:scroll">
           @foreach ($orders as $order)
-            <li id="s{{$order['order_id']}}" class="list-group-item">
+            <li id="s{{$order['order_id']}}" class="list-group-item"  style="overflow-x:scroll" >
               <div class="d-flex justify-content-between">
                 <span style="background-color:lightgrey;color:black"> Order #{{ $order['order_id']}}- Customer: {{ $order['User']['name'] }}</span>
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#orderItems{{ $order->id }}" aria-expanded="false" aria-controls="orderItems{{ $order->id }}">

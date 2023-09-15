@@ -12,6 +12,9 @@
             padding: 12px 25px !important;
         }
     }
+    ul{
+        padding-left:0  !important;;
+    }
 </style>
 <div class="le" style="
     width: 50%;
@@ -53,6 +56,7 @@
     background-position: center;
     background-color: #aaa;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 "><img src="" style="width: 100%;height:120px;">
 </div>
@@ -86,6 +90,7 @@
     background-position: center;
     background-color: #aaa;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 "><img src="{{ asset('storage/'. $item['image']) }}" style="width: 100%;height:120px;">
 </div>
