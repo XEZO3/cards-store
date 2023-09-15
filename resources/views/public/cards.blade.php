@@ -1,25 +1,52 @@
 @extends('public._layout')
 @section('content')
 
-<style>.product{
+<style>
+.product{
   min-height: 302px;
       }
   .ftco-section{
       padding: 0px !important;
       }
-      .col-lg-3, .col-md-6{width:50% !important;padding-right:0px !important;}
   .hid{
       overflow-x: hidden;
       }
     .modal-backdrop {
       z-index: -1;
 }
+.col-lg-4{
+width:33%
+}
+.img-product{
+    height:300px;
+}
+@media (min-width: 992px){
+.col-lg-4 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 19.333333% !important;
+    max-width: 33.333333%;
+}
+}
+@media (min-width: 768px){
+.col-md-6 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 33%;
+}
+}
+@media (max-width: 400px){
+.img-product{
+    height:200px;
+}
+}
+
 span.price-dc{overflow-wrap: break-word;}
   </style>
       <link rel="stylesheet" href="{{URL::asset("css/pro.css")}}">
   <section class="ftco-section">
         <div class="container">
-          @if(count($products)>0)
+          
           @php
           $rank = 0;
           if(auth()->check()){
@@ -32,10 +59,11 @@ span.price-dc{overflow-wrap: break-word;}
         // You can also use the @php Blade directive to write PHP code
                 $price = $item['price']*((100-$item['discount'])/100)*(100 - ($rank == 1 ? 20 : ($rank == 2?10:($rank==3?5:0)))) / 100;
             @endphp
+          @if($item['avilability'])  
           @if($item['discount']!=0)
             <div class="col-md-6 col-lg-4 col-sm-5  ftco-animate fadeInUp ftco-animated">
               <div class="product">
-                <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset('storage/'. $item['image']) }}" alt="image">
+                <a href="#" class="img-prod"><img class="img-product" style="width:100%" src="{{ asset('storage/'. $item['image']) }}" alt="image">
                   <span class="status">{{$item['discount']}}%</span>
                   <div class="overlay"></div>
                 </a>
@@ -49,7 +77,7 @@ span.price-dc{overflow-wrap: break-word;}
                   <div class="bottom-area d-flex px-3">
                     <div class="m-auto d-flex">
                     <a  class="buy-now d-flex justify-content-center align-items-center mx-1"  data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s">
-                      <span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span>
+                      <span>شراء</span>
                     </a>        
                     </div>
                   </div>
@@ -59,7 +87,7 @@ span.price-dc{overflow-wrap: break-word;}
             @else
             <div class="col-md-6 col-lg-4 col-sm-5 ftco-animate fadeInUp ftco-animated">
               <div class="product">
-                <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset('storage/'. $item['image']) }}" alt="Colorlib Template">
+                <a href="#" class="img-prod"><img class="img-product" style="width:100%" src="{{ asset('storage/'. $item['image']) }}" alt="Colorlib Template">
                   <div class="overlay"></div>
                 </a>
                 <div class="text py-3 pb-4 px-3 text-center">
@@ -73,7 +101,7 @@ span.price-dc{overflow-wrap: break-word;}
                     <div class="m-auto d-flex">
                       
                       <a  class="buy-now d-flex justify-content-center align-items-center mx-1"  data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s">
-                        <span><i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i></span>
+                        <span>شراء</span>
                       </a>                    
                     </div>
                   </div>
@@ -163,11 +191,41 @@ span.price-dc{overflow-wrap: break-word;}
               </div>
             </div>
  <!-- modal end -->
+            @else
+            <div class="col-md-6 col-lg-4 col-sm-5 ftco-animate fadeInUp ftco-animated" >
+              <div class="product" style="position:relative">
+                  <div style="position:absolute;width:100%;height:100%;z-index:10;background-color:rgba(255, 255, 255, 0.8);display:flex;justify-content:center;align-items:center;color:black">
+                    غير متوفر
+                </div>
+                  <a href="#" class="img-prod">
+                      <img style="width:100%" class="img-product" src="{{ asset('storage/'. $item['image']) }}" alt="image">
+                      <span class="status">{{$item['discount']}}%</span>
+                      <div class="overlay"></div>
+                  </a>
+                  <div class="text py-3 pb-4 px-3 text-center">
+                      <h3><a href="#">{{$item['name']}}</a></h3>
+                      <div class="d-flex">
+                          <div class="pricing">
+                              <p class="price">
+                                  <span class="mr-2 price-dc">{{$item['price']}}</span>
+                                  <span class="price-sale"> {{$price}} نقطة</span>
+                              </p>
+                          </div>
+                      </div>
+                      <div class="bottom-area d-flex px-3">
+                          <div class="m-auto d-flex">
+                              <span class="buy-now-unavailable d-flex justify-content-center align-items-center mx-1">
+                                  <i class="fa-beat fa-sm fa-solid fa-cart-plus" style="color: #ffffff;"></i>
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+            @endif
             @endforeach              
           </div>
-          @else
-            <h2 style="text-align: center">لا يتوفر منتجات لهذا القسم</h2>
-          @endif
+         
         </div>
        
       </section>

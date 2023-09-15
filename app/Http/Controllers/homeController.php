@@ -38,4 +38,5 @@ class homeController extends Controller
         $info = siteInfo::first();
         return view("public.service",['service'=>$info['service']]);
     }
+    
 }

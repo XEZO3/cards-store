@@ -29,18 +29,14 @@
 </style>
 
 <div class="container-fluid">
-	@if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
 
 	<div class="row  justify-content-center">
         @foreach($banner as $item)
-		<img alt="*banner name*" class="mySlides animate-fading" src="{{ asset("storage/" . $item['image']) }}"  style="width:100%; max-height:370px;border-radius:10px">
+		<img alt="*banner name*" class="mySlides animate-fading" src="{{ asset("storage/" . $item['image']) }}"  style="width:100%; height:370px;border-radius:10px">
 		@endforeach
  
 </div>
+	
 	</div>
 
  

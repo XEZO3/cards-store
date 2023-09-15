@@ -38,7 +38,7 @@ border-top-right-radius: 0;
   @csrf
     <div style="direction:rtl">
     <a href="index.php">
-        <img class="mb-4" src="images/logo.png" alt="logo" width="72" height="57" style="display: block;"></a></div><!--this is logo so modify it-->
+        <img class="mb-4" src="{{asset("storage/".$info['logo'])}}" alt="logo" width="72" height="57" style="display: block;"></a></div><!--this is logo so modify it-->
   <h1 class="h3 mb-3 fw-normal" style="text-align:right">تسجيل الدخول</h1>
 
   <div class="form-floating">

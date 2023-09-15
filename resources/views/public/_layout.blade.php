@@ -29,6 +29,7 @@
 .r{
     float: right;
 }
+.content{padding:6px 6px !important;}
 .l{
     float: left;
 }
@@ -45,7 +46,7 @@ width: 1200px !important;
 .animate-fading{animation:fading 5s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
         
         .mySlides{
-            max-width: 1200px;
+            width: 100%;
         }
         .sidebar .sidebar-layout::-webkit-scrollbar{
         background-color: #27282a;
@@ -232,14 +233,14 @@ width: 1200px !important;
                 <!---->
                 <!--If logged in show this: -->
                 @auth
-                {{-- <li class="menu-item">
-                  <a href="editprofile.php">
+                <li class="menu-item">
+                  <a href="/user/profile">
                     <span class="menu-icon">
                       <i class="fa-solid fa-user"></i>
                     </span>
                     <span class="menu-title">تعديل الملف الشخصي</span>
                   </a>
-                </li> --}}
+                </li>
                 @endauth
                   
                 <!---->
@@ -360,11 +361,6 @@ width: 1200px !important;
 </div>
 <script src="https://azouaoui-med.github.io/pro-sidebar-template/main.js"></script>
 <script>
- document.getElementById('close-popup').addEventListener('click', function() {
-        document.getElementById('news-popup').style.display = 'none';
-    });
-
-
 var myIndex = 0;
 carousel();
 function carousel() {
@@ -379,9 +375,15 @@ x[myIndex-1].style.display = "block";
 setTimeout(carousel, 4500);    
 }
 </script>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
 <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+<script>
+   document.getElementById('close-popup').addEventListener('click', function() {
+        document.getElementById('news-popup').style.display = 'none';
+    });
+</script>
 </body>
 </html>

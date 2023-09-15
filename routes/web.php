@@ -60,6 +60,9 @@ Route::get('/terms',[homeController::class,'terms']);
 Route::get('/service',[homeController::class,'service']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/logout', [authController::class,"logout"]);
+    Route::get('/user/profile', [authController::class,"profile"]);
+    Route::post('/user/profile', [authController::class,"profileEdit"]);
+    
     Route::post('/payment/recharge',[balanceController::class,'recharge_the_balance']);
     Route::get('/payment/recharge',[balanceController::class,'recharge']);
 
