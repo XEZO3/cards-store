@@ -71,16 +71,16 @@ span.price-dc{overflow-wrap: break-word;}
                   <h3><a href="#">{{$item['name']}}</a></h3>
                   <div class="d-flex">
                     <div class="pricing">
-                      <p class="price"><span class="mr-2 price-dc">{{$item['price']}}</span><span class="price-sale"> {{$price}} نقطة</span></p>
+                      <p class="price"><span class="mr-2 price-dc">{{$item['price']}}$</span><span class="price-sale"> {{$price}}$</span></p>
                     </div>
                   </div>
-                  <div class="bottom-area d-flex px-3">
-                    <div class="m-auto d-flex">
-                    <a  class="buy-now d-flex justify-content-center align-items-center mx-1"  data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s">
+                 <div class="bottom-area d-flex px-3">
+                  <div class="m-auto d-flex">
+                    <a class="buy-now d-flex justify-content-center align-items-center mx-1" data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s" style="border-radius: 4px;">
                       <span>شراء</span>
                     </a>        
-                    </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -94,17 +94,16 @@ span.price-dc{overflow-wrap: break-word;}
                   <h3><a href="#">{{$item['name']}}</a></h3>
                   <div class="d-flex">
                     <div class="pricing">
-                      <p class="price"><span>{{$price}} نقطة</span></p>
+                      <p class="price"><span>{{$price}}$</span></p>
                     </div>
                   </div>
                   <div class="bottom-area d-flex px-3">
-                    <div class="m-auto d-flex">
-                      
-                      <a  class="buy-now d-flex justify-content-center align-items-center mx-1"  data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s">
-                        <span>شراء</span>
-                      </a>                    
-                    </div>
+                   <div class="m-auto d-flex">
+                    <a class="buy-now d-flex justify-content-center align-items-center mx-1" data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s" style="border-radius: 4px;">
+                      <span>شراء</span>
+                    </a>        
                   </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -208,7 +207,7 @@ span.price-dc{overflow-wrap: break-word;}
                           <div class="pricing">
                               <p class="price">
                                   <span class="mr-2 price-dc">{{$item['price']}}</span>
-                                  <span class="price-sale"> {{$price}} نقطة</span>
+                                  <span class="price-sale"> {{$price}}$</span>
                               </p>
                           </div>
                       </div>

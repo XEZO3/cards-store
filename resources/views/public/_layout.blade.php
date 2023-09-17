@@ -11,6 +11,17 @@
             padding: 0px;
             margin: 0px;
         }
+         .t-intel{display:contents !important ;
+              }
+    .t-logo{
+        margin-right:30px;
+    }
+    .t-logo img {width:74px;}
+    
+    @media (min-width:993px){
+        .t-logo {display:none !important;}
+        
+    }
         body{
     position: relative;
     min-height: 100vh;
@@ -69,7 +80,7 @@ width: 1200px !important;
 
    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="background-color:#27282a !important;height: 100px;width: 100%;/* position: absolute; *//* z-index:10; */">   
        
-    <div class="layout has-sidebar" style="height: 100%;">
+    <div class="layout has-sidebar  t-intel" style="height: 100%;">
       <aside id="" class="sidebar break-point-lg" style="
     z-index: 11;
 ">
@@ -82,21 +93,17 @@ width: 1200px !important;
             </div>
             </div></div></aside></div>
             @auth
-       <ul style="margin-right:50px !important;margin-bottom: 0px;">
-          <li>
-               <div style="color: rgb(21, 87, 36);border: 1px solid #c3e6cb;background-color: #d4edda;min-width:130px;max-height: 38px;height: 100%;border-radius: 4px;text-align: right;padding-right: 10px !important;padding: 3px;">
-                <strong>&lrm;${{auth()->user()->balance}}</strong>
-               </div>
-          </li>
-         @endauth
+           <ul style="margin-right:50px !important;margin-bottom: 0px;padding-left:0 !important">
+              <li>
+                   <div style="color: rgb(21, 87, 36);border: 1px solid #c3e6cb;background-color: #d4edda;min-width:130px;max-height: 38px;height: 100%;border-radius: 4px;text-align: right;padding-right: 10px !important;padding: 3px;">
+                    <strong>&lrm;${{auth()->user()->balance}}</strong>
+                   </div>
+              </li>
         </ul>
+         @endauth
         <div class="collapse navbar-collapse" id="navbarsExample03" style="direction:rtl">
         <ul class="navbar-nav mr-auto" style="margin-right:50px !important">
           @auth
-          <li class="nav-item active">
-            <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
-          <a class="nav-link" style="float:right" href="/user/logout">تسجيل الخروج</a>
-        </li>
         <li class="nav-item active">
           @if(auth()->user()->rank==1)
           <i class="fa-solid fa-crown" style="color: #ffd700;"></i>
@@ -128,7 +135,10 @@ width: 1200px !important;
 -->
         </ul>
       </div>
-     
+     <div class="t-logo" style="">
+              <img src="https://ez-alayed.tech/storage/images/product/H8wSGjC9mPgeXN1CUAofNboFEGoflnK1HVFuxiHn.png" style="width: 75px;float: right;text-align: right;">
+              
+            </div>
     </nav>
     <div class="layout has-sidebar" style="height:100%">
       <aside id="sidebar" class="sidebar break-point-lg">
@@ -239,6 +249,14 @@ width: 1200px !important;
                       <i class="fa-solid fa-user"></i>
                     </span>
                     <span class="menu-title">تعديل الملف الشخصي</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="/user/logout">
+                    <span class="menu-icon">
+                      <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
+                    </span>
+                    <span class="menu-title">تسجيل خروج </span>
                   </a>
                 </li>
                 @endauth
@@ -353,7 +371,7 @@ width: 1200px !important;
   <li class="nav-item"><a href="/terms" class="nav-link px-2 text-muted">سياسة الخصوصية</a></li>
   <li class="nav-item"><a href="/service" class="nav-link px-2 text-muted">شروط الخدمة</a></li>
 </ul>
-<p class="text-center text-muted">    جميع الحقوق محفوظة لدى # © 2023</p><!--modify it and connect it with admin dashboard-->
+<p class="text-center text-muted">    جميع الحقوق محفوظة لدى {{$info['name']}} © 2023</p><!--modify it and connect it with admin dashboard-->
 </footer>
 </div>
 <div class="overlay"></div>

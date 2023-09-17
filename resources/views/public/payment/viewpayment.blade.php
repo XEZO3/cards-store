@@ -2,7 +2,7 @@
 @section('content')
 <style>
     th,td{
-    width:50%;padding:0.75rem;vertical-align:top;border-top:1px solid #dee2e6;text-align:right
+    width:50%;padding:0.75rem;vertical-align:top;border-top:1px solid #dee2e6;text-align:right;
         }
     </style>
     <div style="
@@ -27,8 +27,8 @@
     ">
     @isset($balance)
     <!-- Your code to display balance and payment methods -->
-            <table style="width:100%;max-width:100%;margin-bottom:1rem; background-color:transparent;border-collapse:collapse;overflow-x:scroll" >
-            <tbody>
+            <table style="width:100%;max-width:100%;margin-bottom:1rem; background-color:transparent;border-collapse:collapse;overflow-x:scroll">
+            <tbody styke="overflow-x:scroll">
                 <tr>
                     <th><strong>رقم الدفعة: </strong></th>
                     <th style="font-weight:normal">{{$balance['id']}}</th>
