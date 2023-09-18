@@ -46,7 +46,7 @@
             @csrf
           <div class="mb-3">
             <label for="">الخصم</label>
-            <input type="number" min="1" name="discount" class="form-control" />
+            <input type="float" min="1" name="discount" class="form-control" />
           </div>
         </div>
         <div class="modal-footer">

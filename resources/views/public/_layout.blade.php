@@ -52,6 +52,7 @@ width: 1200px !important;
     margin-right: auto !important;
     margin-left: auto !important;
 }
+.sidebar, .menu, .menu-item a, .menu-icon i { color:#ffffff !important;}
 /*headertop style start*/
 
 .animate-fading{animation:fading 5s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
@@ -87,11 +88,15 @@ width: 1200px !important;
         <a id="btn-collapse"></a>
         <div class="sidebar-layout" style="background-color:#27282a;">
           <div class="sidebar-header" style="padding:0px !important;">
-            <div class="pro-sidebar-logo">
+            <a href="/" style="color:#fff !important" class="pro-sidebar-logo">
               <img src="{{asset("storage/".$info['logo'])}}" style="width:50px">
               <h5>{{$info['name']}}</h5><!--اربطها مع الادمن-->
-            </div>
+            </a>
             </div></div></aside></div>
+            <a href="/" class="t-logo" >
+              <img src="{{ asset('storage/'. $info['logo']) }}" style="width: 75px;float: right;text-align: right;">
+              
+            </a>
             @auth
            <ul style="margin-right:50px !important;margin-bottom: 0px;padding-left:0 !important">
               <li>
@@ -135,10 +140,7 @@ width: 1200px !important;
 -->
         </ul>
       </div>
-     <div class="t-logo" style="">
-              <img src="https://ez-alayed.tech/storage/images/product/H8wSGjC9mPgeXN1CUAofNboFEGoflnK1HVFuxiHn.png" style="width: 75px;float: right;text-align: right;">
-              
-            </div>
+     
     </nav>
     <div class="layout has-sidebar" style="height:100%">
       <aside id="sidebar" class="sidebar break-point-lg">

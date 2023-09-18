@@ -11,9 +11,56 @@ class authController extends Controller
     function register(){
         return view("admin.register");
     }
+    function storeUser(Request $request){
+        // dd($request);
+        $formInputs = $request->validate([
+            'name'=>'required|min:3',
+            'email'=>'required|email|unique:users',
+            'password'=>'required|min:3|confirmed',
+            'phone_number'=>"required"
+            
+        ]);
+        $formInputs['password']=bcrypt($formInputs['password']);
+        $formInputs['permession'] = "User";
+        User::create($formInputs);
+        return redirect()->back()->with('message', 'تم تسجيل المستخدم  ');
+        
+    }
+
+
+
+    public function editUser(Request $request, $id)
+{
+    // Find the user by ID
+    $user = User::find($id);
+
+    // Validate the request data
+    $request->validate([
+        'name' => 'required|string',
+        'email' => 'required|email|unique:users,email,'.$id,
+        'balance' => 'numeric',
+        'password' => 'nullable|min:6'
+    ]);
+
+    // Update user information
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+    $user->balance = $request->input('balance');
+    if ($request->input('password')) {
+        $user->password = bcrypt($request->input('password'));
+    }
+    $user->save();
+
+    return redirect()->back()->with('message', 'تم تحديث المعلومات بنجاح');
+}
+
     function index(){
         $data= User::where('permession','Admin')->get();
         return view("admin.admins",['users'=>$data]);
+    }
+    function users(){
+        $data= User::where('permession','user')->get();
+        return view("admin.users",['users'=>$data]);
     }
     public function delete(Request $req,$id){
         User::destroy($id);

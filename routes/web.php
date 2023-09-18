@@ -96,6 +96,10 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/dashboard', [AdminHomeController::class,'dashboard']);
 
+        Route::get("/users",[AdminAuthController::class,'users']);
+        Route::post("/users/edit/{id}",[AdminAuthController::class,'editUser']);
+        Route::post("/users/add",[AdminAuthController::class,'storeUser']);
+
 
         Route::get('/info',[AdminHomeController::class,'site_info']);
         Route::post('/info/update/{id}',[AdminHomeController::class,'site_info_update']);

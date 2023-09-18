@@ -2,6 +2,55 @@
 @section('content')
 
 <style>
+.card-title {margin-bottom 0px !important}
+.hid{overflow-x:hidden;}
+    @media (min-width:350px){
+    .card-body{
+        padding: 0.25rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    }
+    .t-amd {
+    width: 65% !important;
+    height: 65% !important;
+    margin-right: 3px !important;
+    margin-top: 16.5% !important;
+    }
+    .card-title{font-size:100%;word-wrap:normal;}
+    .card {
+    width: 100px !important;
+    height: 130px !important;
+    margin: 0px !important;
+    margin-bottom: 20px !important;}
+}
+    @media (min-width:600px){
+      .t-amd {
+    width: 75% !important;
+    height: 75% !important;
+    margin-right: 3px !important;
+    margin-top: 10% !important;
+}
+.card-title{font-size:100%;word-wrap:normal;}
+.card {
+    width: 7.5rem !important;
+    height: 150px !important;
+}
+}
+@media (min-width:768px){
+  .t-amd {
+    width: 65% !important;
+    height: 65% !important;
+    margin-right: 3px !important;
+    margin-top: 10% !important;
+    }
+.card-title{font-size:100%;word-wrap:normal;}
+.card {
+    width: 8rem !important;
+height: 150px !important;
+}    .col-auto{flex: 0 0 15% !important;}
+}
 	.back{
 		height: 80%;
 		width:100%;
@@ -29,6 +78,11 @@
 </style>
 
 <div class="container-fluid">
+	@if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
 	<div class="row  justify-content-center">
         @foreach($banner as $item)
@@ -36,7 +90,6 @@
 		@endforeach
  
 </div>
-	
 	</div>
 
  
@@ -52,7 +105,7 @@
 						
 					<div class="card  shadow-lg" style="width: 11.5rem;margin:20px;height:16rem">
 						<div class="back" >
-						<img  src="{{ asset('storage/'. $item['image']) }}" style="width: 55%;height:55%;margin-top:35px;  box-shadow: 5px 5px 2px;border-radius: 10px;
+						<img class="t-amd" src="{{ asset('storage/'. $item['image']) }}" style="width: 55%;height:55%;margin-top:35px;  box-shadow: 5px 5px 2px;border-radius: 10px;
 						">
 						</div>
 						<div class="card-body" style="text-align: center">

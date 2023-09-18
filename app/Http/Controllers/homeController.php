@@ -26,8 +26,10 @@ class homeController extends Controller
     }
     function search(Request $req){
         $name = $req->query('name');
-        $data = card::where('name','like','%'.$name.'%')->get();
-        return view('public.cards',['products'=>$data]);
+        $category = category::where('name','like','%'.$name.'%')->get();
+        $banner = banner::all();
+        return view("public.home",['category'=>$category,'banner'=>$banner]);
+        
     }
     
     function terms(){

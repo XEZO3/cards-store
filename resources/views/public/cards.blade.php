@@ -2,8 +2,12 @@
 @section('content')
 
 <style>
+  .img-prod img{height: auto;}
+.product{height:100%;min-height:100px !important;}
+.col-lg-4{height:100%;}
+.card-title {margin-bottom 0px !important}
 .product{
-  min-height: 302px;
+  min-height: 100px !important;
       }
   .ftco-section{
       padding: 0px !important;
@@ -20,6 +24,7 @@ width:33%
 .img-product{
     height:300px;
 }
+
 @media (min-width: 992px){
 .col-lg-4 {
     -webkit-box-flex: 0;
@@ -303,4 +308,4 @@ function calculateTotalWithDiscount(price, quantity, discount) {
       
       
       </script>
-@endsection 
+@endsection
