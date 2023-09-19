@@ -26,7 +26,10 @@ class User extends Authenticatable
         'phone_number',
         'latest_seen_news_id',
         'total_balance',
-        'rank'
+        'rank',
+        'country',
+        'town',
+        'location'
     ];
 
     /**

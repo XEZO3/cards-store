@@ -81,8 +81,8 @@ span.price-dc{overflow-wrap: break-word;}
                   </div>
                  <div class="bottom-area d-flex px-3">
                   <div class="m-auto d-flex">
-                    <a class="buy-now d-flex justify-content-center align-items-center mx-1" data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s" style="border-radius: 4px;">
-                      <span>شراء</span>
+                    <a  class="buy-now d-flex justify-content-center align-items-center mx-1" data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s" style="border-radius: 4px;cursor:pointer">
+                      <span style="cursor:pointer">شراء</span>
                     </a>        
                   </div>
                 </div>
@@ -104,8 +104,8 @@ span.price-dc{overflow-wrap: break-word;}
                   </div>
                   <div class="bottom-area d-flex px-3">
                    <div class="m-auto d-flex">
-                    <a class="buy-now d-flex justify-content-center align-items-center mx-1" data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s" style="border-radius: 4px;">
-                      <span>شراء</span>
+                    <a class="buy-now d-flex justify-content-center align-items-center mx-1" data-bs-toggle="modal" data-bs-target="#sosab{{$item['id']}}s" style="border-radius: 4px;cursor:pointer">
+                      <span  style="cursor:pointer">شراء</span>
                     </a>        
                   </div>
                 </div>

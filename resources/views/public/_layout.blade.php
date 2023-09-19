@@ -124,13 +124,8 @@ width: 1200px !important;
               <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
             <a class="nav-link" style="float:right" href="/user/login">الدخول</a>
           </li>
-            <li style="padding: 8px 0px;text-align:right;color: white;margin: 0px 10px;">
-                <span>أو</span>
-            </li>
-            <li class="nav-item active">
-            <i class="fa fa-user-plus" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
-            <a class="nav-link" style="float:right" href="/user/register">التسجيل</a>
-          </li>
+            
+            
           @endauth
         <!--
 <li class="nav-item active" style="cursor:pointer;">
@@ -206,14 +201,7 @@ width: 1200px !important;
                     <span class="menu-title">الدخول</span>
                   </a>
                 </li>
-                  <li class="menu-item">
-                  <a href="/user/register">
-                    <span class="menu-icon">
-                      <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    </span>
-                    <span class="menu-title">التسجيل</span>
-                  </a>
-                </li>
+                  
                 @endauth
                   <!---->
                   

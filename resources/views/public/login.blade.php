@@ -56,7 +56,7 @@ border-top-right-radius: 0;
         @enderror
   </div>
   <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-  <p style="text-align:right">ليس لديك حساب؟ <a href="/user/register" style="text-decoration:none;cursor:poiner;">سجل الآن</a></p>
+  <p style="text-align:right">ليس لديك حساب؟ <a href="" style="text-decoration:none;cursor:poiner;">سجل الآن</a></p>
 </form>
 </main>
 @endsection

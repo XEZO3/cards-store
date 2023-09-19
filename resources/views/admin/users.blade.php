@@ -10,11 +10,15 @@
 <div class="container-fluid" style="overflow-x: scroll">
         @csrf <!-- Laravel CSRF token -->
 
-        <table class="table" style="overflow-x: scroll;min-width:1000px">
+        <table class="table" style="overflow-x: scroll;min-width:1400px">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">الاسم</th>
+                    <th scope="col">الدولة</th>
+                    <th scope="col">المدينة</th>
+                    <th scope="col">العنوان</th>
+                    <th scope="col">رقم الهاتف</th>
                     <th scope="col">الايميل</th>
                     <th scope="col">الرصيد</th>
                     <th scope="col">تحرير / حفظ / إلغاء / حذف</th>
@@ -28,6 +32,18 @@
                         <th scope="row">{{ $index + 1 }}</th>
                         <td>
                             <input type="text" class="form-control" name="name" value="{{ $item['name'] }}" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="country" value="{{ $item['country'] }}" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="town" value="{{ $item['town'] }}" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="location" value="{{ $item['location'] }}" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="phone_number" value="{{ $item['phone_number'] }}" readonly>
                         </td>
                         <td>
                             <input type="email" class="form-control" name="email" value="{{ $item['email'] }}" readonly>
@@ -114,6 +130,27 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="newUserBalance">الدولة</label>
+                                <input type="text" class="form-control" id="newUserBalance" name="country" required>
+                                @error('phone_number')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="newUserBalance">المدينة</label>
+                                <input type="text" class="form-control" id="newUserBalance" name="town" required>
+                                @error('phone_number')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="newUserBalance">العنوان</label>
+                                <input type="text" class="form-control" id="newUserBalance" name="location" required>
+                                @error('phone_number')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="newUserPassword">كلمة المرور</label>
                                 <input type="password" class="form-control" id="newUserPassword" name="password" required>
                                 @error('password')
@@ -144,6 +181,10 @@
     const saveButtons = document.querySelectorAll(".save-user");
     const cancelButtons = document.querySelectorAll(".cancel-edit");
     const nameInputs = document.querySelectorAll("input[name='name']");
+    const countryInputs = document.querySelectorAll("input[name='country']");
+    const townInputs = document.querySelectorAll("input[name='town']");
+    const locationInputs = document.querySelectorAll("input[name='location']");
+    const phonenumberInputs = document.querySelectorAll("input[name='phone_number']");
     const emailInputs = document.querySelectorAll("input[name='email']");
     const balanceInputs = document.querySelectorAll("input[name='balance']");
     const passwordInputs = document.querySelectorAll("input[name='password']");
@@ -156,6 +197,10 @@
             saveButtons[index].style.display = "block";
             cancelButtons[index].style.display = "block";
             nameInputs[index].readOnly = false;
+            countryInputs[index].readOnly = false;
+            townInputs[index].readOnly = false;
+            locationInputs[index].readOnly = false;
+            phonenumberInputs[index].readOnly = false;
             passwordInputs[index].readOnly = false;
             emailInputs[index].readOnly = false;
             balanceInputs[index].readOnly = false;
@@ -167,6 +212,10 @@
             editButtons[index].style.display = "block";
             saveButtons[index].style.display = "none";
             cancelButtons[index].style.display = "none";
+            countryInputs[index].readOnly = true;
+            townInputs[index].readOnly = true;
+            locationInputs[index].readOnly = true;
+            phonenumberInputs[index].readOnly = true;
             nameInputs[index].readOnly = true;
             passwordInputs[index].readOnly = true;
             emailInputs[index].readOnly = true;
@@ -178,6 +227,10 @@
             saveButtons[index].style.display = "none";
             cancelButtons[index].style.display = "none";
             nameInputs[index].readOnly = true;
+            countryInputs[index].readOnly = true;
+            townInputs[index].readOnly = true;
+            locationInputs[index].readOnly = true;
+            phonenumberInputs[index].readOnly = true;
             emailInputs[index].readOnly = true;
             passwordInputs[index].readOnly = true;
             balanceInputs[index].readOnly = true;
@@ -190,6 +243,10 @@
             saveButtons[index].style.display = "none";
             cancelButtons[index].style.display = "none";
             nameInputs[index].readOnly = true;
+            countryInputs[index].readOnly = true;
+            townInputs[index].readOnly = true;
+            locationInputs[index].readOnly = true;
+            phonenumberInputs[index].readOnly = true;
             emailInputs[index].readOnly = true;
             passwordInputs[index].readOnly = true;
             balanceInputs[index].readOnly = true;

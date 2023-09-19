@@ -17,7 +17,11 @@ class authController extends Controller
             'name'=>'required|min:3',
             'email'=>'required|email|unique:users',
             'password'=>'required|min:3|confirmed',
-            'phone_number'=>"required"
+            'phone_number'=>"required",
+            'balance'=>"required|numeric",
+            'country'=>"required",
+            'town'=>"required",
+            'location'=>"required"
             
         ]);
         $formInputs['password']=bcrypt($formInputs['password']);
@@ -39,13 +43,22 @@ class authController extends Controller
         'name' => 'required|string',
         'email' => 'required|email|unique:users,email,'.$id,
         'balance' => 'numeric',
-        'password' => 'nullable|min:6'
+        'password' => 'nullable|min:6',
+        'country'=>"required",
+        'town'=>"required",
+        'location'=>"required",
+        'phone_number'=>"required"
     ]);
 
     // Update user information
     $user->name = $request->input('name');
     $user->email = $request->input('email');
     $user->balance = $request->input('balance');
+    $user->phone_number = $request->input('phone_number');
+    $user->town = $request->input('town');
+    $user->location = $request->input('location');
+    $user->country = $request->input('country');
+
     if ($request->input('password')) {
         $user->password = bcrypt($request->input('password'));
     }

@@ -35,8 +35,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/user/register', [authController::class,"register"]);
-Route::post('/user/register', [authController::class,"store"]);
+// Route::get('/user/register', [authController::class,"register"]);
+// Route::post('/user/register', [authController::class,"store"]);
 Route::post('/user/login', [authController::class,"loginPost"]);
 Route::get('/user/login', [authController::class,"login"])->name('login');
 
