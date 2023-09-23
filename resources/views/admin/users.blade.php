@@ -21,6 +21,7 @@
                     <th scope="col">رقم الهاتف</th>
                     <th scope="col">الايميل</th>
                     <th scope="col">الرصيد</th>
+                     <th scope="col">الرتبة</th>
                     <th scope="col">تحرير / حفظ / إلغاء / حذف</th>
                 </tr>
             </thead>
@@ -51,7 +52,9 @@
                         <td>
                             <input type="text" class="form-control" name="balance" value="{{ $item['balance'] }}" readonly>
                         </td>
-
+                        <td>
+                            <input type="number" class="form-control" name="rank" value="{{ $item['rank'] }}" readonly>
+                        </td>
                         <td>
                             <input type="password" class="form-control" name="password" placeholder="تغيير كلمة المرور" readonly>
                         </td>
@@ -187,6 +190,7 @@
     const phonenumberInputs = document.querySelectorAll("input[name='phone_number']");
     const emailInputs = document.querySelectorAll("input[name='email']");
     const balanceInputs = document.querySelectorAll("input[name='balance']");
+    const rankInputs = document.querySelectorAll("input[name='rank']");
     const passwordInputs = document.querySelectorAll("input[name='password']");
     const saveChangesButton = document.querySelector(".btn-success");
     const cancelButton = document.querySelector(".btn-secondary");
@@ -201,6 +205,7 @@
             townInputs[index].readOnly = false;
             locationInputs[index].readOnly = false;
             phonenumberInputs[index].readOnly = false;
+            rankInputs[index].readOnly = false;
             passwordInputs[index].readOnly = false;
             emailInputs[index].readOnly = false;
             balanceInputs[index].readOnly = false;
@@ -214,6 +219,7 @@
             cancelButtons[index].style.display = "none";
             countryInputs[index].readOnly = true;
             townInputs[index].readOnly = true;
+            rankInputs[index].readOnly = true;
             locationInputs[index].readOnly = true;
             phonenumberInputs[index].readOnly = true;
             nameInputs[index].readOnly = true;
@@ -230,6 +236,7 @@
             countryInputs[index].readOnly = true;
             townInputs[index].readOnly = true;
             locationInputs[index].readOnly = true;
+            rankInputs[index].readOnly = true;
             phonenumberInputs[index].readOnly = true;
             emailInputs[index].readOnly = true;
             passwordInputs[index].readOnly = true;
@@ -245,6 +252,7 @@
             nameInputs[index].readOnly = true;
             countryInputs[index].readOnly = true;
             townInputs[index].readOnly = true;
+            rankInputs[index].readOnly = true;
             locationInputs[index].readOnly = true;
             phonenumberInputs[index].readOnly = true;
             emailInputs[index].readOnly = true;

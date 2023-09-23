@@ -20,7 +20,7 @@
                 <small class="text-danger">{{$message}}</small>
             @enderror
         <br>
-        <label>البريد الالكتروني</label>
+        <label>تلجرام </label>
         <input type="text" name="email"  class="form-control tes" value="{{$siteInfo['email']}}">
         <br>
         @error('email')

@@ -47,6 +47,7 @@ class authController extends Controller
         'country'=>"required",
         'town'=>"required",
         'location'=>"required",
+        'rank'=>"required",
         'phone_number'=>"required"
     ]);
 
@@ -57,6 +58,7 @@ class authController extends Controller
     $user->phone_number = $request->input('phone_number');
     $user->town = $request->input('town');
     $user->location = $request->input('location');
+    $user->rank = $request->input('rank');
     $user->country = $request->input('country');
 
     if ($request->input('password')) {

@@ -14,23 +14,27 @@ use Illuminate\Support\Facades\Cookie;
 
 class homeController extends Controller
 {
-    function index(){
-        $category = category::all();
-        $banner = banner::all();
-        return view("public.home",['category'=>$category,'banner'=>$banner]);
+    function index(Request $req){
+         $name = $req->query('name');
+         $categoryQuery = category::query();
+         if (!empty($name)) {
+            $categoryQuery->where('name', 'like', '%' . $name . '%');
+         }
+         $category = $categoryQuery->get();
+         $banner = banner::all();
+         return view("public.home",['category'=>$category,'banner'=>$banner]);
     }
  
     function agents(){
         $data = agents::all();
         return view("public.agents",['agents'=>$data]);
     }
-    function search(Request $req){
-        $name = $req->query('name');
-        $category = category::where('name','like','%'.$name.'%')->get();
-        $banner = banner::all();
-        return view("public.home",['category'=>$category,'banner'=>$banner]);
-        
-    }
+    // function search(Request $req){
+    //     $name = $req->query('name');
+    //     $category = category::where('name','like','%'.$name.'%')->get();
+    //     $banner = banner::all();
+    //     return view("public.home",['category'=>$category,'banner'=>$banner]);
+    // }
     
     function terms(){
         $info = siteInfo::first();
@@ -40,5 +44,4 @@ class homeController extends Controller
         $info = siteInfo::first();
         return view("public.service",['service'=>$info['service']]);
     }
-    
 }

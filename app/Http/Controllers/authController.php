@@ -24,6 +24,10 @@ class authController extends Controller
         // Validate the form data
         $validator = $request->validate([
             'phone_number' => 'required|string|max:20',
+            'name' => 'required|string|max:20',
+            'country' => 'required|string|max:10',
+            'town' => 'required|string|max:10',
+            'location' => 'required|string|max:20',
             
         ]);
 
@@ -33,6 +37,10 @@ class authController extends Controller
         // Update profile fields
         $user->name = $request->input('name');
         $user->phone_number = $request->input('phone_number');
+        $user->country = $request->input('country');
+        $user->town = $request->input('town');
+        $user->location = $request->input('location');
+
 
         // Check if the user wants to change the password
         if ($request->filled('current-password')) {
@@ -85,6 +93,9 @@ class authController extends Controller
         
     }
     function login(){
+        if(auth()->check()){
+            return redirect("/");
+        }
         $info = siteInfo::all()->first();
         return view("public.login",['info'=>$info]);
     }

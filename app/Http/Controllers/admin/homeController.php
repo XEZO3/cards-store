@@ -86,7 +86,7 @@ class homeController extends Controller
         $info = siteInfo::findOrFail($id);
         $data =  $req->validate([
             'name'=>'required',
-            'email'=>'required|email',
+            'email'=>'required',
             'phone_number'=>'required'
         ]);
         if ($req->hasFile('image')) {

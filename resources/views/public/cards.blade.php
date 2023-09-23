@@ -24,7 +24,31 @@ width:33%
 .img-product{
     height:300px;
 }
-
+      @media(min-width:768px){
+    .img-product{height:200px !important}}
+@media(min-width:350px){
+.img-product{height:110px !important}
+}
+    @media(min-width:992px){.col-lg-4{flex: 0 0 16.333333% !important}}
+    .col-lg-4 {
+    width: 33% !important;
+padding-right: 5px !important;
+    padding-left: 5px !important;
+        height:auto !important;
+        margin-bottom:30px;
+}
+.product, .text, h3{
+    font-size:95% !important;
+}
+.product{margin-bottom:0px !important}
+/*    .col-lg-4 {*/
+/*    width: 33% !important;*/
+/*padding-right: 5px !important;*/
+/*    padding-left: 5px !important;*/
+/*}*/
+/*.product .text h3{*/
+/*    font-size:100% !important;*/
+/*}*/
 @media (min-width: 992px){
 .col-lg-4 {
     -webkit-box-flex: 0;
@@ -49,6 +73,15 @@ width:33%
 span.price-dc{overflow-wrap: break-word;}
   </style>
       <link rel="stylesheet" href="{{URL::asset("css/pro.css")}}">
+      <div style="
+    margin-bottom: 1rem;
+">
+   <a href="/" class="btn btn-primary" style="
+    scale: -1;color:white;
+">
+                <i class="fa-solid fa-arrow-right"></i></a>
+
+</div>
   <section class="ftco-section">
         <div class="container">
           

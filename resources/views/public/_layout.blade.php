@@ -7,12 +7,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <style>
+     .sidebar-header{border-bottom: 1px solid #343e44}
+    .sidebar-header a{margin-left:80px}
+    .sidebar-header a img{width:70px !important}
+    .sidebar-header a h5{display:none !important}
+    .footer-box{padding:0px !important;}
+.footer-box div{padding:0px !important;}
         * {
             padding: 0px;
             margin: 0px;
         }
          .t-intel{display:contents !important ;
               }
+              @media(min-width:992px){.side-logo{display:none !important}}
     .t-logo{
         margin-right:30px;
     }
@@ -124,7 +131,10 @@ width: 1200px !important;
               <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
             <a class="nav-link" style="float:right" href="/user/login">الدخول</a>
           </li>
-            
+            <li class="nav-item active">
+              <i  class="fa fa-user-plus" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
+            <a class="nav-link" style="float:right" href="https://wa.me/{{$info['phone_number']}}?text=اريد انشاء حساب جديد">التسجيل</a>
+          </li>
             
           @endauth
         <!--
@@ -145,6 +155,12 @@ width: 1200px !important;
           <div class="sidebar-content" style="
     /* margin-top: 80px; */
 ">
+              <div class="sidebar-header side-logo" style="padding:0px !important;height: 50px !important;margin-left: 10px;">
+            <a href="/" style="color:#fff !important" class="pro-sidebar-logo">
+              <img  src="{{ asset('storage/'. $info['logo']) }}" style="width:50px;margin-right: 10px;">
+              <h5>{{$info['name']}}</h5><!--اربطها مع الادمن-->
+            </a>
+            </div>
             <nav class="menu open-current-submenu">
               <ul>
                 <li class="menu-item">
@@ -199,6 +215,13 @@ width: 1200px !important;
                       <i class="fa fa-right-to-bracket" aria-hidden="true"></i>
                     </span>
                     <span class="menu-title">الدخول</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="https://wa.me/{{$info['phone_number']}}?text=اريد انشاء حساب جديد">
+                    <span class="menu-icon">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>                    </span>
+                    <span class="menu-title">التسجيل</span>
                   </a>
                 </li>
                   
@@ -261,9 +284,8 @@ width: 1200px !important;
               <div style="padding: 0 10px">
                 <span style="direction: rtl;display: block;margin-bottom: 10px">الدعم الفني : </span>
                 <div style="margin-bottom: 15px;">
-                    <a href="tel:{{$info['phone_number']}}" style="margin: 5px;font-size: 20px;"><i class="fa fa-phone" aria-hidden="true"></i></a> <!--phone number-->
-                    <a href="mailto:{{$info['email']}}" style="margin: 5px;font-size: 20px;"><i class="fa-solid fa-envelope"></i></a><!--email-->
-                    <a href="https://wa.me/{{$info['phone_number']}}" style="margin: 5px;font-size: 20px;"><i class="fa-brands fa-whatsapp"></i></a><!--phone number-->
+                    <a href="https://telegram.me/{{$info['email']}}" style="margin: 5px;font-size: 20px;"><i class="fa-brands fa-telegram" aria-hidden="true"></i></a>
+                     <a href="https://wa.me/{{$info['phone_number']}}" style="margin: 5px;font-size: 20px;"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
                 </div>
               </div>
             </div>

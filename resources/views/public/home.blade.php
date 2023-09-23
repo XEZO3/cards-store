@@ -2,6 +2,17 @@
 @section('content')
 
 <style>
+  .col-auto{padding-right:3px !important;padding-left:3px !important;max-width:190px !important;}
+  @media(min-width:768px){.mySlides{height:220px !important}}
+@media(min-width:350px){
+.mySlides{
+height:150px
+}
+}
+.back{height:64% !important;
+            }
+.card-title{margin-bottom:0px !important}
+    @media (min-width: 350px){.card{width:122px !important;}}
 .card-title {margin-bottom 0px !important}
 .hid{overflow-x:hidden;}
     @media (min-width:350px){
@@ -47,7 +58,7 @@
     }
 .card-title{font-size:100%;word-wrap:normal;}
 .card {
-    width: 8rem !important;
+    width: 100% !important;
 height: 150px !important;
 }    .col-auto{flex: 0 0 15% !important;}
 }
@@ -75,26 +86,50 @@ height: 150px !important;
 		box-shadow: 10px 10px 10px;
 		border-radius: 11px;
 	}
+	 .search-input{padding: 0.375rem 0.75rem;
+    width: calc(100% - 80px);
+    margin-top: 1rem;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #ced4da;
+    font-size: 0.95rem;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;}
+    .search-input:focus{border-color:#007bff !important; box-shadow: 0px 0px 7px 0px #007bff;}
+    .search-input:focus{outline:none;}
 </style>
 
 <div class="container-fluid">
-	@if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
 	<div class="row  justify-content-center">
         @foreach($banner as $item)
-		<img alt="*banner name*" class="mySlides animate-fading" src="{{ asset("storage/" . $item['image']) }}"  style="width:100%; height:370px;border-radius:10px">
+		<img alt="*banner name*" class="mySlides animate-fading" src="{{ asset("storage/" . $item['image']) }}"  style="width:100%;border-radius:10px">
 		@endforeach
- 
 </div>
 	</div>
 
  
 <!--banner end-->
     <br>
+    <div style="direction: rtl;margin-left: 10px;">
+        <form method="get" action="">
+          
+        <input type="text" name="name" class="search-input"><input type="submit" style="
+    width: 60px;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 400;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+" value="بحث">
+</form>
+</div>
+    <br>
+    <br>
+
 <!--category-->
     <div class="form-group products">
         <div class="row justify-content-center ">

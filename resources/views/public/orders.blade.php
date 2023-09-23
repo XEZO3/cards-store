@@ -44,8 +44,6 @@ overflow-x: scroll;
     <td class="phonea">المنتج</td>
     <td class="cata">اللاعب/المشترك</td>
     <td class="regiona">المجموع</td>
-    <td class="quentity">الكمية</td>
-    <td class="regiona">التاريخ</td>
     <td class="regiona">الحالة</td>
     <td class="regiona">سبب الرفض|ان وجد</td>
     <td class="regiona">##</td>
@@ -64,8 +62,6 @@ overflow-x: scroll;
     <td class="allb">{{$item['card']['name']}}</td>
     <td class="allb">{{$item['game_id']}}</td>
     <td class="allb">{{$item['total']}}</td>
-    <td class="allb">{{$item['quentity']}}</td>
-    <td class="allb">{{$item['created_at']}}</td>
     <td class="allb">{{$item['state']=="pending" ? "قيد الانتظار" : ($item['state']=="done" ? "تمت العملية" : "تم الالغاء")}}</td>
     <td class="allb">{{$item['rejecte_cause']}}</td>
     <td class="allb">
