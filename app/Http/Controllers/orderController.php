@@ -12,12 +12,15 @@ use Illuminate\Support\Facades\DB;
 class orderController extends Controller
 {
     public function index(Request $req){
-        $orders = order::with(["card"])->where('user_id',auth()->id())->get();
+        $orders = order::with(["card"])
+    ->where('user_id', auth()->id())
+    ->orderBy('id', 'desc') // Sort by created_at in descending order
+    ->get();
         return view("public.orders",['orders'=>$orders]);
     }
     public function purchasing(Request $req,card $card){
         $data = $req->validate([
-            'quentity' => 'required|integer|gt:0',
+            'quentity' => 'required|integer|gt:0|lt:1000',
             'game_id' => ($card['require_type'] == 1) ? 'required' : '',
             'username' => ($card['require_type'] == 2) ? 'required' : '',
             'password' => ($card['require_type'] == 2) ? 'required' : '',

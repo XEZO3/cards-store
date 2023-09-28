@@ -24,14 +24,14 @@ class order extends Model
 
     protected static function booted()
     {
-        static::creating(function ($order) {
-            $uniqueOrderId = null;
-            do {
-                $uniqueOrderId = rand(); 
-            } while (static::where('order_id', $uniqueOrderId)->exists()); 
+       static::creating(function ($order) {
+        $uniqueOrderId = null;
+        do {
+            $uniqueOrderId = rand(1000000, 9999999); // Generate a random 7-digit number
+        } while (static::where('order_id', $uniqueOrderId)->exists()); 
 
-            $order->order_id = $uniqueOrderId;
-        });
+        $order->order_id = $uniqueOrderId;
+    });
     }
     public function card()
     {

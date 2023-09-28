@@ -7,7 +7,8 @@
 <div class="row justify-content-center">
 <div class="col-md-12 col-lg-10">
 <div class="wrap d-md-flex">
-<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last" style="padding: 0px !important;display: flex !important;flex-direction: column;justify-content: flex-start;">
+<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last" style="padding: 0px !important;display: flex !important;flex-direction: column;justify-content: center;background-image: url(https://imagizer.imageshack.com/img924/8004/Py5GSt.png);
+    background-repeat: round;">
 <div style="margin-top: 10px;"><img src="{{asset("storage/".$info['logo'])}}" style="
     width: 50%;
 "></div><div class="text w-100" style="">
@@ -40,7 +41,7 @@
     font-family: tahoma;
     float: right;
     font-size: 14px;
-">كلمة السر</label>
+">كلمة المرور</label>
 <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required="">
  @error('password')
          <small class="text-danger">{{$message}}</small>
@@ -50,6 +51,7 @@
 <div style="
     display: flex;
     width: 100%;
+		justify-content: center;
 ">
     
     <div class="form-group" style="
@@ -59,7 +61,7 @@
 <button type="submit" class="form-control btn btn-primary submit px-3" style="
     font-size: 16px;
     font-weight: 900;
-">الدخـــول</button>
+">دخول</button>
 </div>
 <div class="form-group" style="
     width: 44%;
@@ -76,7 +78,9 @@
 ">التسجيل</span></a>
 </div></div>
 </div>
-
+<style>
+    .btn:not(:disabled):not(.disabled) {background:#007bff;border-color: #007bff;}
+</style>
 </form>
 </div>
 </div>

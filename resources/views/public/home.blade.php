@@ -12,20 +12,26 @@ height:150px
 .back{height:64% !important;
             }
 .card-title{margin-bottom:0px !important}
-    @media (min-width: 350px){.card{width:122px !important;}}
+    
 .card-title {margin-bottom 0px !important}
 .hid{overflow-x:hidden;}
+.card-body{
+  background-color: #27b8fd;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: white;
+}
     @media (min-width:350px){
     .card-body{
         padding: 0.25rem !important;
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: column-reverse !important;
     align-items: center !important;
-    justify-content: flex-end !important;
+    justify-content: center !important;
     }
     .t-amd {
-    width: 65% !important;
-    height: 65% !important;
+    width: 65px !important;
+    height: 60px !important;
     margin-right: 3px !important;
     margin-top: 16.5% !important;
     }
@@ -36,6 +42,7 @@ height:150px
     margin: 0px !important;
     margin-bottom: 20px !important;}
 }
+@media (min-width: 400px){.card{width:122px !important;}}
     @media (min-width:600px){
       .t-amd {
     width: 75% !important;
@@ -51,8 +58,8 @@ height:150px
 }
 @media (min-width:768px){
   .t-amd {
-    width: 65% !important;
-    height: 65% !important;
+    width: 80px !important;
+    height: 80px !important;
     margin-right: 3px !important;
     margin-top: 10% !important;
     }
@@ -66,10 +73,12 @@ height: 150px !important;
 		height: 80%;
 		width:100%;
 		text-align:center;
-		background:url('{{URL::asset('images/striped.png')}}');
+		background:url('{{URL::asset('storage/images/fixed/auGb13.webp')}}');
 		background-repeat: no-repeat;
 		background-size: cover;
 		border-radius: 8px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
 
 	}
 	.aa:hover{
@@ -102,14 +111,14 @@ height: 150px !important;
 <div class="container-fluid">
 	<div class="row  justify-content-center">
         @foreach($banner as $item)
-		<img alt="*banner name*" class="mySlides animate-fading" src="{{ asset("storage/" . $item['image']) }}"  style="width:100%;border-radius:10px">
+		<img alt="banner name" class="mySlides animate-fading" src="{{ asset("storage/" . $item['image']) }}"  style="width:100%;border-radius:10px">
 		@endforeach
 </div>
 	</div>
 
  
 <!--banner end-->
-    <br>
+    
     <div style="direction: rtl;margin-left: 10px;">
         <form method="get" action="">
           
@@ -127,7 +136,7 @@ height: 150px !important;
 " value="بحث">
 </form>
 </div>
-    <br>
+    
     <br>
 
 <!--category-->
@@ -140,7 +149,7 @@ height: 150px !important;
 						
 					<div class="card  shadow-lg" style="width: 11.5rem;margin:20px;height:16rem">
 						<div class="back" >
-						<img class="t-amd" src="{{ asset('storage/'. $item['image']) }}" style="width: 55%;height:55%;margin-top:35px;  box-shadow: 5px 5px 2px;border-radius: 10px;
+						<img class="t-amd" src="{{ asset('storage/'. $item['image']) }}" style="width: 55%;height:55%;margin-top:35px; border-radius: 10px;
 						">
 						</div>
 						<div class="card-body" style="text-align: center">

@@ -7,6 +7,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <style>
+    .sidebar-content div{min-height:75px !important}
+
+    .open-current-submenu{
+                         height:450px !important}
+    .footer-box div span{margin-bottom:0px !important;
+                        margin-top:10px !important}
      .sidebar-header{border-bottom: 1px solid #343e44}
     .sidebar-header a{margin-left:80px}
     .sidebar-header a img{width:70px !important}
