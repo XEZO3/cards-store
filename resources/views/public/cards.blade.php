@@ -2,6 +2,7 @@
 @section('content')
 
 <style>
+.bottom-area{bottom:5px !important}
   .img-prod img{height: auto;}
 .product{height:100%;min-height:100px !important;}
 .col-lg-4{height:100%;}

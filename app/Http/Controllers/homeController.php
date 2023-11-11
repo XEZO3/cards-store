@@ -6,6 +6,7 @@ use App\Models\agents;
 use App\Models\banner;
 use App\Models\card;
 use App\Models\category;
+use App\Models\news;
 use App\Models\siteInfo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -43,5 +44,10 @@ class homeController extends Controller
     function service(){
         $info = siteInfo::first();
         return view("public.service",['service'=>$info['service']]);
+    }
+
+    function notification(){
+        $news = news::all();
+        return view("public.notification",['info'=>$news]);
     }
 }

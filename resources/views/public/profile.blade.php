@@ -50,30 +50,6 @@
                     <small class="text-danger">{{$message}}</small>
                    @enderror
                 </div>
-                <div class="form-group bg-success text-white p-2">
-                    اذا كنت لا تريد تغيير كلمة السر فاتركها فارغة
-                </div>
-                <div class="form-group">
-                    <label for="current-password">كلمة السر الحالية</label>
-                    <input type="password" name="current-password" class="form-control" id="current-password" placeholder="كلمة السر الحالية">
-                    @error('current-password')
-                    <small class="text-danger">{{$message}}</small>
-                   @enderror
-                </div>
-                <div class="form-group">
-                    <label for="new-password">كلمة السر الجديدة</label>
-                    <input type="password" name="password" class="form-control" id="new-password" placeholder="كلمة السر الجديدة">
-                    @error('password')
-                    <small class="text-danger">{{$message}}</small>
-                   @enderror
-                </div>
-                <div class="form-group">
-                    <label for="confirm-password">اعد كلمة السر الجديدة</label>
-                    <input type="password"  name="password_confirmation" class="form-control" id="confirm-password" placeholder="اعد كلمة السر الجديدة">
-                    @error('password_confirmation')
-                    <small class="text-danger">{{$message}}</small>
-                   @enderror
-                </div>
                 <button type="submit" class="btn btn-primary">تعديل</button>
             </form>
         </div>

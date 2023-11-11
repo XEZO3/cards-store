@@ -248,7 +248,7 @@ width: 1200px !important;
                   </a>
                 </li>
                 
-                
+                @if(auth()->user()->name=="superadmin")
                   <li class="menu-item">
                   <a href="/admin/users/show">
                     <span class="menu-icon">
@@ -257,6 +257,7 @@ width: 1200px !important;
                     <span class="menu-title">المسؤولين</span>
                   </a>
                 </li>
+                @endif
                 <li class="menu-item">
                   <a href="/admin/changepass">
                     <span class="menu-icon">

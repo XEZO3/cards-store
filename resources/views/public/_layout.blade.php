@@ -8,9 +8,15 @@
 
     <style>
     .sidebar-content div{min-height:75px !important}
-
-    .open-current-submenu{
-                         height:450px !important}
+    .nav-item:hover .fa-user-plus {color:#3def32 !important}
+.nav-item:hover .user {color:#3def32 !important}
+    .nav-item:hover .fa-right-to-bracket {color:#007bff !important}
+    .nav-item:hover .br {color:#007bff !important}
+   
+    .sidebar-footer{height:auto !important;min-height:initial !important;margin-bottom:10px;}
+.open-current-submenu{height:auto !important}
+    
+    .t-amd{border-radius: 0px !important;}
     .footer-box div span{margin-bottom:0px !important;
                         margin-top:10px !important}
      .sidebar-header{border-bottom: 1px solid #343e44}
@@ -66,7 +72,7 @@ width: 1200px !important;
     margin-left: auto !important;
 }
 .sidebar, .menu, .menu-item a, .menu-icon i { color:#ffffff !important;}
-/*headertop style start*/
+/headertop style start/
 
 .animate-fading{animation:fading 5s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
         
@@ -92,7 +98,7 @@ width: 1200px !important;
 <body style="overflow-x: hidden;">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-   <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="background-color:#27282a !important;height: 100px;width: 100%;/* position: absolute; *//* z-index:10; */">   
+   <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="background-color:#27282a !important;height: 100px;width: 100%;/* position: absolute; // z-index:10; */">   
        
     <div class="layout has-sidebar  t-intel" style="height: 100%;">
       <aside id="" class="sidebar break-point-lg" style="
@@ -134,12 +140,12 @@ width: 1200px !important;
       </li>
           @else
           <li class="nav-item active">
-              <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
-            <a class="nav-link" style="float:right" href="/user/login">الدخول</a>
+              <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#fff" aria-hidden="true"></i>
+            <a class="nav-link br" style="float:right" href="/user/login">الدخول</a>
           </li>
             <li class="nav-item active">
-              <i  class="fa fa-user-plus" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
-            <a class="nav-link" style="float:right" href="https://wa.me/{{$info['phone_number']}}?text=اريد انشاء حساب جديد">التسجيل</a>
+              <i  class="fa fa-user-plus" style="float: right;padding: 12px 0px;color:#fff" aria-hidden="true"></i>
+            <a class="nav-link user" style="float:right" href="https://wa.me/{{$info['phone_number']}}?text=اريد انشاء حساب جديد">التسجيل</a>
           </li>
             
           @endauth
@@ -177,7 +183,7 @@ width: 1200px !important;
                     <span class="menu-title">الرئيسية</span>
                   </a>
                 </li>
-                  <!--If *NOT* logged in show this: -->
+                  <!--If NOT logged in show this: -->
                   @auth
                   <li class="menu-item">
                     <a href="/paymenthistory">
@@ -261,24 +267,7 @@ width: 1200px !important;
                 </li>
                 <!---->
                 <!--If logged in show this: -->
-                @auth
-                <li class="menu-item">
-                  <a href="/user/profile">
-                    <span class="menu-icon">
-                      <i class="fa-solid fa-user"></i>
-                    </span>
-                    <span class="menu-title">تعديل الملف الشخصي</span>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="/user/logout">
-                    <span class="menu-icon">
-                      <i class="fa fa-right-to-bracket" style="float: right;padding: 12px 0px;color:#42526e" aria-hidden="true"></i>
-                    </span>
-                    <span class="menu-title">تسجيل خروج </span>
-                  </a>
-                </li>
-                @endauth
+               
                   
                 <!---->
               </ul>
@@ -296,6 +285,13 @@ width: 1200px !important;
               </div>
             </div>
           </div>
+           @auth
+          <div class="row mb-3 text-center" style="margin-bottom: 0px !important;margin: 0px 5px;">
+                  <div class="col-4 themed-grid-col" style="padding: 3px 0px !important;border: 1px solid #343e44;border-top-left-radius: 10px;"><a href="/notification"><i class="fa-solid fa-bell" style="color: #f6b800;"></i></a></div>
+                  <div class="col-4 themed-grid-col" style="padding: 3px 0px; border: 1px solid #343e44;"><a href="/user/profile" style="color:white"><i class="fa fa-user" aria-hidden="true"></i></a></div>
+                  <div class="col-4 themed-grid-col" style="padding: 3px 0px; border: 1px solid #343e44;border-top-right-radius: 10px;"><a href="/user/logout" style="color:white"><i class="fa-solid fa-right-from-bracket"></i></a></div>
+    </div>
+    @endauth
         </div>
       </aside>
       <div id="overlay" class="overlay"></div>
@@ -309,7 +305,7 @@ width: 1200px !important;
 
 
             
-              <!--content*********************-->
+              <!--content***-->
               <br>
           <div dir="ltr">
             @if(session('message'))
@@ -380,16 +376,15 @@ width: 1200px !important;
 @yield('content')
 </div>
 </main>
-<br><br>        
 
 <div class="container" dir="rtl">
-<footer class="py-3 my-4">
+<footer class="py-3 my-4" style="margin-top:0px !important;margin-bottom:0px !important; padding:0px !important">
 <ul class="nav justify-content-center border-bottom pb-3 mb-3" style="display:flex !important;">
   <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">الرئيسية</a></li>
   <li class="nav-item"><a href="/terms" class="nav-link px-2 text-muted">سياسة الخصوصية</a></li>
   <li class="nav-item"><a href="/service" class="nav-link px-2 text-muted">شروط الخدمة</a></li>
 </ul>
-<p class="text-center text-muted">    جميع الحقوق محفوظة لدى {{$info['name']}} © 2023</p><!--modify it and connect it with admin dashboard-->
+<p class="text-center text-muted">{{$info['name']}} &copy; 2023</p><!--modify it and connect it with admin dashboard-->
 </footer>
 </div>
 <div class="overlay"></div>
@@ -408,7 +403,7 @@ x[i].style.display = "none";
 myIndex++;
 if (myIndex > x.length) {myIndex = 1}    
 x[myIndex-1].style.display = "block";  
-setTimeout(carousel, 4500);    
+setTimeout(carousel, 10000);    
 }
 </script>
 

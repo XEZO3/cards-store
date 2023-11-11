@@ -1,5 +1,6 @@
 @extends('public._layout')
 @section('content')
+<style>.btn,.btn-primary:hover{border:1px solid #3def32 !important}</style>
 <link rel="stylesheet" href="https://preview.colorlib.com/theme/bootstrap/login-form-17/css/style.css">
 <section class="ftco-section">
 <div class="container">
@@ -47,6 +48,7 @@
          <small class="text-danger">{{$message}}</small>
 @enderror
 </div>
+<br>
 <div class="form-group">
 <div style="
     display: flex;
@@ -58,10 +60,7 @@
     width: 44%;
     margin-right: 10px;
 ">
-<button type="submit" class="form-control btn btn-primary submit px-3" style="
-    font-size: 16px;
-    font-weight: 900;
-">دخول</button>
+<button type="submit" class="form-control btn btn-primary submit px-3" style="font-size: 20px;font-weight: 900;background: #007bff;border-color: #007bff;display: flex;flex-wrap: wrap;justify-content: center;align-content: center;">دخول</button>
 </div>
 <div class="form-group" style="
     width: 44%;
@@ -72,15 +71,10 @@
     font-weight: 600;
     padding: 0px;
     width: -webkit-fill-available;
-"><span  class="form-control btn btn-primary submit px-3" style="
-    font-size: 16px;
-    font-weight: 900;
-">التسجيل</span></a>
+"><span  class="form-control btn btn-primary submit px-3" style="font-size: 20px;font-weight: 900;display: flex;flex-wrap: wrap;align-content: center;justify-content: center;background: #3def32;border-color: #3def32 !important;">التسجيل</span></a>
 </div></div>
 </div>
-<style>
-    .btn:not(:disabled):not(.disabled) {background:#007bff;border-color: #007bff;}
-</style>
+
 </form>
 </div>
 </div>

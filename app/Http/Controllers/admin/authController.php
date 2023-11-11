@@ -69,6 +69,8 @@ class authController extends Controller
     return redirect()->back()->with('message', 'تم تحديث المعلومات بنجاح');
 }
 
+
+
     function index(){
         $data= User::where('permession','Admin')->get();
         return view("admin.admins",['users'=>$data]);
@@ -86,7 +88,12 @@ class authController extends Controller
         $formInputs = $request->validate([
             'name'=>'required|min:3',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:3|confirmed',     
+            'password'=>'required|min:3|confirmed',
+            'country'=>"required",
+            'town'=>"required",
+            'location'=>"required",
+            'balance' => 'numeric',
+
         ]);
         $formInputs['phone_number'] = "1234556";
         $formInputs['password']=bcrypt($formInputs['password']);

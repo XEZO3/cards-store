@@ -2,7 +2,12 @@
 @section('content')
 
 <style>
-  .col-auto{padding-right:3px !important;padding-left:3px !important;max-width:190px !important;}
+  .t-amd{height:100% !important;width:100% !important;
+  margin-top:0px !important;max-height:100px !important;}
+
+    
+
+  .col-auto{padding-right:3px !important;padding-left:3px !important;max-width:150px !important;}
   @media(min-width:768px){.mySlides{height:220px !important}}
 @media(min-width:350px){
 .mySlides{
@@ -20,10 +25,11 @@ height:150px
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     color: white;
+    font-size:small !important;
 }
     @media (min-width:350px){
     .card-body{
-        padding: 0.25rem !important;
+        
     display: flex !important;
     flex-direction: column-reverse !important;
     align-items: center !important;
@@ -66,8 +72,8 @@ height:150px
 .card-title{font-size:100%;word-wrap:normal;}
 .card {
     width: 100% !important;
-height: 150px !important;
-}    .col-auto{flex: 0 0 15% !important;}
+height: 120px !important;
+}    .col-auto{flex: 0 0 12% !important;}
 }
 	.back{
 		height: 80%;
@@ -106,12 +112,14 @@ height: 150px !important;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;}
     .search-input:focus{border-color:#007bff !important; box-shadow: 0px 0px 7px 0px #007bff;}
     .search-input:focus{outline:none;}
+    .t-amd{height:100% !important;width:100% !important;
+  margin-top:0px !important;max-height:100px !important;}
 </style>
 
 <div class="container-fluid">
 	<div class="row  justify-content-center">
         @foreach($banner as $item)
-		<img alt="banner name" class="mySlides animate-fading" src="{{ asset("storage/" . $item['image']) }}"  style="width:100%;border-radius:10px">
+		<img alt="banner name" class="mySlides " src="{{ asset("storage/" . $item['image']) }}"  style="width:100%;border-radius:10px">
 		@endforeach
 </div>
 	</div>
@@ -152,7 +160,7 @@ height: 150px !important;
 						<img class="t-amd" src="{{ asset('storage/'. $item['image']) }}" style="width: 55%;height:55%;margin-top:35px; border-radius: 10px;
 						">
 						</div>
-						<div class="card-body" style="text-align: center">
+						<div class="card-body" style="text-align: center;padding:0 !important">
 						  <h5 class="card-title">{{$item['name']}}</h5>
 						 
 						</div>
